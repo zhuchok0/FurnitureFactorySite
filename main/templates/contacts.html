@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block content %}
+    <h1>Our Team</h1>
+    <p>Contact our employees for any inquiries.</p>
+    
+    <div class="employees-list">
+        {% for employee in employees %}
+        <div class="employee-card" style="border: 1px solid #ddd; margin-bottom: 20px; padding: 15px; border-radius: 8px;">
+            {% if employee.photo %}
+            <div class="employee-photo">
+                <img src="{{ employee.photo.url }}" alt="{{ employee.full_name }}" style="max-width: 150px; border-radius: 50%;">
+            </div>
+            {% endif %}
+            
+            <div class="employee-info">
+                <h3>{{ employee.full_name }}</h3>
+                <p><strong>Position:</strong> 
+                    {% if employee.position %}
+                        {{ employee.position.name }}
+                    {% else %}
+                        No position assigned
+                    {% endif %}
+                </p>
+                <p><strong>Phone:</strong> {{ employee.phone }}</p>
+                <p><strong>Email:</strong> <a href="mailto:{{ employee.email }}">{{ employee.email }}</a></p>
+                <p><strong>Age:</strong> {{ employee.age }} years</p>
+            </div>
+        </div>
+        {% empty %}
+        <p>No employees found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

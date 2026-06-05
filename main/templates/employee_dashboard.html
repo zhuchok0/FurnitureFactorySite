@@ -1,0 +1,59 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Employee Dashboard{% endblock %}
+
+{% block content %}
+<h1>Employee Dashboard</h1>
+
+<h2>Clients List</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Responsible Person</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.company_name }}</a></td>
+            <td>{{ client.responsible_person|default:"—" }}</a></td>
+            <td>{% if client.age %}{{ client.age }}{% else %}—{% endif %}</a></td>
+            <td>{{ client.phone }}</a></td>
+            <td>{{ client.city }}</a></td>
+            <td>{{ client.address }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Orders List</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Furniture</th>
+            <th>Quantity</th>
+            <th>Order Date</th>
+            <th>Delivery Date</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.client.company_name }}</a></td>
+            <td>{{ order.furniture.title }}</a></td>
+            <td>{{ order.quantity }}</a></td>
+            <td>{{ order.order_date|date:"d.m.Y" }}</a></td>
+            <td>{{ order.delivery_date|date:"d.m.Y"|default:"Not set" }}</a></td>
+            <td>${{ order.total_price|floatformat:2 }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

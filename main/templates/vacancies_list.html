@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Vacancies{% endblock %}
+
+{% block content %}
+    <h1>Job Vacancies</h1>
+    <p>Join our team! We are looking for talented professionals.</p>
+    
+    {% for vacancy in vacancies %}
+    <div class="vacancy-item" style="border: 1px solid #ddd; margin-bottom: 20px; padding: 15px; border-radius: 8px;">
+        <h2>{{ vacancy.title }}</h2>
+        <p><strong>Salary:</strong> ${{ vacancy.salary|floatformat:2 }} per month</p>
+        <p><strong>Location:</strong> {{ vacancy.location }}</p>
+        <p><strong>Posted:</strong> {{ vacancy.created_date }}</p>
+        
+        <div class="description">
+            <h3>Description:</h3>
+            <p>{{ vacancy.description|linebreaks }}</p>
+        </div>
+    </div>
+    {% empty %}
+    <p>No vacancies available at the moment. Please check back later.</p>
+    {% endfor %}
+{% endblock %}

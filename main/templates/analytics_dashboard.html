@@ -1,0 +1,199 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Analytics Dashboard{% endblock %}
+
+{% block content %}
+<h1>📊 Analytics Dashboard</h1>
+
+<br>
+<h2>💰 Price List</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Furniture</th>
+            <th>Price ($)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in price_list %}
+        <tr>
+            <td>{{ item.title }}</td>
+            <td>${{ item.price|floatformat:2 }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No furniture available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<h2>🏙️ Clients by City</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>City</th>
+            <th>Clients</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for city, clients in clients_by_city.items %}
+        <tr>
+            <td>{{ city }}</td>
+            <td>{{ clients|join:", " }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No clients available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<h2>📊 Revenue by City</h2>
+{% if city_chart %}
+    <img src="{{ city_chart }}" alt="Revenue by City">
+{% else %}
+    <p>No data available for revenue chart</p>
+{% endif %}
+
+<br>
+<h2>🔥 Top 3 Designs by Demand</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Design</th>
+            <th>Number of Orders</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for design in top_3_designs %}
+        <tr>
+            <td>{{ design.name }}</td>
+            <td>{{ design.orders }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No data available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<h2>❌ Bottom 3 Designs by Demand</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Design</th>
+            <th>Number of Orders</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for design in bottom_3_designs %}
+        <tr>
+            <td>{{ design.name }}</td>
+            <td>{{ design.orders }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No data available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<h2>🥧 Revenue by Design</h2>
+{% if design_pie_chart %}
+    <img src="{{ design_pie_chart }}" alt="Revenue by Design">
+{% else %}
+    <p>No data available for design revenue chart</p>
+{% endif %}
+
+<br>
+<h2>📈 Monthly Revenue by Furniture Type</h2>
+{% if type_trend_chart %}
+    <img src="{{ type_trend_chart }}" alt="Monthly Revenue by Furniture Type" style="width: 100%;">
+{% else %}
+    <p>No data available for monthly revenue trend</p>
+{% endif %}
+
+<br>
+<h2>📅 Yearly Statistics</h2>
+{% if yearly_stats %}
+<table border="1">
+    <thead>
+        <tr>
+            <th>Year</th>
+            <th>Number of Orders</th>
+            <th>Revenue ($)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in yearly_stats %}
+        <tr>
+            <td>{{ stat.year }}</td>
+            <td>{{ stat.orders_count }}</td>
+            <td>${{ stat.revenue|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>No data available for yearly statistics</p>
+{% endif %}
+
+<br>
+<h2>📈 Monthly Sales for {{ current_year }}</h2>
+{% if monthly_sales_chart %}
+    <img src="{{ monthly_sales_chart }}" alt="Monthly Sales for {{ current_year }}" style="width: 100%;">
+{% else %}
+    <p>No data available for monthly sales chart</p>
+{% endif %}
+
+<br>
+<h2>🔮 Sales Forecast for Next 3 Months</h2>
+
+{% if sales_forecast %}
+    {% if trend_direction %}
+        <p><strong>Trend:</strong> {{ trend_direction }} by ${{ slope|floatformat:2 }} per month</p>
+    {% endif %}
+    
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #2196F3; color: white;">
+                <th>Month</th>
+                <th>Predicted Revenue ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for month, value in sales_forecast %}
+            <tr>
+                <td>{{ month }}</td>
+                <td>${{ value|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Not enough data for forecast (minimum 3 months required).</p>
+{% endif %}
+
+<br>
+<h2>📉 Linear Sales Trend</h2>
+{% if trend_chart %}
+    <img src="{{ trend_chart }}" alt="Sales Trend with Linear Regression" style="width: 100%;">
+    <p><strong>{{ trend_message }}</strong></p>
+    {% if r_squared %}
+        <p><strong>R² (coefficient of determination):</strong> {{ r_squared|floatformat:3 }}</p>
+        <p><small>R² indicates how well the trend line fits the data (closer to 1 = better fit)</small></p>
+    {% endif %}
+{% else %}
+    <p>{{ trend_message }}</p>
+{% endif %}
+
+<br><br>
+{% endblock %}

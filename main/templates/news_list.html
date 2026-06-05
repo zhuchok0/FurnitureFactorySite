@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+    <h1>News</h1>
+    
+    {% for news in news_items %}
+    <div class="news-item">
+        <h2>{{ news.title }}</h2>
+        
+        {% if news.image %}
+        <div>
+            <img src="{{ news.image.url }}" alt="{{ news.title }}" style="max-width: 300px;">
+        </div>
+        {% endif %}
+        
+        <p>{{ news.short_content }}</p>
+        <p><small>Published: {{ news.created_date }}</small></p>
+        <hr>
+    </div>
+    {% empty %}
+    <p>No news available.</p>
+    {% endfor %}
+{% endblock %}

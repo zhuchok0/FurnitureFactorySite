@@ -1,0 +1,145 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Home - Statistics{% endblock %}
+
+{% block content %}
+    {% if latest_news %}
+    <div style="background-color: #f0f8ff; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
+        <h2>Latest News</h2>
+        <h3>{{ latest_news.title }}</h3>
+        
+        {% if latest_news.image %}
+        <div>
+            <img src="{{ latest_news.image.url }}" alt="{{ latest_news.title }}" style="max-width: 200px; max-height: 150px;">
+        </div>
+        {% endif %}
+        
+        <p>{{ latest_news.short_content }}</p>
+        <p><small>Published: {{ latest_news.created_date }}</small></p>
+        <a href="{% url 'news_list' %}">Read all news →</a>
+    </div>
+    {% endif %}
+
+    {% if client_info %}
+    <div style="background-color: #e8f5e9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
+        <h2>🕒 Timezone Information</h2>
+        <p><strong>Current timezone:</strong> {{ client_info.name }}</p>
+        <p><strong>Current date:</strong> {{ client_info.current_date|date:"d/m/Y" }}</p>
+        <p><strong>Timezone last updated:</strong> {{ client_info.timezone_updated|date:"d/m/Y H:i" }}</p>
+        <h3>📅 Calendar for {{ client_info.current_date|date:"F Y" }}</h3>
+        {{ client_info.calendar|safe }}
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="timezone">Change timezone:</label>
+            <select name="timezone" id="timezone">
+                {% for tz in timezones %}
+                    <option value="{{ tz }}" {% if tz == client_info.name %}selected{% endif %}>{{ tz }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+{% endif %}
+
+{% if weather_info %}
+    <div class="weather-info">
+        <h3>Weather in {{ weather_info.city }}</h3>
+        <p>Temperature: {{ weather_info.temp }}°C</p>
+        <p>{{ weather_info.description }}</p>
+        <img src="http://openweathermap.org/img/w/{{ weather_info.icon }}.png" alt="weather icon">
+    </div>
+{% endif %}
+
+{% if video_data %}
+    <h3>{{ video_data.title }}</h3>
+    <iframe width="560" height="315" 
+            src="https://www.youtube-nocookie.com/embed/{{ video_data.id }}" 
+            frameborder="0" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+    </iframe>
+{% endif %}
+
+<!-- <iframe width="560" height="315" 
+        src="https://www.youtube-nocookie.com/embed/qlpE7SFtMPQ" 
+        frameborder="0" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+</iframe> -->
+
+    <h1>Furniture Factory Dashboard</h1>
+    
+    <h2>Clients List (Alphabetical Order)</h2>
+    <ul>
+        {% for client in clients %}
+        <li>{{ client.company_name }} - {{ client.city }}</li>
+        {% empty %}
+        <li>No clients</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Furniture List (Alphabetical Order)</h2>
+    <ul>
+        {% for item in furniture_list %}
+        <li>{{ item.title }} - ${{ item.price }}</li>
+        {% empty %}
+        <li>No furniture</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Total Sales</h2>
+    <p><strong>${{ total_sales|floatformat:2 }}</strong></p>
+    
+    <h2>Order Amount Statistics</h2>
+    <ul>
+        <li><strong>Mean:</strong> ${{ avg_sales|floatformat:2 }}</li>
+        <li><strong>Median:</strong> ${{ median_sales|floatformat:2 }}</li>
+        <li><strong>Mode:</strong> 
+            {% if mode_sales %}
+                ${{ mode_sales|floatformat:2 }}
+            {% else %}
+                No unique mode
+            {% endif %}
+        </li>
+    </ul>
+    
+    <h2>Client Age Statistics</h2>
+    <ul>
+        <li><strong>Mean Age:</strong> {{ avg_age|floatformat:1 }} years</li>
+        <li><strong>Median Age:</strong> {{ median_age|floatformat:1 }} years</li>
+    </ul>
+    
+    <h2>Furniture Type Analysis</h2>
+    
+    <h3>Most Popular Type</h3>
+    <p><strong>{{ most_popular_type.name|default:"No data" }}</strong> - {{ most_popular_type.order_count|default:0 }} orders</p>
+    
+    <h3>Most Profitable Type</h3>
+    <p><strong>{{ most_profitable_type.name|default:"No data" }}</strong> - ${{ most_profitable_type.total_revenue|default:0|floatformat:2 }}</p>
+    
+    <h3>Detailed Statistics by Type:</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Number of Orders</th>
+                <th>Total Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for type in all_types_stats %}
+            <tr>
+                <td>{{ type.name }}</td>
+                <td>{{ type.order_count }}</td>
+                <td>${{ type.revenue|floatformat:2 }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No data</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

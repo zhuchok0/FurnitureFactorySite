@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block title %}My Orders{% endblock %}
+
+{% block content %}
+<h2>📦 My Orders</h2>
+
+{% if orders %}
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #4CAF50; color: white;">
+                <th>Order ID</th>
+                <th>Furniture</th>
+                <th>Quantity</th>
+                <th>Order Date</th>
+                <th>Delivery Date</th>
+                <th>Total Price ($)</th>
+             </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.furniture.title }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.order_date|date:"Y-m-d" }}</td>
+                <td>{{ order.delivery_date|date:"Y-m-d"|default:"Not scheduled" }}</td>
+                <td>${{ order.total_price|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>You have not placed any orders yet.</p>
+    <p><a href="{% url 'create_order' %}">Place your first order</a></p>
+{% endif %}
+
+<p><a href="{% url 'main' %}">Back to Home</a></p>
+{% endblock %}

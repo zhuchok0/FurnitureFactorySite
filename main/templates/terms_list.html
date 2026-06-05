@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Glossary of Terms{% endblock %}
+
+{% block content %}
+    <h1>Glossary of Terms</h1>
+    <p>Frequently asked questions and terminology explained.</p>
+    
+    <div class="search-box" style="margin-bottom: 20px;">
+        <form method="get" action="">
+            <input type="text" name="search" placeholder="Search by term or answer..." 
+                   value="{{ search_query }}" style="padding: 8px; width: 300px;">
+            <button type="submit" style="padding: 8px 15px;">Search</button>
+            {% if search_query %}
+                <a href="{% url 'terms_list' %}" style="margin-left: 10px;">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+    
+    <div class="sorting" style="margin-bottom: 20px;">
+        <span>Sort by:</span>
+        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=question">Name (A-Z)</a> |
+        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=-question">Name (Z-A)</a>
+    </div>
+    
+    <p><strong>Found {{ terms|length }} term(s)</strong></p>
+    
+    {% for term in terms %}
+    <div class="term-item" style="margin-bottom: 30px; border-bottom: 1px solid #ddd; padding-bottom: 15px;">
+        <h3>{{ term.question }}</h3>
+        <p>{{ term.answer }}</p>
+    </div>
+    {% empty %}
+    <p>No terms found matching your search.</p>
+    {% endfor %}
+{% endblock %}

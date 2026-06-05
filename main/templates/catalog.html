@@ -1,0 +1,79 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Catalog{% endblock %}
+
+{% block content %}
+<h1>📋 Furniture Catalog</h1>
+
+<div style="margin-bottom: 30px; border: 1px solid #ddd; padding: 15px;">
+    <h2>🏷️ Furniture Types</h2>
+    <ul>
+        {% for type in types %}
+        <li><strong>{{ type.name }}</strong> ({{ type.furniture_count }} items)</li>
+        {% empty %}
+        <li>No types available</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div style="margin-bottom: 30px; border: 1px solid #ddd; padding: 15px;">
+    <h2>🎨 Furniture Designs</h2>
+    <ul>
+        {% for design in designs %}
+        <li><strong>{{ design.name }}</strong> ({{ design.furniture_count }} items)</li>
+        {% empty %}
+        <li>No designs available</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div style="margin-bottom: 30px; border: 1px solid #ddd; padding: 15px;">
+    <h2>🪑 Furniture Items</h2>
+    
+    <div style="margin-bottom: 15px;">
+        <strong>Sort by price:</strong>
+        <a href="?sort=price_asc">↓ Low to High</a> |
+        <a href="?sort=price_desc">↑ High to Low</a>
+    </div>
+    
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #4CAF50; color: white;">
+                <th>Furniture</th>
+                <th>Type(s)</th>
+                <th>Design</th>
+                <th>Price ($)</th>
+                <th>In Production</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in furniture_list %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.type_names|default:"No type" }}</td>
+                <td>{{ item.design_name }}</td>
+                <td>${{ item.price|floatformat:2 }}</td>
+                <td>{% if item.in_production %}✓ Yes{% else %}✗ No{% endif %}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No furniture available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    div {
+        border-radius: 5px;
+    }
+    ul {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+    li {
+        margin: 5px 0;
+    }
+</style>
+{% endblock %}

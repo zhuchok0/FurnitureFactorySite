@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Reviews{% endblock %}
+
+{% block content %}
+<h1>Customer Reviews</h1>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'add_review' %}" class="btn btn-primary">Leave a review</a>
+{% else %}
+    <a href="{% url 'login' %}?next={% url 'add_review' %}" class="btn btn-primary">Leave a review</a>
+{% endif %}
+
+<div class="reviews-list">
+    {% for review in reviews %}
+        <div class="review-item" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; position: relative;">
+            {% if user.is_superuser or user.is_staff %}
+            <div style="float: right;">
+                <a href="{% url 'edit_review' review.id %}" style="margin-right: 10px; color: blue;">✏️ Edit</a>
+                <a href="{% url 'delete_review' review.id %}" onclick="return confirm('Are you sure?');" style="color: red;">🗑️ Delete</a>
+            </div>
+            {% endif %}
+            <strong>{{ review.name }}</strong> rated <strong>{{ review.rating }}/5</strong>
+            <p>{{ review.text }}</p>
+            <small>{{ review.created_at|date:"d.m.Y H:i" }}</small>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No reviews yet. Be the first!</p>
+    {% endfor %}
+</div>
+{% endblock %}
