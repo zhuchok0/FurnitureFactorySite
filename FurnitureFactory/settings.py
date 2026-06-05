@@ -33,8 +33,8 @@ DEBUG = True
 SESSION_COOKIE_SECURE = True  
 CSRF_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "igimaria.pythonanywhere.com"]
-
+ALLOWED_HOSTS = ['furniture-site.onrender.com', 'localhost', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://furniture-site.onrender.com']
 
 # Application definition
 
