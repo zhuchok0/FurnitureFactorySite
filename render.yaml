@@ -2,7 +2,7 @@ services:
   - type: web
     name: furniture-factory
     runtime: python
-    repo: https://github.com/zhuchok0/FurnitureFabric
+    repo: https://github.com/zhuchok0/FurnitureFabricSite
     plan: free
     buildCommand: "./build.sh"         # 1️⃣ Команда для сборки
     startCommand: "gunicorn FurnitureFactory.wsgi:application" # 2️⃣ Команда для запуска
