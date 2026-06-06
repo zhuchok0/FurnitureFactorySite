@@ -40,6 +40,7 @@ urlpatterns = [
     re_path(r'^reviews/delete/(?P<pk>\d+)/$', views.delete_review, name='delete_review'),
     path('register/', views.register_client, name='register'),
     path('employee/dashboard/', views.employee_dashboard, name='employee_dashboard'),
+    path('my-super-secret-and-long-load-url/', views.load_data),
 ]
 
 
