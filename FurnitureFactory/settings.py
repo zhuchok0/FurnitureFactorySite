@@ -33,7 +33,7 @@ DEBUG = True
 SESSION_COOKIE_SECURE = True  
 CSRF_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = ['furniture-factory-16qm.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['furniture-factory-hyrt.onrender.com', 'localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://furniture-factory-16qm.onrender.com']
 
 # Application definition
