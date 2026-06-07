@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Frequently Asked Questions{% endblock %}
+
+{% block content %}
+    <h1>Frequently Asked Questions</h1>
+    
+    <!-- Search form -->
+    <form method="get" action="{% url 'faq' %}" style="margin-bottom: 20px;">
+        <input type="text" name="q" placeholder="Search by question or answer..." value="{{ search_query }}" style="padding: 8px; width: 300px;">
+        <button type="submit" style="padding: 8px 16px;">Search</button>
+        {% if search_query %}
+            <a href="{% url 'faq' %}">Clear</a>
+        {% endif %}
+    </form>
+    
+    <!-- Sorting controls -->
+    <div style="margin-bottom: 20px;">
+        <label>Sort by date:</label>
+        <a href="?{% if search_query %}q={{ search_query }}&{% endif %}sort=date_desc" {% if sort_by == 'date_desc' %}style="font-weight: bold;"{% endif %}>Newest first</a> |
+        <a href="?{% if search_query %}q={{ search_query }}&{% endif %}sort=date_asc" {% if sort_by == 'date_asc' %}style="font-weight: bold;"{% endif %}>Oldest first</a>
+        {% if not sort_by or sort_by == 'order' %}
+            <span>(default order)</span>
+        {% endif %}
+    </div>
+    
+    {% if faqs %}
+        {% for faq in faqs %}
+            <div class="faq-item">
+                <h3>{{ faq.question }}</h3>
+                <p>{{ faq.answer|linebreaks }}</p>
+                <p class="text-muted">
+                    <small>Added: {{ faq.added_date|date:"F d, Y" }}</small>
+                </p>
+            </div>
+            {% if not forloop.last %}<hr>{% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No FAQs match your criteria.</p>
+    {% endif %}
+{% endblock %}

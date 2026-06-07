@@ -7,6 +7,8 @@ from django.core.validators import RegexValidator, MinValueValidator, MaxValueVa
 from django.conf import settings
 import pytz
 from django.utils import timezone
+from dateutil.relativedelta import relativedelta
+from django.core.exceptions import ValidationError
 import logging
 
 logger = logging.getLogger(__name__)
@@ -84,6 +86,12 @@ class Furniture(models.Model):
         ordering = ['title']
 
 
+def validate_min_age(value):
+    today = date.today()
+    min_birth_date = today - relativedelta(years=18)
+    if value > min_birth_date:
+        raise ValidationError('Person must be at least 18 years old')
+
 class Client(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
@@ -104,14 +112,10 @@ class Client(models.Model):
         default='',
         blank=True 
     )
-    age = models.PositiveIntegerField(
-        validators=[
-            MinValueValidator(18, message="Client must be at least 18 years old"),
-            MaxValueValidator(120, message="Invalid age")
-        ],
-        help_text="Client's age (must be 18 or older)", 
-        blank=True,
-        null=True
+    date_of_birth = models.DateField(
+        default=date(1990, 1, 1), 
+        validators=[validate_min_age],
+        help_text="Date of birth (employee must be at least 18 years old)"
     )
     phone = models.CharField(
     max_length=20,
@@ -148,6 +152,11 @@ class Client(models.Model):
             self.timezone_updated_at = timezone.now() 
             logger.info(f'Client "{self.company_name}" changed timezone from {old_timezone} to {self.timezone}')
         super().save(*args, **kwargs)
+
+    @property
+    def age(self):
+        today = date.today()
+        return relativedelta(today, self.date_of_birth).years
     
     def __str__(self):
         return self.company_name
@@ -187,12 +196,10 @@ class Employee(models.Model):
     )
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    age = models.PositiveIntegerField(
-        validators=[
-            MinValueValidator(18, message="Employee must be at least 18 years old"),
-            MaxValueValidator(65, message="Employee must be under 65 years old")
-        ],
-        help_text="Employee's age (18-65)"
+    date_of_birth = models.DateField(
+        default=date(1990, 1, 1), 
+        validators=[validate_min_age],
+        help_text="Date of birth (employee must be at least 18 years old)"
     )
     photo = models.ImageField(
         upload_to='employees/',
@@ -223,6 +230,11 @@ class Employee(models.Model):
     @property
     def full_name(self):
         return f"{self.last_name} {self.first_name}"
+    
+    @property
+    def age(self):
+        today = date.today()
+        return relativedelta(today, self.date_of_birth).years
     
     def __str__(self):
         return f"{self.full_name} - {self.position}"
@@ -286,22 +298,6 @@ class News(models.Model):
     class Meta:
         ordering = ['-created_date']
         verbose_name_plural = "News"
-
-
-class Term(models.Model):
-    question = models.CharField(
-        max_length=300,
-        help_text="Enter the term or question"
-    )
-    answer = models.TextField(
-        help_text="Enter the explanation or answer"
-    )
-    
-    def __str__(self):
-        return self.question
-    
-    class Meta:
-        ordering = ['question']
 
 
 class Vacancy(models.Model):
@@ -402,3 +398,44 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.name}: {self.rating} stars"
+
+from django.db import models
+
+class CompanyInfo(models.Model):
+    name = models.CharField(max_length=100, default='Furniture Factory')
+    founded_year = models.PositiveIntegerField(default=2010)
+    description = models.TextField(blank=True)
+    mission = models.TextField(blank=True)
+    
+    values = models.JSONField(default=list, blank=True)
+    
+    address = models.CharField(max_length=255, blank=True)
+    phone = models.CharField(max_length=50, blank=True)
+    email = models.EmailField(blank=True)
+    
+    working_hours = models.TextField(blank=True)
+    
+    products_info = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Company Information'
+        verbose_name_plural = 'Company Information'
+
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=500, unique=True, verbose_name='Question')
+    answer = models.TextField(verbose_name='Answer')
+    added_date = models.DateField(auto_now_add=True, verbose_name='Date added')
+    is_published = models.BooleanField(default=True, verbose_name='Published')
+    order = models.PositiveSmallIntegerField(default=0, verbose_name='Display order')
+
+    class Meta:
+        ordering = ['order', '-added_date']
+        verbose_name = 'FAQ'
+        verbose_name_plural = 'FAQs'
+
+    def __str__(self):
+        return self.question[:50]

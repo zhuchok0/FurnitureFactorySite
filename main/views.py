@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum, Count, F, DecimalField, Q
 from django.db.models.functions import Coalesce
-from .models import Furniture, Client, Order, Type, News, Term, Employee, Vacancy, PromoCode, Design, Review
+from .models import Furniture, Client, Order, Type, News, Employee, Vacancy, PromoCode, Design, Review, CompanyInfo, FAQ
+
 from statistics import median, mode
 from decimal import Decimal
 from datetime import date, datetime, timedelta
@@ -63,7 +64,7 @@ def main(request):
         median_sales = 0
         mode_sales = None
     
-    client_ages = [client.age for client in Client.objects.filter(age__isnull=False)]
+    client_ages = [client.age for client in Client.objects.all() if client.date_of_birth is not None]
     
     if client_ages:
         avg_age = sum(client_ages) / len(client_ages)
@@ -233,31 +234,6 @@ def news_list(request):
 
 def about(request):
     return render(request, 'about.html')
-
-def terms_list(request):
-    terms = Term.objects.all()
-    
-    search_query = request.GET.get('search', '')
-    if search_query:
-        terms = terms.filter(
-            Q(question__icontains=search_query) |
-            Q(answer__icontains=search_query)
-        )
-    
-    sort_by = request.GET.get('sort', 'question')
-    if sort_by == 'question':
-        terms = terms.order_by('question')
-    elif sort_by == '-question':
-        terms = terms.order_by('-question')
-    else:
-        terms = terms.order_by('question')
-    
-    context = {
-        'terms': terms,
-        'search_query': search_query,
-        'sort_by': sort_by,
-    }
-    return render(request, 'terms_list.html', context)
 
 def contacts(request):
     employees = Employee.objects.select_related('position').all()
@@ -725,3 +701,50 @@ def employee_dashboard(request):
         'orders': orders,
     }
     return render(request, 'employee_dashboard.html', context)
+
+def about(request):
+    company, created = CompanyInfo.objects.get_or_create(
+        id=1,
+        defaults={
+            'name': 'Furniture Factory',
+            'founded_year': 2010,
+            'description': 'Furniture Factory has been a leading manufacturer of high-quality furniture for over a decade.',
+            'mission': 'To create beautiful, functional, and sustainable furniture that enhances living and working spaces.',
+            'values': [
+                {'title': 'Quality', 'description': 'We use only the finest materials and craftsmanship.'},
+                {'title': 'Innovation', 'description': 'We constantly improve our designs and production methods.'},
+                {'title': 'Sustainability', 'description': 'We are committed to environmentally responsible practices.'},
+                {'title': 'Customer Satisfaction', 'description': 'Your happiness is our priority.'},
+            ],
+            'address': '123 Furniture Street, Minsk, Belarus',
+            'phone': '+375 (29) 123-45-67',
+            'email': 'info@furniturefactory.by',
+            'working_hours': 'Monday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM\nSunday: Closed',
+            'products_info': 'We manufacture a wide range of furniture including kitchen, office, and cabinet furniture. Each piece is designed with attention to detail and built to last.',
+        }
+    )
+    
+    context = {'company': company}
+    return render(request, 'about.html', context)
+
+def faq_view(request):
+    faqs = FAQ.objects.filter(is_published=True)
+    
+    search_query = request.GET.get('q', '')
+    if search_query:
+        faqs = faqs.filter(Q(question__icontains=search_query) | Q(answer__icontains=search_query))
+    
+    sort_by = request.GET.get('sort', 'date_desc') 
+    if sort_by == 'date_asc':
+        faqs = faqs.order_by('added_date')
+    elif sort_by == 'date_desc':
+        faqs = faqs.order_by('-added_date')
+    else:
+        faqs = faqs.order_by('order', '-added_date')
+    
+    context = {
+        'faqs': faqs,
+        'search_query': search_query,
+        'sort_by': sort_by,
+    }
+    return render(request, 'faq.html', context)

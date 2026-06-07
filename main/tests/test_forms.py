@@ -8,17 +8,17 @@ from django.test import TestCase
 from main.forms import OrderForm, ReviewForm, ClientRegistrationForm
 from main.models import Type, Design, Furniture, Client, Order, Review
 
+from dateutil.relativedelta import relativedelta
+
 User = get_user_model()
 
 
 class OrderFormTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        # Создаём дизайн и тип
         cls.design = Design.objects.create(name='Modern')
         cls.type1 = Type.objects.create(name='Chair')
         cls.type2 = Type.objects.create(name='Table')
-        # Мебель, которая находится в производстве (доступна в форме)
         cls.furniture_in_prod = Furniture.objects.create(
             title='Available Chair',
             design=cls.design,
@@ -26,7 +26,6 @@ class OrderFormTest(TestCase):
             in_production=True
         )
         cls.furniture_in_prod.type.add(cls.type1)
-        # Мебель, не находящаяся в производстве (не должна появляться в списке)
         cls.furniture_not_in_prod = Furniture.objects.create(
             title='Unavailable Table',
             design=cls.design,
@@ -36,7 +35,6 @@ class OrderFormTest(TestCase):
         cls.furniture_not_in_prod.type.add(cls.type2)
 
     def test_valid_order(self):
-        """Корректные данные создают валидную форму"""
         data = {
             'furniture': self.furniture_in_prod.id,
             'quantity': 2,
@@ -46,12 +44,9 @@ class OrderFormTest(TestCase):
         self.assertTrue(form.is_valid(), form.errors)
 
     def test_invalid_furniture_not_in_production(self):
-        """Мебель не в производстве не должна быть доступна в поле"""
-        # Проверим, что её нет в queryset
         form = OrderForm()
         self.assertNotIn(self.furniture_not_in_prod.id,
                          form.fields['furniture'].queryset.values_list('id', flat=True))
-        # При попытке отправить её id должна быть ошибка валидации
         data = {
             'furniture': self.furniture_not_in_prod.id,
             'quantity': 1,
@@ -62,7 +57,6 @@ class OrderFormTest(TestCase):
         self.assertIn('furniture', form.errors)
 
     def test_quantity_min_value(self):
-        """Количество не может быть меньше 1"""
         data = {
             'furniture': self.furniture_in_prod.id,
             'quantity': 0,
@@ -73,7 +67,6 @@ class OrderFormTest(TestCase):
         self.assertIn('quantity', form.errors)
 
     def test_delivery_date_too_early(self):
-        """Дата доставки раньше чем +3 месяца вызывает ошибку"""
         data = {
             'furniture': self.furniture_in_prod.id,
             'quantity': 1,
@@ -85,7 +78,6 @@ class OrderFormTest(TestCase):
         self.assertIn('at least 3 months', form.errors['delivery_date'][0])
 
     def test_delivery_date_exactly_3_months(self):
-        """Граничная дата (+3 месяца) допустима"""
         data = {
             'furniture': self.furniture_in_prod.id,
             'quantity': 1,
@@ -95,7 +87,6 @@ class OrderFormTest(TestCase):
         self.assertTrue(form.is_valid(), form.errors)
 
     def test_delivery_date_optional(self):
-        """Если дата не указана, форма всё равно валидна (required=False)"""
         data = {
             'furniture': self.furniture_in_prod.id,
             'quantity': 3,
@@ -129,7 +120,6 @@ class ReviewFormTest(TestCase):
         self.assertIn('rating', form.errors)
 
     def test_required_fields(self):
-        """Пустая форма должна содержать ошибки на обязательных полях"""
         form = ReviewForm({})
         self.assertFalse(form.is_valid())
         self.assertIn('name', form.errors)
@@ -137,7 +127,6 @@ class ReviewFormTest(TestCase):
         self.assertIn('rating', form.errors)
 
     def test_widget_choices(self):
-        """Проверяем, что выбор рейтинга содержит 1-5"""
         form = ReviewForm()
         choices = dict(form.fields['rating'].widget.choices)
         self.assertEqual(choices[1], '1 star')
@@ -147,7 +136,6 @@ class ReviewFormTest(TestCase):
 class ClientRegistrationFormTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        # Создаём группу Client (будет добавляться при регистрации)
         Group.objects.get_or_create(name='Client')
 
     def test_valid_registration(self):
@@ -160,23 +148,22 @@ class ClientRegistrationFormTest(TestCase):
             'phone': '+375 (29) 123-45-67',
             'city': 'Minsk',
             'address': 'Some street, 1',
+            'date_of_birth': (date.today() - relativedelta(years=20)).isoformat(),  # 20 лет назад
             'timezone': 'Europe/Minsk',
-            # responsible_person не обязателен
+            'responsible_person': 'John Doe',
         }
         form = ClientRegistrationForm(data)
         self.assertTrue(form.is_valid(), form.errors)
 
     def test_required_fields(self):
-        """Пустая форма показывает ошибки для всех обязательных полей"""
         form = ClientRegistrationForm({})
         required = ['username', 'email', 'password1', 'password2',
-                    'company_name', 'phone', 'city', 'address', 'timezone']
+                    'company_name', 'phone', 'city', 'address', 'date_of_birth', 'timezone']
         self.assertFalse(form.is_valid())
         for field in required:
             self.assertIn(field, form.errors, f"Missing error for {field}")
 
     def test_email_validation(self):
-        """Некорректный email"""
         data = {
             'username': 'test',
             'email': 'notanemail',
@@ -186,6 +173,7 @@ class ClientRegistrationFormTest(TestCase):
             'phone': '+375 (29) 123-45-67',
             'city': 'Minsk',
             'address': 'Addr',
+            'date_of_birth': (date.today() - relativedelta(years=20)).isoformat(),
             'timezone': 'UTC',
         }
         form = ClientRegistrationForm(data)
@@ -193,7 +181,6 @@ class ClientRegistrationFormTest(TestCase):
         self.assertIn('email', form.errors)
 
     def test_password_mismatch(self):
-        """Пароли не совпадают"""
         data = {
             'username': 'user',
             'email': 'user@example.com',
@@ -203,6 +190,7 @@ class ClientRegistrationFormTest(TestCase):
             'phone': '+375 (29) 123-45-67',
             'city': 'Minsk',
             'address': 'Addr',
+            'date_of_birth': (date.today() - relativedelta(years=20)).isoformat(),
             'timezone': 'UTC',
         }
         form = ClientRegistrationForm(data)
@@ -210,68 +198,67 @@ class ClientRegistrationFormTest(TestCase):
         self.assertIn('password2', form.errors)
 
     def test_phone_format_validation(self):
-        """Неверный формат телефона (должен валидироваться моделью)"""
         data = {
             'username': 'user',
             'email': 'user@example.com',
             'password1': 'StrongPass1!',
             'password2': 'StrongPass1!',
             'company_name': 'Test',
-            'phone': '1234567',  # неверный формат
+            'phone': '1234567',  
             'city': 'Minsk',
             'address': 'Addr',
+            'date_of_birth': (date.today() - relativedelta(years=20)).isoformat(),
             'timezone': 'UTC',
         }
         form = ClientRegistrationForm(data)
         self.assertFalse(form.is_valid())
-        # Ошибка будет относиться к полю phone, но может быть привязана к модели
-        self.assertTrue('phone' in form.errors or '__all__' in form.errors)
+        self.assertIn('phone', form.errors)
 
-    def test_age_optional_and_range(self):
-        """Возраст не обязателен, но должен быть в диапазоне 18-120, если указан"""
+    def test_date_of_birth_validation_min_age(self):
+        today = date.today()
+        dob_17 = today - relativedelta(years=17)
         data = {
-            'username': 'user',
-            'email': 'user@example.com',
+            'username': 'younguser',
+            'email': 'young@example.com',
             'password1': 'StrongPass1!',
             'password2': 'StrongPass1!',
-            'company_name': 'Test',
+            'company_name': 'Young Co',
             'phone': '+375 (29) 123-45-67',
             'city': 'Minsk',
             'address': 'Addr',
+            'date_of_birth': dob_17.isoformat(),
             'timezone': 'UTC',
         }
-        # Без возраста – валидно
+        form = ClientRegistrationForm(data)
+        self.assertFalse(form.is_valid())
+        self.assertIn('date_of_birth', form.errors)
+        self.assertIn('at least 18 years old', form.errors['date_of_birth'][0])
+
+        dob_exactly_18 = today - relativedelta(years=18)
+        data['date_of_birth'] = dob_exactly_18.isoformat()
         form = ClientRegistrationForm(data)
         self.assertTrue(form.is_valid(), form.errors)
-        # С возрастом меньше 18
-        data['age'] = 15
-        form = ClientRegistrationForm(data)
-        self.assertFalse(form.is_valid())
-        self.assertIn('age', form.errors)
-        # С возрастом >120
-        data['age'] = 150
-        form = ClientRegistrationForm(data)
-        self.assertFalse(form.is_valid())
-        self.assertIn('age', form.errors)
-        # Корректный возраст
-        data['age'] = 30
+
+        dob_19 = today - relativedelta(years=19)
+        data['date_of_birth'] = dob_19.isoformat()
         form = ClientRegistrationForm(data)
         self.assertTrue(form.is_valid(), form.errors)
 
     def test_save_creates_user_and_client(self):
-        """Метод save() создаёт User и Client, добавляет в группу Client"""
+        today = date.today()
+        dob = today - relativedelta(years=30) 
         data = {
             'username': 'savetest',
             'email': 'save@example.com',
-            'password1': 'SecureP@ssw0rd!', 
-            'password2': 'SecureP@ssw0rd!', 
+            'password1': 'SecureP@ssw0rd!',
+            'password2': 'SecureP@ssw0rd!',
             'company_name': 'SaveCorp',
             'phone': '+375 (29) 777-77-77',
             'city': 'Minsk',
             'address': 'Test address',
+            'date_of_birth': dob.isoformat(),
             'timezone': 'Europe/Minsk',
             'responsible_person': 'Ivan Ivanov',
-            'age': 28,
         }
         form = ClientRegistrationForm(data)
         self.assertTrue(form.is_valid(), form.errors)
@@ -284,6 +271,7 @@ class ClientRegistrationFormTest(TestCase):
         client = Client.objects.get(user=user)
         self.assertEqual(client.company_name, 'SaveCorp')
         self.assertEqual(client.phone, '+375 (29) 777-77-77')
-        self.assertEqual(client.age, 28)
+        self.assertEqual(client.date_of_birth, dob)
+        self.assertEqual(client.age, 30)
         self.assertEqual(client.timezone, 'Europe/Minsk')
         self.assertEqual(client.responsible_person, 'Ivan Ivanov')

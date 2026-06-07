@@ -35,5 +35,16 @@
     <p><a href="{% url 'create_order' %}">Place your first order</a></p>
 {% endif %}
 
+<div style="margin-top: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+    <h3>📍 Pickup Points</h3>
+    <p>You can pick up your order at one of our pickup points:</p>
+    <ul>
+        <li><strong>Minsk</strong> – 123 Furniture Street, working hours: Mon-Fri 9:00-18:00, Sat 10:00-16:00</li>
+        <li><strong>Brest</strong> – 45 Sovetskaya Street, working hours: Mon-Fri 9:00-17:00, Sat 10:00-15:00</li>
+        <li><strong>Grodno</strong> – 8 Mostovaya Street, working hours: Mon-Fri 9:00-18:00</li>
+    </ul>
+    <p><em>Please bring your order confirmation and ID when picking up.</em></p>
+</div>
+
 <p><a href="{% url 'main' %}">Back to Home</a></p>
 {% endblock %}

@@ -6,7 +6,9 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from main.models import Type, Design, Furniture, Client, Position, Employee, Order, News, Term, Vacancy, PromoCode, Review
+from main.models import Type, Design, Furniture, Client, Position, Employee, Order, News, Vacancy, PromoCode, Review
+
+from dateutil.relativedelta import relativedelta 
 
 User = get_user_model()
 
@@ -63,7 +65,6 @@ class FurnitureModelTest(TestCase):
             design=self.design,
             price=Decimal('299.99')
         )
-        # first furniture -> design prefix + "001"
         self.assertEqual(f1.product_code, 'MODE-001')
 
         f2 = Furniture.objects.create(
@@ -79,7 +80,6 @@ class FurnitureModelTest(TestCase):
             design=self.design,
             price=Decimal('49.99')
         )
-        # Попытка вручную изменить product_code игнорируется
         f.product_code = 'XXXX-999'
         f.save()
         f.refresh_from_db()
@@ -101,24 +101,28 @@ class ClientModelTest(TestCase):
         self.user = User.objects.create_user(username='client1', password='testpass')
 
     def test_create_client(self):
+        today = date.today()
+        dob = today - relativedelta(years=30)  
         client = Client.objects.create(
             user=self.user,
             company_name='Best Office',
             responsible_person='John Doe',
-            age=30,
+            date_of_birth=dob,
             phone='+375 (29) 123-45-67',
             city='Minsk',
             address='Lenina 10',
             timezone='Europe/Minsk'
         )
         self.assertEqual(str(client), 'Best Office')
-        self.assertEqual(client.age, 30)
+        self.assertEqual(client.age, 30)    
 
-    def test_age_validators(self):
+    def test_date_of_birth_validator_min_age(self):
+        today = date.today()
+        dob_17 = today - relativedelta(years=17)
         client = Client(
             user=self.user,
             company_name='Test',
-            age=17,
+            date_of_birth=dob_17,
             phone='+375 (29) 123-45-67',
             city='Minsk',
             address='Street',
@@ -127,16 +131,19 @@ class ClientModelTest(TestCase):
         with self.assertRaises(ValidationError):
             client.full_clean()
 
-        client.age = 121
-        with self.assertRaises(ValidationError):
+        dob_18 = today - relativedelta(years=18)
+        client.date_of_birth = dob_18
+        try:
             client.full_clean()
+        except ValidationError:
+            self.fail("Age exactly 18 should be valid")
 
     def test_phone_validator(self):
         client = Client(
             user=self.user,
             company_name='Test',
-            age=25,
-            phone='12345',  # неверный формат
+            date_of_birth=date.today() - relativedelta(years=25),
+            phone='12345',
             city='Minsk',
             address='Street',
             timezone='UTC'
@@ -145,10 +152,11 @@ class ClientModelTest(TestCase):
             client.full_clean()
 
     def test_timezone_update_tracking(self):
+        today = date.today()
         client = Client.objects.create(
             user=self.user,
             company_name='Initial',
-            age=25,
+            date_of_birth=today - relativedelta(years=25),
             phone='+375 (29) 123-45-67',
             city='Minsk',
             address='Street',
@@ -156,13 +164,11 @@ class ClientModelTest(TestCase):
         )
         self.assertIsNone(client.timezone_updated_at)
 
-        # Меняем часовой пояс
         client.timezone = 'Europe/Minsk'
         client.save()
         client.refresh_from_db()
         self.assertIsNotNone(client.timezone_updated_at)
 
-        # Повторное сохранение без смены таймзоны не должно менять метку
         old_timestamp = client.timezone_updated_at
         client.company_name = 'Updated'
         client.save()
@@ -182,24 +188,29 @@ class EmployeeModelTest(TestCase):
         self.position = Position.objects.create(name='Carpenter', salary=Decimal('1200.00'))
 
     def test_create_employee(self):
+        today = date.today()
+        dob = today - relativedelta(years=30)
         emp = Employee.objects.create(
             user=self.user,
             first_name='Ivan',
             last_name='Petrov',
-            age=30,
+            date_of_birth=dob,
             phone='+375 (29) 111-22-33',
             email='ivan@example.com',
             position=self.position
         )
         self.assertEqual(emp.full_name, 'Petrov Ivan')
+        self.assertEqual(emp.age, 30)
         self.assertEqual(str(emp), 'Petrov Ivan - Carpenter ($1200.00)')
 
     def test_email_unique(self):
+        today = date.today()
+        dob = today - relativedelta(years=25)
         Employee.objects.create(
             user=self.user,
             first_name='A',
             last_name='B',
-            age=25,
+            date_of_birth=dob,
             phone='+375 (29) 000-00-00',
             email='dup@example.com',
             position=self.position
@@ -210,18 +221,20 @@ class EmployeeModelTest(TestCase):
                 user=user2,
                 first_name='C',
                 last_name='D',
-                age=25,
+                date_of_birth=dob,
                 phone='+375 (29) 111-11-11',
                 email='dup@example.com',
                 position=self.position
             )
 
-    def test_age_validators(self):
+    def test_date_of_birth_validator_min_age(self):
+        today = date.today()
+        dob_17 = today - relativedelta(years=17)
         emp = Employee(
             user=self.user,
             first_name='A',
             last_name='B',
-            age=17,
+            date_of_birth=dob_17,
             phone='+375 (29) 123-45-67',
             email='a@b.com',
             position=self.position
@@ -229,9 +242,12 @@ class EmployeeModelTest(TestCase):
         with self.assertRaises(ValidationError):
             emp.full_clean()
 
-        emp.age = 66
-        with self.assertRaises(ValidationError):
+        dob_65 = today - relativedelta(years=65)
+        emp.date_of_birth = dob_65
+        try:
             emp.full_clean()
+        except ValidationError:
+            self.fail("Age 65 should be valid")
 
 
 class OrderModelTest(TestCase):
@@ -240,7 +256,7 @@ class OrderModelTest(TestCase):
         self.client = Client.objects.create(
             user=self.user,
             company_name='ClientCo',
-            age=30,
+            date_of_birth=date.today() - relativedelta(years=25),
             phone='+375 (29) 123-45-67',
             city='Minsk',
             address='Addr',
@@ -327,15 +343,10 @@ class ReviewModelTest(TestCase):
             r.full_clean()
 
 
-# Простые тесты для News, Term, Vacancy – создание и строковое представление
 class SimpleModelsTest(TestCase):
     def test_news(self):
         n = News.objects.create(title='New Collection', short_content='...')
         self.assertEqual(str(n), 'New Collection')
-
-    def test_term(self):
-        t = Term.objects.create(question='What is MDF?', answer='Medium Density Fibreboard')
-        self.assertEqual(str(t), 'What is MDF?')
 
     def test_vacancy(self):
         v = Vacancy.objects.create(

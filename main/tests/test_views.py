@@ -11,7 +11,7 @@ from django.urls import reverse
 
 from main.models import (
     Type, Design, Furniture, Client, Position, Employee,
-    Order, News, Term, Vacancy, PromoCode, Review
+    Order, News, Vacancy, PromoCode, Review
 )
 
 User = get_user_model()
@@ -38,11 +38,13 @@ class ViewsTestCase(TestCase):
         self.client_user.groups.add(self.client_group)
         self.employee_user.groups.add(self.employee_group)
 
+        today = date.today()
+        dob_client = today - relativedelta(years=30)
         self.client_profile = Client.objects.create(
             user=self.client_user,
             company_name='TestClient Ltd',
             responsible_person='John Doe',
-            age=30,
+            date_of_birth=dob_client,
             phone='+375 (29) 123-45-67',
             city='Minsk',
             address='Lenina 1',
@@ -50,11 +52,12 @@ class ViewsTestCase(TestCase):
         )
 
         self.position = Position.objects.create(name='Manager', salary=Decimal('1500.00'))
+        dob_employee = today - relativedelta(years=25)
         self.employee = Employee.objects.create(
             user=self.employee_user,
             first_name='Ivan',
             last_name='Petrov',
-            age=25,
+            date_of_birth=dob_employee,
             phone='+375 (29) 987-65-43',
             email='ivan@test.com',
             position=self.position
@@ -98,7 +101,6 @@ class ViewsTestCase(TestCase):
         )
 
         self.news = News.objects.create(title='Breaking News', short_content='...')
-        self.term = Term.objects.create(question='What is Django?', answer='Web framework')
         self.vacancy = Vacancy.objects.create(
             title='Designer',
             description='Design furniture',
@@ -175,30 +177,6 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'about.html')
 
-    def test_terms_list_all(self):
-        response = self.client.get(reverse('terms_list'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'terms_list.html')
-        self.assertEqual(len(response.context['terms']), 1)
-
-    def test_terms_list_search(self):
-        response = self.client.get(reverse('terms_list'), {'search': 'Django'})
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context['terms']), 1)
-
-        response = self.client.get(reverse('terms_list'), {'search': 'nonexistent'})
-        self.assertEqual(len(response.context['terms']), 0)
-
-    def test_terms_list_sorting(self):
-        Term.objects.create(question='Alpha', answer='First')
-        response = self.client.get(reverse('terms_list'), {'sort': 'question'})
-        terms = list(response.context['terms'])
-        self.assertEqual(terms[0].question, 'Alpha')
-
-        response = self.client.get(reverse('terms_list'), {'sort': '-question'})
-        terms = list(response.context['terms'])
-        self.assertEqual(terms[0].question, 'What is Django?')
-
     def test_contacts(self):
         response = self.client.get(reverse('contacts'))
         self.assertEqual(response.status_code, 200)
@@ -256,18 +234,20 @@ class ViewsTestCase(TestCase):
         self.assertTemplateUsed(response, 'registration/register_client.html')
 
     def test_register_client_post_valid(self):
+        today = date.today()
+        dob = (today - relativedelta(years=25)).isoformat()
         data = {
             'username': 'newclient',
             'email': 'newclient@example.com',
             'password1': 'ComplexPass123!',
             'password2': 'ComplexPass123!',
             'company_name': 'New Corp',
-            'responsible_person': 'John Smith',      
-            'age': 25,
+            'responsible_person': 'John Smith',
+            'date_of_birth': dob, 
             'phone': '+375 (29) 555-55-55',
             'city': 'Minsk',
             'address': 'Main Street',
-            'timezone': 'Europe/Minsk',       
+            'timezone': 'Europe/Minsk',
         }
         response = self.client.post(reverse('register'), data)  
         self.assertRedirects(response, reverse('main'))

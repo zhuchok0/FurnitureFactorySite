@@ -1,14 +1,8 @@
 from django.contrib import admin
-from .models import Type, Design, Furniture, Position, Employee, Client, Order, News, Term, Vacancy, PromoCode
+from .models import Type, Design, Furniture, Position, Employee, Client, Order, News, Vacancy, PromoCode, CompanyInfo, FAQ
 
 admin.site.register(Type)
-# admin.site.register(Design)
-# admin.site.register(Furniture)
-# admin.site.register(Employee)
-# admin.site.register(Client)
-# admin.site.register(Order)
 admin.site.register(News)
-admin.site.register(Term)
 
 class FurnitureInline(admin.TabularInline):
     model = Furniture
@@ -75,3 +69,29 @@ class PromoCodeAdmin(admin.ModelAdmin):
             'fields': ('is_active', 'created_date')
         }),
     )
+
+@admin.register(CompanyInfo)
+class CompanyInfoAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Main', {
+            'fields': ('name', 'founded_year', 'description', 'mission')
+        }),
+        ('Values (JSON format)', {
+            'fields': ('values',),
+            'description': 'Example: [{"title": "Quality", "description": "We use finest materials"}, ...]'
+        }),
+        ('Contact & Hours', {
+            'fields': ('address', 'phone', 'email', 'working_hours')
+        }),
+        ('Products', {
+            'fields': ('products_info',)
+        }),
+    )
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ('question', 'added_date', 'is_published', 'order')
+    list_filter = ('is_published', 'added_date')
+    search_fields = ('question', 'answer')
+    list_editable = ('is_published', 'order')
+    readonly_fields = ('added_date',)
