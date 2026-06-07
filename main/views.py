@@ -35,7 +35,7 @@ from io import StringIO
 def load_data(request):
     out = StringIO()
     try:
-        call_command('loaddata', 'datadump.json', stdout=out)
+        call_command('loaddata', 'datadump.json', ignorenonexistent=True, stdout=out)
         return HttpResponse(out.getvalue(), content_type="text/plain")
     except Exception as e:
         return HttpResponse(f"Ошибка: {e}", status=500)
