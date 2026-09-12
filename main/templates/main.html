@@ -3,6 +3,54 @@
 {% block title %}Home - Statistics{% endblock %}
 
 {% block content %}
+    <figure>
+        <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
+            <picture>
+                <source media="(max-width: 40em)"
+                        srcset="/media/add/cat2.gif 1x,
+                                /media/add/cat2.gif 2x,
+                                /media/add/cat2.gif 3x">
+                <source media="(max-width: 80em)"
+                        srcset="/media/add/cat3.gif 1x,
+                                /media/add/cat3.gif 2x,
+                                /media/add/cat3.gif 3x">
+                <img src="/media/add/cat1.gif"
+                    alt="Love kitties!">
+            </picture>
+        </a>
+        <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
+            <picture>
+                <source media="(max-width: 40em)"
+                        srcset="/media/add/cat4.gif 1x,
+                                /media/add/cat4.gif 2x,
+                                /media/add/cat4.gif 3x">
+                <source media="(max-width: 80em) "
+                        srcset="/media/add/cat5.gif 1x,
+                                /media/add/cat5.gif 2x,
+                                /media/add/cat5.gif 3x">
+                <img src="/media/add/cat1.gif"
+                    alt="Love kitties!">
+            </picture>
+        </a>
+        <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
+            <picture>
+                <source media="(max-width: 40em)"
+                        srcset="/media/add/cat6.gif 1x,
+                                /media/add/cat6.gif 2x,
+                                /media/add/cat6.gif 3x">
+                <source media="(max-width: 80em)"
+                        srcset="/media/add/cat7.gif 1x,
+                                /media/add/cat7.gif 2x,
+                                /media/add/cat7.gif 3x">
+                <img src="/media/add/cat1.gif"
+                    alt="Love kitties!">
+            </picture>
+        </a>
+        <figcaption>
+            You can watch more here: <a href="/about">open</a>
+        </figcaption>
+    </figure>
+
     {% if latest_news %}
     <div style="background-color: #f0f8ff; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
         <h2>Latest News</h2>
