@@ -6,44 +6,23 @@
     <figure>
         <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
             <picture>
-                <source media="(max-width: 40em)"
-                        srcset="/media/add/cat2.gif 1x,
-                                /media/add/cat2.gif 2x,
-                                /media/add/cat2.gif 3x">
-                <source media="(max-width: 80em)"
-                        srcset="/media/add/cat3.gif 1x,
-                                /media/add/cat3.gif 2x,
-                                /media/add/cat3.gif 3x">
-                <img src="/media/add/cat1.gif"
-                    alt="Love kitties!">
+                <source media="(max-width: 40em)" srcset="/media/add/cat2.gif">
+                <source media="(max-width: 80em)" srcset="/media/add/cat3.gif">
+                <img src="/media/add/cat1.gif" alt="Love kitties!">
             </picture>
         </a>
         <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
             <picture>
-                <source media="(max-width: 40em)"
-                        srcset="/media/add/cat4.gif 1x,
-                                /media/add/cat4.gif 2x,
-                                /media/add/cat4.gif 3x">
-                <source media="(max-width: 80em) "
-                        srcset="/media/add/cat5.gif 1x,
-                                /media/add/cat5.gif 2x,
-                                /media/add/cat5.gif 3x">
-                <img src="/media/add/cat1.gif"
-                    alt="Love kitties!">
+                <source media="(max-width: 40em)" srcset="/media/add/cat4.gif">
+                <source media="(max-width: 80em)" srcset="/media/add/cat5.gif 1x">
+                <img src="/media/add/cat1.gif" alt="Love kitties!">
             </picture>
         </a>
         <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
             <picture>
-                <source media="(max-width: 40em)"
-                        srcset="/media/add/cat6.gif 1x,
-                                /media/add/cat6.gif 2x,
-                                /media/add/cat6.gif 3x">
-                <source media="(max-width: 80em)"
-                        srcset="/media/add/cat7.gif 1x,
-                                /media/add/cat7.gif 2x,
-                                /media/add/cat7.gif 3x">
-                <img src="/media/add/cat1.gif"
-                    alt="Love kitties!">
+                <source media="(max-width: 40em)" srcset="/media/add/cat6.gif 1x">
+                <source media="(max-width: 80em)" srcset="/media/add/cat7.gif 1x">
+                <img src="/media/add/cat1.gif" alt="Love kitties!">
             </picture>
         </a>
         <figcaption>
@@ -67,6 +46,34 @@
         <a href="{% url 'news_list' %}">Read all news →</a>
     </div>
     {% endif %}
+
+    <h2>Our Partners</h2>
+
+    <table border="1" cellpadding="15" cellspacing="5" width="100%">
+        <tr>
+            {% for partner in partners %}
+            <td align="center" valign="middle" width="200">
+                <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ partner.logo.url }}"
+                        alt="{{ partner.name }}"
+                        width="150"
+                        height="80">
+                </a>
+                <br>
+                <strong>{{ partner.name }}</strong>
+                <br>
+                <small>
+                    <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
+                        Visit site →
+                    </a>
+                </small>
+            </td>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </tr><tr>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
 
     {% if client_info %}
     <div style="background-color: #e8f5e9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">

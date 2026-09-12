@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Type, Design, Furniture, Position, Employee, Client, Order, News, Vacancy, PromoCode, CompanyInfo, FAQ
+from .models import Type, Design, Furniture, Position, Employee, Client, Order, News, Vacancy, PromoCode, CompanyInfo, FAQ, Partner
 
 admin.site.register(Type)
 admin.site.register(News)
@@ -95,3 +95,8 @@ class FAQAdmin(admin.ModelAdmin):
     search_fields = ('question', 'answer')
     list_editable = ('is_published', 'order')
     readonly_fields = ('added_date',)
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'website')
+    search_fields = ('name', 'website')

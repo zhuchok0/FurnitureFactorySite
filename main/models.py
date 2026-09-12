@@ -439,3 +439,16 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question[:50]
+
+class Partner(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Name')
+    logo = models.ImageField(upload_to='partners/logos/', verbose_name='Logo')
+    website = models.URLField(max_length=200, verbose_name='Website')
+
+    class Meta:
+        verbose_name = 'Partner'
+        verbose_name_plural = 'Partners'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name

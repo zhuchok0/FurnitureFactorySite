@@ -156,6 +156,19 @@
     }
 },
 {
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2026-09-12T18:44:36.372Z",
+        "user": 1,
+        "content_type": 4,
+        "object_id": "9",
+        "object_repr": "emp",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+    }
+},
+{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -867,7 +880,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$1000000$kpT7xviV3GMoIoj742dV9j$20MtHjU/cFLA0UDhg540i8dfwSKPimj9ehsalxN0Opw=",
-        "last_login": "2026-09-07T23:32:39.655Z",
+        "last_login": "2026-09-12T18:43:28.145Z",
         "is_superuser": true,
         "username": "maria",
         "first_name": "",
@@ -884,8 +897,8 @@
     "model": "auth.user",
     "pk": 9,
     "fields": {
-        "password": "pbkdf2_sha256$1000000$5CJzMZSYZmPOQrCUEdY8rJ$ZyOxMxCtwDJIKWLrzDrvqQEiksvx0RtIGmezaudPGH4=",
-        "last_login": null,
+        "password": "pbkdf2_sha256$1000000$jDoEymGXQKIuHYUdULBvcw$P4hsm8Q5QeH8aZ8PpIwpQbbsSs9BRyJYSd+lYezt9bI=",
+        "last_login": "2026-09-12T18:44:57.278Z",
         "is_superuser": false,
         "username": "emp",
         "first_name": "",
@@ -1452,10 +1465,10 @@
 },
 {
     "model": "sessions.session",
-    "pk": "2hh2uye1td5bcbxcq6odzy4urn6roo84",
+    "pk": "l9rmnpzuw8jjjmebnyhsrm35e08dxign",
     "fields": {
-        "session_data": ".eJxVjMsOwiAQRf-FtSEC5TEu3fsNZGAYqRqalHZl_HfbpAvd3nPOfYuI61Lj2sscRxIXocTpd0uYn6XtgB7Y7pPMU1vmMcldkQft8jZReV0P9--gYq9bzej5nFzhYD3BQEqZ5AflEmgNWnHRYAKE5Fh7yJYBiVBZs3VoQmbx-QLkdzgg:1x3ipL:ymsVDdyDZbM6LsJ6UrQiGmOA4Hl6LMx15-Jfx31yoH8",
-        "expire_date": "2026-09-21T23:32:39.656Z"
+        "session_data": ".eJxVjDkOwjAURO_iGlmWvMWU9JzB-v4LDqBYipMq4u4kUgpoppj3ZjaVYV1qXjvPeSR1VUldfrsC-OLpAPSE6dE0tmmZx6IPRZ-063sjft9O9--gQq_7GmAQb_dwxkNKjEwIsbCzIXKSEC078MFIHBybYAWLRPDiCQ1JQfX5AhPCOW4:1x5Sif:nMW0Wj9o4EnXvJLZR1s4ZnSK1U1nHJXenz_Tdd3a9JA",
+        "expire_date": "2026-09-26T18:44:57.278Z"
     }
 },
 {

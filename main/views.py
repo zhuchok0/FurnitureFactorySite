@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum, Count, F, DecimalField, Q
 from django.db.models.functions import Coalesce
-from .models import Furniture, Client, Order, Type, News, Employee, Vacancy, PromoCode, Design, Review, CompanyInfo, FAQ
+from .models import Furniture, Client, Order, Type, News, Employee, Vacancy, PromoCode, Design, Review, CompanyInfo, FAQ, Partner
 
 from statistics import median, mode
 from decimal import Decimal
@@ -43,6 +43,8 @@ def load_data(request):
 
 def main(request):
     latest_news = News.objects.first() 
+
+    partners = Partner.objects.all()
 
     clients_alphabetical = Client.objects.order_by('company_name')
     furniture_alphabetical = Furniture.objects.order_by('title')
@@ -207,6 +209,7 @@ def main(request):
     
     context = {
         'latest_news': latest_news,
+        'partners': partners,
         'clients': clients_alphabetical,
         'furniture_list': furniture_alphabetical,
         'total_sales': total_sales,

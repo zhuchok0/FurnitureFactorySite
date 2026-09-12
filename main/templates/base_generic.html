@@ -25,12 +25,9 @@
     <main>
         <aside>
             <ul>
-                {% if not user.is_authenticated %}
-                    <li><br></li>
-                    <li><strong>UNAUTHENTICATED USER PANEL</strong></li>
-                    <li><a href="{% url 'promocodes_list' %}">Promo Codes</a></li>
-                    <li><a href="{% url 'catalog' %}">Catalog</a></li>
-                {% endif %}
+                <li><br></li>
+                <li><a href="{% url 'promocodes_list' %}">Promo Codes</a></li>
+                <li><a href="{% url 'catalog' %}">Catalog</a></li>
                     
                 {% if user.is_superuser or user.is_staff %}
                     <li><br></li>
@@ -46,7 +43,6 @@
                             <li><strong>CLIENT PANEL</strong></li>
                             <li><a href="{% url 'client_orders' %}">My Orders</a></li>
                             <li><a href="{% url 'create_order' %}">Place Order</a></li>
-                            <li><a href="{% url 'promocodes_list' %}">Promo Codes</a></li>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
