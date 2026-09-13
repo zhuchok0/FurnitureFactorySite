@@ -76,15 +76,27 @@ class CompanyInfoAdmin(admin.ModelAdmin):
         ('Main', {
             'fields': ('name', 'founded_year', 'description', 'mission')
         }),
+        ('Logo & Video', {
+            'fields': ('logo', 'video_file', 'video_title')
+        }),
         ('Values (JSON format)', {
             'fields': ('values',),
-            'description': 'Example: [{"title": "Quality", "description": "We use finest materials"}, ...]'
+            'description': 'Example: [{"title": "Quality", "description": "..."}]'
         }),
-        ('Contact & Hours', {
-            'fields': ('address', 'phone', 'email', 'working_hours')
+        ('History', {
+            'fields': ('history',)
         }),
         ('Products', {
             'fields': ('products_info',)
+        }),
+        ('Requisites', {
+            'fields': ('requisites',)
+        }),
+        ('Certificates', {
+            'fields': ('certificates', 'certificate_image')
+        }),
+        ('Contact & Hours', {
+            'fields': ('address', 'phone', 'email', 'working_hours')
         }),
     )
 

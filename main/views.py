@@ -237,7 +237,8 @@ def news_list(request):
     return render(request, 'news_list.html', {'news_items': news_items})
 
 def about(request):
-    return render(request, 'about.html')
+    company = CompanyInfo.objects.first()
+    return render(request, 'about.html', {'company': company})
 
 def contacts(request):
     employees = Employee.objects.select_related('position').all()

@@ -418,20 +418,45 @@ class CompanyInfo(models.Model):
     founded_year = models.PositiveIntegerField(default=2010)
     description = models.TextField(blank=True)
     mission = models.TextField(blank=True)
-    
     values = models.JSONField(default=list, blank=True)
-    
+
+    logo = models.ImageField(upload_to='company/', blank=True, null=True)
+
+    video_file = models.FileField(
+        upload_to='company/videos/',
+        blank=True,
+        null=True,
+        verbose_name='Video file',
+        help_text='MP4, WebM или OGG (до 50 МБ)'
+    )
+    video_title = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name='Video title',
+        default='Watch Our Video'
+    )
+
+    history = models.TextField(blank=True, help_text='Company history by years')
+
+    requisites = models.TextField(blank=True, help_text='Legal and bank details')
+
+    certificates = models.TextField(blank=True, help_text='Certificate description')
+    certificate_image = models.ImageField(
+        upload_to='company/certificates/',
+        blank=True,
+        null=True,
+        verbose_name='Certificate image'
+    )
+
     address = models.CharField(max_length=255, blank=True)
     phone = models.CharField(max_length=50, blank=True)
     email = models.EmailField(blank=True)
-    
     working_hours = models.TextField(blank=True)
-    
     products_info = models.TextField(blank=True)
-    
+
     def __str__(self):
         return self.name
-    
+
     class Meta:
         verbose_name = 'Company Information'
         verbose_name_plural = 'Company Information'

@@ -3,34 +3,79 @@
 {% block title %}About Us{% endblock %}
 
 {% block content %}
-    <h1>About {{ company.name }}</h1>
-    
-    <div class="about-content">
-        <h2>{{ company.name }}</h2>
-        
-        <p>Founded in {{ company.founded_year }}, {{ company.description }}</p>
-        
-        <h3>Our Mission</h3>
-        <p>{{ company.mission }}</p>
-        
-        <h3>Our Values</h3>
-        <ul>
-            {% for value in company.values %}
-                <li><strong>{{ value.title }}:</strong> {{ value.description }}</li>
-            {% endfor %}
-        </ul>
-        
-        <h3>Our Products</h3>
-        <p>{{ company.products_info }}</p>
-        
-        <h3>Contact Information</h3>
-        <p>
-            <strong>Address:</strong> {{ company.address }}<br>
-            <strong>Phone:</strong> {{ company.phone }}<br>
-            <strong>Email:</strong> {{ company.email }}
-        </p>
-        
-        <h3>Working Hours</h3>
-        <p>{{ company.working_hours|linebreaksbr }}</p>
-    </div>
+{% if company %}
+
+<h1>About {{ company.name }}</h1>
+
+{% if company.logo %}
+    <p>
+        <img src="{{ company.logo.url }}"
+             alt="{{ company.name }} logo"
+             width="200">
+    </p>
+{% endif %}
+
+<p><strong>Founded:</strong> {{ company.founded_year }}</p>
+
+<h2>About the Company</h2>
+<p>{{ company.description|linebreaks }}</p>
+
+<h2>Our Mission</h2>
+<p>{{ company.mission|linebreaks }}</p>
+
+{% if company.values %}
+<h2>Our Values</h2>
+<ul>
+    {% for value in company.values %}
+    <li>
+        <strong>{{ value.title }}</strong> — {{ value.description }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h2>History</h2>
+<p>{{ company.history|linebreaks }}</p>
+
+<h2>Our Products</h2>
+<p>{{ company.products_info|linebreaks }}</p>
+
+<h2>Requisites</h2>
+<p>{{ company.requisites|linebreaks }}</p>
+
+<h2>Certificates</h2>
+<p>{{ company.certificates|linebreaks }}</p>
+{% if company.certificate_image %}
+    <a href="{{ company.certificate_image.url }}" target="_blank">
+        <img src="{{ company.certificate_image.url }}"
+             alt="Certificate"
+             width="300">
+    </a>
+{% endif %}
+
+{% if company.video_file %}
+<h2>{{ company.video_title|default:"Watch Our Video" }}</h2>
+<video width="560" height="315" controls>
+    <source src="{{ company.video_file.url }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+{% endif %}
+
+<h2>Contact Us</h2>
+<ul>
+    {% if company.address %}<li><strong>Address:</strong> {{ company.address }}</li>{% endif %}
+    {% if company.phone %}<li><strong>Phone:</strong> {{ company.phone }}</li>{% endif %}
+    {% if company.email %}<li><strong>Email:</strong> {{ company.email }}</li>{% endif %}
+</ul>
+
+{% if company.working_hours %}
+<h3>Working Hours</h3>
+<p>{{ company.working_hours|linebreaks }}</p>
+{% endif %}
+
+{% else %}
+    <p>Company information is not available.</p>
+{% endif %}
+
+<p><a href="{% url 'main' %}">← Back to Main</a></p>
 {% endblock %}
