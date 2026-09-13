@@ -236,6 +236,10 @@ def news_list(request):
     news_items = News.objects.all().order_by('-created_date')
     return render(request, 'news_list.html', {'news_items': news_items})
 
+def news_detail(request, pk):
+    news = get_object_or_404(News, pk=pk)
+    return render(request, 'news_detail.html', {'news': news})
+
 def about(request):
     company = CompanyInfo.objects.first()
     return render(request, 'about.html', {'company': company})

@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block title %}{{ news.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ news.title }}</h1>
+
+<p><small>Published: {{ news.created_date }}</small></p>
+
+{% if news.image %}
+    <p>
+        <img src="{{ news.image.url }}"
+             alt="{{ news.title }}"
+             style="max-width: 100%; height: auto;">
+    </p>
+{% endif %}
+
+<p>{{ news.short_content }}</p>
+
+{% if news.full_content %}
+    <div>
+        {{ news.full_content|linebreaks }}
+    </div>
+{% else %}
+    <p><em>Full content is not available yet.</em></p>
+{% endif %}
+
+<p><a href="{% url 'news_list' %}">← Back to News</a></p>
+{% endblock %}

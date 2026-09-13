@@ -298,6 +298,10 @@ class News(models.Model):
         max_length=300,
         help_text="One sentence summary (max 300 characters)"
     )
+    full_content = models.TextField(
+        blank=True,
+        help_text="Full text of the news article"
+    )
     image = models.ImageField(
         upload_to='news_images/',
         help_text="News image (optional)"
