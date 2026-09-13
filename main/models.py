@@ -58,6 +58,14 @@ class Furniture(models.Model):
     in_production = models.BooleanField(default=False,
                                         verbose_name='In production')
     
+    image = models.ImageField(
+        upload_to='furniture/images/',
+        blank=True,
+        null=True,
+        verbose_name='Image',
+        help_text='Photo of the furniture'
+    )
+    
     product_code = models.CharField(
         max_length=20,
         unique=True,
@@ -78,6 +86,10 @@ class Furniture(models.Model):
             self.product_code = old_code
 
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('furniture_detail', args=[str(self.pk)])
     
     def __str__(self):
         return self.title

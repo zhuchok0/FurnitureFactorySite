@@ -75,6 +75,20 @@
         </tr>
     </table>
 
+    <h2>Furniture List (Alphabetical Order)</h2>
+    <ul>
+        {% for item in furniture_list %}
+        <li>
+            <a href="{{ item.get_absolute_url }}">
+                {{ item.title }}
+            </a>
+            — ${{ item.price }}
+        </li>
+        {% empty %}
+        <li>No furniture</li>
+        {% endfor %}
+    </ul>
+    
     {% if client_info %}
     <div style="background-color: #e8f5e9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
         <h2>🕒 Timezone Information</h2>
@@ -134,16 +148,7 @@
         <li>No clients</li>
         {% endfor %}
     </ul>
-    
-    <h2>Furniture List (Alphabetical Order)</h2>
-    <ul>
-        {% for item in furniture_list %}
-        <li>{{ item.title }} - ${{ item.price }}</li>
-        {% empty %}
-        <li>No furniture</li>
-        {% endfor %}
-    </ul>
-    
+
     <h2>Total Sales</h2>
     <p><strong>${{ total_sales|floatformat:2 }}</strong></p>
     

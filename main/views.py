@@ -751,3 +751,7 @@ def faq_view(request):
         'sort_by': sort_by,
     }
     return render(request, 'faq.html', context)
+
+def furniture_detail(request, pk):
+    furniture = get_object_or_404(Furniture, pk=pk)
+    return render(request, 'furniture/detail.html', {'furniture': furniture})    

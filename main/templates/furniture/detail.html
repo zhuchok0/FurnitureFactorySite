@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+
+{% block title %}{{ furniture.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ furniture.title }}</h1>
+
+{% if furniture.image %}
+    <p>
+        <img src="{{ furniture.image.url }}"
+             alt="{{ furniture.title }}"
+             style="max-width: 400px; height: auto;">
+    </p>
+{% endif %}
+
+<dl>
+    <dt>Product Code</dt>
+    <dd>{{ furniture.product_code }}</dd>
+
+    <dt>Price</dt>
+    <dd>${{ furniture.price }}</dd>
+
+    <dt>Design</dt>
+    <dd>{{ furniture.design.name|default:"—" }}</dd>
+
+    <dt>Types</dt>
+    <dd>
+        {% for t in furniture.type.all %}
+            {{ t.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            —
+        {% endfor %}
+    </dd>
+
+    <dt>In production</dt>
+    <dd>{{ furniture.in_production|yesno:"Yes,No" }}</dd>
+</dl>
+
+<p><a href="{% url 'main' %}">← Back to list</a></p>
+{% endblock %}

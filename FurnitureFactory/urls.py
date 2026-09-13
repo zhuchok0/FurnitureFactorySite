@@ -41,6 +41,7 @@ urlpatterns = [
     path('register/', views.register_client, name='register'),
     path('employee/dashboard/', views.employee_dashboard, name='employee_dashboard'),
     path('my-super-secret-and-long-load-url/', views.load_data),
+    path('furniture/<int:pk>/', views.furniture_detail, name='furniture_detail'),
 ]
 
 
