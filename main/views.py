@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum, Count, F, DecimalField, Q
 from django.db.models.functions import Coalesce
-from .models import Furniture, Client, Order, Type, News, Employee, Vacancy, PromoCode, Design, Review, CompanyInfo, FAQ, Partner
+from .models import Furniture, Client, Order, Type, News, Employee, Vacancy, PromoCode, Design, Review, CompanyInfo, FAQ
+from .models import Partner, Cart, CartItem
 
 from statistics import median, mode
 from decimal import Decimal
@@ -755,3 +756,90 @@ def faq_view(request):
 def furniture_detail(request, pk):
     furniture = get_object_or_404(Furniture, pk=pk)
     return render(request, 'furniture/detail.html', {'furniture': furniture})    
+
+from django.views.decorators.http import require_POST
+
+def get_user_cart(user):
+    client = user.client_profile          # related_name из Client
+    cart, _ = Cart.objects.get_or_create(client=client)
+    return cart
+
+
+@login_required
+@user_passes_test(is_client)
+def cart_view(request):
+    cart = get_user_cart(request.user)
+    items = cart.items.select_related('furniture').all()
+    return render(request, 'cart.html', {
+        'cart': cart,
+        'items': items,
+        'total': cart.total,
+    })
+
+
+@login_required
+@user_passes_test(is_client)
+@require_POST
+def cart_add(request, pk):
+    furniture = get_object_or_404(Furniture, pk=pk)
+    cart = get_user_cart(request.user)
+
+    item, created = CartItem.objects.get_or_create(
+        cart=cart,
+        furniture=furniture,
+        defaults={'quantity': 1}
+    )
+    if not created:
+        item.quantity += 1
+        item.save()
+
+    return redirect('cart')
+
+
+@login_required
+@user_passes_test(is_client)
+@require_POST
+def cart_action(request, pk):
+    cart = get_user_cart(request.user)
+    item = get_object_or_404(CartItem, cart=cart, pk=pk)
+    action = request.POST.get('action')
+
+    if action == 'delete':
+        item.delete()
+
+    elif action == 'plus':
+        item.quantity += 1
+        item.save()
+
+    elif action == 'minus':
+        item.quantity -= 1
+        if item.quantity <= 0:
+            item.delete()
+        else:
+            item.save()
+
+    return redirect('cart')
+
+
+@login_required
+@user_passes_test(is_client)
+@require_POST
+def cart_pay(request):
+    client = request.user.client_profile
+    cart = get_user_cart(request.user)
+
+    if not cart.items.exists():
+        return redirect('cart')
+
+    for item in cart.items.all():
+        Order.objects.create(
+            client=client,
+            furniture=item.furniture,
+            quantity=item.quantity,
+            order_date=timezone.now().date(),
+            delivery_date=timezone.now().date() + timedelta(days=7)
+        )
+
+    cart.items.all().delete()
+
+    return redirect('client_orders')

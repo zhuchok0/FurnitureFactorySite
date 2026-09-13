@@ -169,6 +169,84 @@
     }
 },
 {
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2026-09-12T23:39:27.855Z",
+        "user": 1,
+        "content_type": 20,
+        "object_id": "1",
+        "object_repr": "Pupsik",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2026-09-13T00:26:26.860Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "9",
+        "object_repr": "Bathroom Vanity",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2026-09-13T00:26:36.280Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "1",
+        "object_repr": "Beauty table for cool girls",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2026-09-13T00:26:53.331Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "5",
+        "object_repr": "Cozy Sofa",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2026-09-13T00:27:02.373Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "10",
+        "object_repr": "Ergonomic Desk",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2026-09-13T00:27:16.373Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "6",
+        "object_repr": "Extendable Dining Table",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -853,6 +931,42 @@
     }
 },
 {
+    "model": "auth.permission",
+    "pk": 77,
+    "fields": {
+        "name": "Can add Partner",
+        "content_type": 20,
+        "codename": "add_partner"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 78,
+    "fields": {
+        "name": "Can change Partner",
+        "content_type": 20,
+        "codename": "change_partner"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 79,
+    "fields": {
+        "name": "Can delete Partner",
+        "content_type": 20,
+        "codename": "delete_partner"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 80,
+    "fields": {
+        "name": "Can view Partner",
+        "content_type": 20,
+        "codename": "view_partner"
+    }
+},
+{
     "model": "auth.group",
     "pk": 1,
     "fields": {
@@ -880,7 +994,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$1000000$kpT7xviV3GMoIoj742dV9j$20MtHjU/cFLA0UDhg540i8dfwSKPimj9ehsalxN0Opw=",
-        "last_login": "2026-09-12T18:43:28.145Z",
+        "last_login": "2026-09-12T23:35:33.066Z",
         "is_superuser": true,
         "username": "maria",
         "first_name": "",
@@ -1464,11 +1578,19 @@
     }
 },
 {
-    "model": "sessions.session",
-    "pk": "l9rmnpzuw8jjjmebnyhsrm35e08dxign",
+    "model": "contenttypes.contenttype",
+    "pk": 20,
     "fields": {
-        "session_data": ".eJxVjDkOwjAURO_iGlmWvMWU9JzB-v4LDqBYipMq4u4kUgpoppj3ZjaVYV1qXjvPeSR1VUldfrsC-OLpAPSE6dE0tmmZx6IPRZ-063sjft9O9--gQq_7GmAQb_dwxkNKjEwIsbCzIXKSEC078MFIHBybYAWLRPDiCQ1JQfX5AhPCOW4:1x5Sif:nMW0Wj9o4EnXvJLZR1s4ZnSK1U1nHJXenz_Tdd3a9JA",
-        "expire_date": "2026-09-26T18:44:57.278Z"
+        "app_label": "main",
+        "model": "partner"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "f246rx54a7q9q2hbuijxyxw0c3vnvmsa",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSEC5TEu3fsNZGAYqRqalHZl_HfbpAvd3nPOfYuI61Lj2sscRxIXocTpd0uYn6XtgB7Y7pPMU1vmMcldkQft8jZReV0P9--gYq9bzej5nFzhYD3BQEqZ5AflEmgNWnHRYAKE5Fh7yJYBiVBZs3VoQmbx-QLkdzgg:1x5XFt:Mwnn5CXGU0pjLdZaGkMuohyX4N8SuEFGzlT-vBnyGpI",
+        "expire_date": "2026-09-26T23:35:33.067Z"
     }
 },
 {
@@ -1619,6 +1741,7 @@
         "design": 1,
         "price": "50.50",
         "in_production": true,
+        "image": "furniture/images/furn2.avif",
         "product_code": "MODE-001",
         "type": [
             1
@@ -1633,6 +1756,7 @@
         "design": 3,
         "price": "1000.00",
         "in_production": true,
+        "image": "",
         "product_code": "VANG-002",
         "type": [
             3
@@ -1647,6 +1771,7 @@
         "design": 2,
         "price": "75.89",
         "in_production": true,
+        "image": "",
         "product_code": "LOFT-003",
         "type": [
             2
@@ -1661,6 +1786,7 @@
         "design": 4,
         "price": "400.00",
         "in_production": true,
+        "image": "",
         "product_code": "CLAS-004",
         "type": [
             4
@@ -1675,6 +1801,7 @@
         "design": 5,
         "price": "450.00",
         "in_production": true,
+        "image": "furniture/images/furn3.avif",
         "product_code": "SCAN-005",
         "type": [
             5
@@ -1689,6 +1816,7 @@
         "design": 1,
         "price": "320.00",
         "in_production": true,
+        "image": "furniture/images/furn2_96kCt4l.avif",
         "product_code": "MODE-006",
         "type": [
             6
@@ -1703,6 +1831,7 @@
         "design": 7,
         "price": "280.00",
         "in_production": true,
+        "image": "",
         "product_code": "MINI-007",
         "type": [
             7
@@ -1717,6 +1846,7 @@
         "design": 6,
         "price": "120.00",
         "in_production": true,
+        "image": "",
         "product_code": "INDU-008",
         "type": [
             8
@@ -1731,6 +1861,7 @@
         "design": 10,
         "price": "210.00",
         "in_production": true,
+        "image": "furniture/images/furn1.avif",
         "product_code": "ECO-009",
         "type": [
             9
@@ -1745,6 +1876,7 @@
         "design": 9,
         "price": "350.00",
         "in_production": true,
+        "image": "furniture/images/furn1_gsyzVBQ.avif",
         "product_code": "ART -010",
         "type": [
             10
@@ -2841,6 +2973,15 @@
         "added_date": "2026-06-07",
         "is_published": true,
         "order": 0
+    }
+},
+{
+    "model": "main.partner",
+    "pk": 1,
+    "fields": {
+        "name": "Pupsik",
+        "logo": "partners/logos/pupsik.png",
+        "website": "https://www.pinterest.com/babiesdotcom/"
     }
 }
 ]

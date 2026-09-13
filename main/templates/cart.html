@@ -1,0 +1,92 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<h1>Shopping Cart</h1>
+
+{% if items %}
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td align="center">
+                {% if item.furniture.image %}
+                    <img src="{{ item.furniture.image.url }}"
+                         alt="{{ item.furniture.title }}"
+                         width="80" height="60">
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'furniture_detail' item.furniture.pk %}">
+                    {{ item.furniture.title }}
+                </a>
+            </td>
+            <td>${{ item.furniture.price }}</td>
+            <td align="center">
+                <!-- Минус -->
+                <form action="{% url 'cart_action' item.pk %}"
+                      method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="minus">
+                    <button type="submit">−</button>
+                </form>
+
+                <strong>{{ item.quantity }}</strong>
+
+                <!-- Плюс -->
+                <form action="{% url 'cart_action' item.pk %}"
+                      method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="plus">
+                    <button type="submit">+</button>
+                </form>
+            </td>
+            <td>${{ item.subtotal }}</td>
+            <td>
+                <!-- Удалить -->
+                <form action="{% url 'cart_action' item.pk %}"
+                      method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="delete">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" align="right"><strong>Total:</strong></td>
+            <td colspan="2"><strong>${{ total }}</strong></td>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- Pay -->
+<form action="{% url 'cart_pay' %}" method="post">
+    {% csrf_token %}
+    <p align="right">
+        <button type="submit"><strong>Pay</strong></button>
+    </p>
+</form>
+
+{% else %}
+    <p>Your cart is empty.</p>
+    
+{% endif %}
+
+<p><a href="{% url 'catalog' %}">← Continue shopping</a></p>
+{% endblock %}

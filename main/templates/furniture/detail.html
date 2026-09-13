@@ -8,8 +8,8 @@
 {% if furniture.image %}
     <p>
         <img src="{{ furniture.image.url }}"
-             alt="{{ furniture.title }}"
-             style="max-width: 400px; height: auto;">
+            alt="{{ furniture.title }}"
+            width="400">
     </p>
 {% endif %}
 
@@ -35,6 +35,28 @@
     <dt>In production</dt>
     <dd>{{ furniture.in_production|yesno:"Yes,No" }}</dd>
 </dl>
+
+{% if furniture.in_production %}
+    {# Товар ещё в производстве — можно купить #}
+    {% if user.is_authenticated %}
+        {% for group in user.groups.all %}
+            {% if group.name == 'Client' %}
+                <form action="{% url 'cart_add' furniture.pk %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+            to add items to cart.
+        </p>
+    {% endif %}
+{% else %}
+    {# Товар снят с производства — покупка недоступна #}
+    <p><strong>This item is no longer available for purchase.</strong></p>
+{% endif %}
 
 <p><a href="{% url 'main' %}">← Back to list</a></p>
 {% endblock %}

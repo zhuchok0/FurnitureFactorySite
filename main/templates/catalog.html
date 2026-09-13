@@ -49,7 +49,11 @@
         <tbody>
             {% for item in furniture_list %}
             <tr>
-                <td>{{ item.title }}</td>
+                <td>
+                    <a href="{{ item.get_absolute_url }}">
+                        {{ item.title }}
+                    </a>
+                </td>
                 <td>{{ item.type_names|default:"No type" }}</td>
                 <td>{{ item.design_name }}</td>
                 <td>${{ item.price|floatformat:2 }}</td>

@@ -100,3 +100,24 @@ class FAQAdmin(admin.ModelAdmin):
 class PartnerAdmin(admin.ModelAdmin):
     list_display = ('name', 'website')
     search_fields = ('name', 'website')
+
+from .models import Cart, CartItem
+
+class CartItemInline(admin.TabularInline):
+    model = CartItem
+    extra = 0
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('client', 'item_count', 'total', 'updated_at')
+    inlines = [CartItemInline]
+    readonly_fields = ('created_at', 'updated_at')
+    search_fields = ('client__company_name', 'client__user__username')
+
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('cart', 'furniture', 'quantity', 'subtotal')
+    list_filter = ('cart__client',)
+    search_fields = ('furniture__title', 'cart__client__company_name')

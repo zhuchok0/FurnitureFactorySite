@@ -464,3 +464,64 @@ class Partner(models.Model):
 
     def __str__(self):
         return self.name
+
+from django.db.models import Sum, F, DecimalField
+
+class Cart(models.Model):
+    client = models.OneToOneField(
+        'Client',
+        on_delete=models.CASCADE,
+        related_name='cart',
+        verbose_name='Client'
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated')
+
+    class Meta:
+        verbose_name = 'Cart'
+        verbose_name_plural = 'Carts'
+
+    def __str__(self):
+        return f'Cart of {self.client.company_name}'
+
+    @property
+    def total(self):
+        result = self.items.aggregate(
+            total=Sum(
+                F('quantity') * F('furniture__price'),
+                output_field=DecimalField(max_digits=10, decimal_places=2)
+            )
+        )['total']
+        return result or 0
+
+    @property
+    def item_count(self):
+        return self.items.aggregate(n=Sum('quantity'))['n'] or 0
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(
+        Cart,
+        on_delete=models.CASCADE,
+        related_name='items',
+        verbose_name='Cart'
+    )
+    furniture = models.ForeignKey(
+        'Furniture',
+        on_delete=models.CASCADE,
+        verbose_name='Furniture'
+    )
+    quantity = models.PositiveIntegerField(default=1, verbose_name='Quantity')
+
+    class Meta:
+        verbose_name = 'Cart item'
+        verbose_name_plural = 'Cart items'
+        unique_together = ('cart', 'furniture')
+        ordering = ['furniture__title']
+
+    def __str__(self):
+        return f'{self.furniture.title} × {self.quantity}'
+
+    @property
+    def subtotal(self):
+        return self.furniture.price * self.quantity

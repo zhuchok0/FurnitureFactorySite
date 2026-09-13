@@ -42,6 +42,10 @@ urlpatterns = [
     path('employee/dashboard/', views.employee_dashboard, name='employee_dashboard'),
     path('my-super-secret-and-long-load-url/', views.load_data),
     path('furniture/<int:pk>/', views.furniture_detail, name='furniture_detail'),
+    path('cart/', views.cart_view, name='cart'),
+    path('cart/add/<int:pk>/', views.cart_add, name='cart_add'),
+    path('cart/action/<int:pk>/', views.cart_action, name='cart_action'),
+    path('cart/pay/', views.cart_pay, name='cart_pay'),
 ]
 
 
