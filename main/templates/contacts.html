@@ -24,6 +24,12 @@
                         No position assigned
                     {% endif %}
                 </p>
+                {% if employee.position.description %}
+                <div class="employee-duties">
+                    <strong>Duties:</strong>
+                    {{ employee.position.description|linebreaks }}
+                </div>
+                {% endif %}
                 <p><strong>Phone:</strong> {{ employee.phone }}</p>
                 <p><strong>Email:</strong> <a href="mailto:{{ employee.email }}">{{ employee.email }}</a></p>
                 <p><strong>Age:</strong> {{ employee.age }} years</p>

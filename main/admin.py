@@ -28,7 +28,7 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'salary')
+    list_display = ('name', 'salary', 'description')
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):

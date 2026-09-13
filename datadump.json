@@ -247,6 +247,84 @@
     }
 },
 {
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2026-09-13T11:37:13.495Z",
+        "user": 1,
+        "content_type": 4,
+        "object_id": "11",
+        "object_repr": "cool_girl",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2026-09-13T15:56:16.338Z",
+        "user": 1,
+        "content_type": 18,
+        "object_id": "1",
+        "object_repr": "Furniture Factory",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Logo\", \"Video url\", \"History\", \"Requisites\", \"Certificate image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2026-09-13T16:00:30.578Z",
+        "user": 1,
+        "content_type": 18,
+        "object_id": "1",
+        "object_repr": "Furniture Factory",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Video url\", \"Certificates\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2026-09-13T16:08:58.385Z",
+        "user": 1,
+        "content_type": 18,
+        "object_id": "1",
+        "object_repr": "Furniture Factory",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Video file\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2026-09-13T16:10:06.261Z",
+        "user": 1,
+        "content_type": 18,
+        "object_id": "1",
+        "object_repr": "Furniture Factory",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Video file\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2026-09-13T19:52:38.554Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "10",
+        "object_repr": "Workshop for DIY Enthusiasts",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Full content\"]}}]"
+    }
+},
+{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -967,6 +1045,78 @@
     }
 },
 {
+    "model": "auth.permission",
+    "pk": 81,
+    "fields": {
+        "name": "Can add Cart",
+        "content_type": 21,
+        "codename": "add_cart"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 82,
+    "fields": {
+        "name": "Can change Cart",
+        "content_type": 21,
+        "codename": "change_cart"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 83,
+    "fields": {
+        "name": "Can delete Cart",
+        "content_type": 21,
+        "codename": "delete_cart"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 84,
+    "fields": {
+        "name": "Can view Cart",
+        "content_type": 21,
+        "codename": "view_cart"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 85,
+    "fields": {
+        "name": "Can add Cart item",
+        "content_type": 22,
+        "codename": "add_cartitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 86,
+    "fields": {
+        "name": "Can change Cart item",
+        "content_type": 22,
+        "codename": "change_cartitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 87,
+    "fields": {
+        "name": "Can delete Cart item",
+        "content_type": 22,
+        "codename": "delete_cartitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 88,
+    "fields": {
+        "name": "Can view Cart item",
+        "content_type": 22,
+        "codename": "view_cartitem"
+    }
+},
+{
     "model": "auth.group",
     "pk": 1,
     "fields": {
@@ -994,7 +1144,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$1000000$kpT7xviV3GMoIoj742dV9j$20MtHjU/cFLA0UDhg540i8dfwSKPimj9ehsalxN0Opw=",
-        "last_login": "2026-09-12T23:35:33.066Z",
+        "last_login": "2026-09-13T15:07:12.878Z",
         "is_superuser": true,
         "username": "maria",
         "first_name": "",
@@ -1012,7 +1162,7 @@
     "pk": 9,
     "fields": {
         "password": "pbkdf2_sha256$1000000$jDoEymGXQKIuHYUdULBvcw$P4hsm8Q5QeH8aZ8PpIwpQbbsSs9BRyJYSd+lYezt9bI=",
-        "last_login": "2026-09-12T18:44:57.278Z",
+        "last_login": "2026-09-13T11:35:48.695Z",
         "is_superuser": false,
         "username": "emp",
         "first_name": "",
@@ -1049,8 +1199,8 @@
     "model": "auth.user",
     "pk": 11,
     "fields": {
-        "password": "pbkdf2_sha256$1000000$P6a8tgJFutYvnHtduHzsQK$OjQxs8GCgByldPjC7+LHbyo8yVDVu8QWR2lGgmOZkv0=",
-        "last_login": "2026-06-07T12:39:15.028Z",
+        "password": "pbkdf2_sha256$1000000$sDZ8v84CHWnMUUOpOdUEh8$i3/cgLYcU+wdq+Kz7tGnJZfSRWGGGFffAMP5fI79g0s=",
+        "last_login": "2026-09-13T11:39:08.745Z",
         "is_superuser": false,
         "username": "cool_girl",
         "first_name": "",
@@ -1586,11 +1736,27 @@
     }
 },
 {
-    "model": "sessions.session",
-    "pk": "f246rx54a7q9q2hbuijxyxw0c3vnvmsa",
+    "model": "contenttypes.contenttype",
+    "pk": 21,
     "fields": {
-        "session_data": ".eJxVjMsOwiAQRf-FtSEC5TEu3fsNZGAYqRqalHZl_HfbpAvd3nPOfYuI61Lj2sscRxIXocTpd0uYn6XtgB7Y7pPMU1vmMcldkQft8jZReV0P9--gYq9bzej5nFzhYD3BQEqZ5AflEmgNWnHRYAKE5Fh7yJYBiVBZs3VoQmbx-QLkdzgg:1x5XFt:Mwnn5CXGU0pjLdZaGkMuohyX4N8SuEFGzlT-vBnyGpI",
-        "expire_date": "2026-09-26T23:35:33.067Z"
+        "app_label": "main",
+        "model": "cart"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 22,
+    "fields": {
+        "app_label": "main",
+        "model": "cartitem"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "kxjcnzpjnjt5q9ogg3zwvfstidfxm6fj",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSEC5TEu3fsNZGAYqRqalHZl_HfbpAvd3nPOfYuI61Lj2sscRxIXocTpd0uYn6XtgB7Y7pPMU1vmMcldkQft8jZReV0P9--gYq9bzej5nFzhYD3BQEqZ5AflEmgNWnHRYAKE5Fh7yJYBiVBZs3VoQmbx-QLkdzgg:1x5lnU:B4zcq4MENIzjbTIg2C_Bw0VoRe4eTXCulvHrsxjEcoc",
+        "expire_date": "2026-09-27T15:07:12.879Z"
     }
 },
 {
@@ -2038,7 +2204,8 @@
     "pk": 1,
     "fields": {
         "name": "Storekeeper",
-        "salary": "1000.00"
+        "salary": "1000.00",
+        "description": "Receiving and inspecting incoming materials and goods\nRecording stock movements in the warehouse system\nOrganizing storage and maintaining order in the warehouse\nIssuing materials to production upon request\nConducting regular inventory checks and audits\nEnsuring compliance with safety and storage regulations"
     }
 },
 {
@@ -2046,7 +2213,8 @@
     "pk": 2,
     "fields": {
         "name": "Director",
-        "salary": "3000.00"
+        "salary": "3000.00",
+        "description": "Developing and implementing company strategy\nManaging financial performance and budget planning\nOverseeing all departments and key business operations\nNegotiating with major partners, suppliers, and clients\nRepresenting the company at official events and exhibitions\nMaking high-level decisions on investments and expansion"
     }
 },
 {
@@ -2054,7 +2222,8 @@
     "pk": 3,
     "fields": {
         "name": "SMM",
-        "salary": "1200.00"
+        "salary": "1200.00",
+        "description": "Managing social media accounts (Instagram, Facebook, TikTok)\nCreating, scheduling, and publishing content\nRunning targeted advertising campaigns\nAnalyzing engagement metrics and audience growth\nCoordinating with designers, photographers, and copywriters\nMonitoring competitors and trending topics"
     }
 },
 {
@@ -2062,7 +2231,8 @@
     "pk": 4,
     "fields": {
         "name": "Manager",
-        "salary": "1500.00"
+        "salary": "1500.00",
+        "description": "Supervising daily operations of the department\nAssigning tasks and monitoring team performance\nHandling client inquiries and preparing commercial offers\nCoordinating with production and logistics departments\nPreparing reports for senior management\nTraining and mentoring new employees"
     }
 },
 {
@@ -2070,7 +2240,8 @@
     "pk": 5,
     "fields": {
         "name": "Carpetner",
-        "salary": "1300.00"
+        "salary": "1300.00",
+        "description": "Cutting and processing wood according to technical drawings\nAssembling furniture frames and structural components\nOperating woodworking machinery (saws, planers, routers)\nSanding, finishing, and preparing surfaces for coating\nQuality-checking finished parts and maintaining tools\nFollowing safety regulations in the workshop"
     }
 },
 {
@@ -2078,7 +2249,8 @@
     "pk": 6,
     "fields": {
         "name": "Carpenter",
-        "salary": "1300.00"
+        "salary": "1300.00",
+        "description": "Cutting and processing wood according to technical drawings\nAssembling furniture frames and structural components\nOperating woodworking machinery (saws, planers, routers)\nSanding, finishing, and preparing surfaces for coating\nQuality-checking finished parts and maintaining tools\nFollowing safety regulations in the workshop"
     }
 },
 {
@@ -2086,7 +2258,8 @@
     "pk": 7,
     "fields": {
         "name": "Sales Manager",
-        "salary": "1400.00"
+        "salary": "1400.00",
+        "description": "Finding and attracting new clients\nConducting negotiations and preparing commercial offers\nClosing deals and processing sales contracts\nMaintaining long-term relationships with existing clients\nAchieving monthly and quarterly sales targets\nReporting sales results and market feedback"
     }
 },
 {
@@ -2094,7 +2267,8 @@
     "pk": 8,
     "fields": {
         "name": "Furniture Assembler",
-        "salary": "1100.00"
+        "salary": "1100.00",
+        "description": "Assembling furniture pieces according to assembly instructions\nUsing hand and power tools safely and efficiently\nChecking all parts for defects before assembly\nApplying fittings, hinges, handles, and hardware\nPackaging finished furniture for delivery\nMaintaining a clean and organized workspace"
     }
 },
 {
@@ -2102,7 +2276,8 @@
     "pk": 9,
     "fields": {
         "name": "Quality Control Specialist",
-        "salary": "1300.00"
+        "salary": "1300.00",
+        "description": "Inspecting raw materials and finished products\nChecking compliance with technical specifications and standards\nDocumenting defects and preparing quality reports\nInvestigating causes of defects and proposing improvements\nConducting regular audits of production processes\nEnsuring adherence to ISO and safety standards"
     }
 },
 {
@@ -2110,7 +2285,8 @@
     "pk": 10,
     "fields": {
         "name": "Logistics Coordinator",
-        "salary": "1250.00"
+        "salary": "1250.00",
+        "description": "Planning and coordinating shipments and deliveries\nCommunicating with transport companies and drivers\nTracking orders and updating delivery status\nPreparing shipping documents and waybills\nOptimizing delivery routes and reducing transportation costs\nResolving delivery issues and handling returns"
     }
 },
 {
@@ -2118,7 +2294,8 @@
     "pk": 11,
     "fields": {
         "name": "Customer Support Representative",
-        "salary": "1150.00"
+        "salary": "1150.00",
+        "description": "Answering customer inquiries via phone, email, and chat\nResolving complaints and providing product information\nProcessing returns, exchanges, and warranty claims\nDocumenting customer interactions in the CRM system\nEscalating complex issues to the appropriate department\nMaintaining a friendly and professional communication style"
     }
 },
 {
@@ -2383,11 +2560,23 @@
     }
 },
 {
+    "model": "main.order",
+    "pk": 17,
+    "fields": {
+        "client": 1,
+        "furniture": 3,
+        "quantity": 1,
+        "order_date": "2026-09-13",
+        "delivery_date": "2026-09-20"
+    }
+},
+{
     "model": "main.news",
     "pk": 1,
     "fields": {
         "title": "New design - Boompala!",
         "short_content": "Boompala is last work of the most famous desingner in the world.",
+        "full_content": "Government try turn could culture. Particular here back.\n\nStore all clear street read ready. Push political campaign third.\n\nWeight father per check history report run detail. Usually big song west popular our child appear.",
         "image": "news_images/news_image_1_vfvJ7h2.jpg",
         "created_date": "2026-05-27"
     }
@@ -2398,6 +2587,7 @@
     "fields": {
         "title": "They are gonna dissapear!",
         "short_content": "There are just several models of out favorite design!",
+        "full_content": "Him color politics very hear our. Measure surface perform particular father enter same reveal. Yourself likely check step.\n\nSkin beat source scientist cold training. Remain article wind entire. Large room wonder community.\n\nInstitution fall attack institution bag suddenly start. During health shoulder office consider fear.",
         "image": "news_images/news_image_3_wcfENyV.jpg",
         "created_date": "2026-05-27"
     }
@@ -2408,6 +2598,7 @@
     "fields": {
         "title": "Do you want it?",
         "short_content": "We are thinking about recreating our past designs. Write us which favorite were for you!",
+        "full_content": "Prevent surface they rule some.\n\nThroughout painting a free just charge who. Customer wait nearly place. Whose today guess piece pay.\n\nReturn eight those wife hear size song her. Along wonder manage. Real might near involve.",
         "image": "news_images/news_image_2_oY0Wfcx.jpg",
         "created_date": "2026-05-27"
     }
@@ -2418,6 +2609,7 @@
     "fields": {
         "title": "New Collection: Scandinavian Comfort",
         "short_content": "Discover our latest line of cozy sofas and armchairs inspired by Nordic design.",
+        "full_content": "Case animal doctor over campaign seven. Power conference artist true consider describe set.\n\nCan general commercial with owner. Way those school call possible surface.\n\nNot continue million view trial. Nearly report region determine create anything.",
         "image": "news_images/news_image_1_f0X5bc2.jpg",
         "created_date": "2026-06-07"
     }
@@ -2428,6 +2620,7 @@
     "fields": {
         "title": "Eco-friendly Materials Now in Production",
         "short_content": "We are proud to introduce recycled wood and non-toxic finishes.",
+        "full_content": "Play lose though wife goal step summer box. Why kid issue bed.\n\nStuff economic others bag. Act figure yard water down.\n\nConsumer reason bill inside management. Century institution ten probably two executive food. Food mind quickly hair soon. Skin be option treat since important water professor.",
         "image": "news_images/news_image_3_w82GBtp.jpg",
         "created_date": "2026-06-07"
     }
@@ -2438,6 +2631,7 @@
     "fields": {
         "title": "Seasonal Sale Up to 30% off!",
         "short_content": "Limited time offer on selected bedroom sets.",
+        "full_content": "Appear whole land fact game election happy can. Type relate remember grow.\n\nBudget give enough us sea ability. Forget him power tough board human science. Away like across matter include reach. Address girl million energy.\n\nWord section answer. Data experience interesting late film city culture face. Pick first government near human.",
         "image": "news_images/news_image_2_ToAFIsu.jpg",
         "created_date": "2026-06-07"
     }
@@ -2448,6 +2642,7 @@
     "fields": {
         "title": "We've Moved to a Larger Showroom",
         "short_content": "Visit our new location at 456 Furniture Ave, Minsk.",
+        "full_content": "Return nor than lot. Section trip before charge home nature event.\n\nNotice office share word report would amount. Up five day throughout. Economy within total or.\n\nProcess class but could once great challenge how. Cold accept gun road. Exist look reduce mission matter development.",
         "image": "news_images/news_image_1_1r77AkB.jpg",
         "created_date": "2026-06-07"
     }
@@ -2458,6 +2653,7 @@
     "fields": {
         "title": "Interview with Our Head Designer",
         "short_content": "Read about the creative process behind our bestsellers.",
+        "full_content": "Consider general expect course one recently. Family want help morning.\n\nSize pay before hundred happy finally value. Computer pull already on program ready political.\n\nReturn out both. Memory reality hot stuff require soon remember.",
         "image": "news_images/news_image_3_DYWkXkG.jpg",
         "created_date": "2026-06-07"
     }
@@ -2468,6 +2664,7 @@
     "fields": {
         "title": "Free Delivery on Orders Over $500",
         "short_content": "Enjoy free shipping within Minsk until the end of the month.",
+        "full_content": "City appear else wonder window. Continue least what give throughout military. Space its cup beautiful add foreign beautiful own.\n\nPicture field executive team enough. Raise writer bank follow partner foot southern.\n\nActually affect paper one peace past paper. Try eat provide improve with. Every difference alone central itself while.",
         "image": "news_images/news_image_2_ntrVQWK.jpg",
         "created_date": "2026-06-07"
     }
@@ -2478,6 +2675,7 @@
     "fields": {
         "title": "Workshop for DIY Enthusiasts",
         "short_content": "Learn how to restore old furniture. Register now!",
+        "full_content": "Personal woman popular. Part next draw four article federal energy.\r\n\r\nHappen table final age memory offer pretty name. Down artist seat run star provide.\r\n\r\nAfter receive my choose. Per certainly attack relate thing smile. Partner sister leg matter former minute large.",
         "image": "news_images/news_image_1_nQaAcFS.jpg",
         "created_date": "2026-06-07"
     }
@@ -2858,6 +3056,13 @@
                 "description": "Your happiness is our priority."
             }
         ],
+        "logo": "company/logo.png",
+        "video_file": "company/videos/5823583-sd_960_540_24fps.mp4",
+        "video_title": "Watch Our Video",
+        "history": "2010 — Foundation\r\nThe company was founded in a small workshop with a team of five craftsmen.\r\nFirst orders were custom-made kitchen cabinets for local customers.\r\n\r\n2013 — First Production Facility\r\nOpened our first 500 m² production facility.\r\nIntroduced automated cutting and edge-banding equipment.\r\n\r\n2015 — Expansion of Product Line\r\nAdded office furniture and modular storage systems to our catalog.\r\nPartnered with three regional distributors.\r\n\r\n2018 — International Cooperation\r\nStarted exporting to neighboring countries.\r\nObtained ISO 9001 quality management certification.\r\n\r\n2020 — Digital Transformation\r\nLaunched an online catalog and order management system.\r\nIntroduced 3D visualization of custom furniture projects.\r\n\r\n2022 — New Showroom\r\nOpened a 300 m² showroom in the city center.\r\nExpanded the team to 45 employees.\r\n\r\n2024 — Sustainable Production\r\nSwitched to FSC-certified wood and water-based finishes.\r\nReduced production waste by 30%.\r\n\r\n2026 — Today\r\nServing over 1,200 clients across the region.\r\nContinuous investment in design, quality, and sustainability.",
+        "requisites": "Legal name:        LLC \"Furniture Factory\"\r\nShort name:        LLC \"FF\"\r\n\r\nRegistration No.:  1901234560001\r\nDate of registration: 15 March 2010\r\n\r\nBank details:\r\nBank name:         Priorbank JSC\r\nAccount (IBAN):    BY13 PJCB 3012 0000 1234 5678 9012\r\nCurrency:          BYN",
+        "certificates": "GLAMOUR Approved",
+        "certificate_image": "company/certificates/certificate.webp",
         "address": "123 Furniture Street, Minsk, Belarus",
         "phone": "+375 (29) 123-45-67",
         "email": "info@furniturefactory.by",
@@ -2982,6 +3187,15 @@
         "name": "Pupsik",
         "logo": "partners/logos/pupsik.png",
         "website": "https://www.pinterest.com/babiesdotcom/"
+    }
+},
+{
+    "model": "main.cart",
+    "pk": 1,
+    "fields": {
+        "client": 1,
+        "created_at": "2026-09-13T13:10:41.458Z",
+        "updated_at": "2026-09-13T13:10:41.459Z"
     }
 }
 ]

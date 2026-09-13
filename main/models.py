@@ -189,6 +189,10 @@ class Position(models.Model):
         default=0,
         help_text="Monthly salary in currency units"
     )
+    description = models.TextField(
+        blank=True,
+        help_text="Description of duties and responsibilities"
+    )
     
     def __str__(self):
         return f"{self.name} (${self.salary})"
