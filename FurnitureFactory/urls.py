@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from main import views
+from django.views.generic import RedirectView
 
 
 urlpatterns = [
@@ -47,6 +48,10 @@ urlpatterns = [
     path('cart/add/<int:pk>/', views.cart_add, name='cart_add'),
     path('cart/action/<int:pk>/', views.cart_action, name='cart_action'),
     path('cart/pay/', views.cart_pay, name='cart_pay'),
+    # path(
+    #     'favicon.ico',
+    #     RedirectView.as_view(url='/static/favicon.png', permanent=True)
+    # ),
 ]
 
 
