@@ -31,7 +31,7 @@
         {% for faq in faqs %}
             <details>
                 <summary>
-                    <strong>{{ faq.question }}</strong>
+                    <strong><dfn title="it is question">{{ faq.question }}</dfn></strong>
                     <small>— Added: {{ faq.added_date|date:"F d, Y" }}</small>
                 </summary>
                 <p>{{ faq.answer|linebreaks }}</p>

@@ -2,13 +2,14 @@
 
 {% block title %}Home - Statistics{% endblock %}
 
+<!-- REL TARGET DOWNLOAD here -->
 {% block content %}
     <figure>
         <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
             <picture>
                 <source media="(max-width: 40em)" srcset="/media/add/cat2.gif">
                 <source media="(max-width: 80em)" srcset="/media/add/cat3.gif">
-                <img src="/media/add/cat1.gif" alt="Love kitties!">
+                <img src="/media/add/cat1.gif" alt="Love kitties!" border="0">
             </picture>
         </a>
         <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
@@ -25,8 +26,13 @@
                 <img src="/media/add/cat1.gif" alt="Love kitties!">
             </picture>
         </a>
+        <!-- A # here -->
         <figcaption>
-            You can watch more here: <a href="/about">open</a>
+            To see our furniture tap here: <a href="#trap">open</a>
+            <br>
+            <a href="/media/add/cat1.gif" download>
+                Download gif with cat tap here
+            </a>
         </figcaption>
     </figure>
 
@@ -119,7 +125,14 @@
         </tr>
     </table>
 
+    <!-- Q and CITE here -->
+    <!-- BR WBR here -->
+    <q cite="Arthur Miller">Fur<wbr>niture that is too clean has no lan<wbr>guage.</q>
+    <br>
+    <p>This is word of <cite>Arthur Miller</cite></p>
+
     <h2>Furniture List (Alphabetical Order)</h2>
+    <a id="trap"></a>
     <ul>
         {% for item in furniture_list %}
         <li>
@@ -137,14 +150,17 @@
      ITEMPROP 
      ITEMID 
      ITEMTYPE here -->
+    <!-- TIME here -->
+    <!-- MARK here-->
+    <!-- SPAN here -->
     {% if client_info %}
     <div 
         itemscope 
         itemtype="https://www.timeanddate.com/time/map/"
         style="background-color: #e8f5e9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
-        <h2 itemid="main_defenition">🕒 Timezone Information</h2>
-        <p itemprop="timezone"><strong>Current timezone:</strong> {{ client_info.name }}</p>
-        <p><strong>Current date:</strong> {{ client_info.current_date|date:"d/m/Y" }}</p>
+        <h2 itemid="main_defenition">🕒 <span class="letter">T</span>imezone Information</h2>
+        <p itemprop="timezone"><mark>Current timezone:</mark> {{ client_info.name }}</p>
+        <p><strong>Current date:</strong> <time>{{ client_info.current_date|date:"d/m/Y" }}</time></p>
         <p><strong>Timezone last updated:</strong> {{ client_info.timezone_updated|date:"d/m/Y H:i" }}</p>
         <h3>📅 Calendar for {{ client_info.current_date|date:"F Y" }}</h3>
         {{ client_info.calendar|safe }}
