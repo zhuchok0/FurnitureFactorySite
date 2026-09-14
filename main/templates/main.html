@@ -30,20 +30,64 @@
         </figcaption>
     </figure>
 
+    <!-- CONTENTEDITABLE and 
+     TABINDEX and 
+     HERE and 
+     LANG and 
+     SPELLCHECK and 
+     TRANSLATE and 
+     DATA* and
+     here 
+     -->
+     <!-- B EM I S U STRONG SMALL SUB here-->
+    <p contenteditable="true" 
+        tabindex="1" dir="rtl" 
+        land="en" 
+        spellcheck="true"
+        translate="yes"
+        data-kittiestype="wishies">
+        <b>Anyone</b> <em>can</em> <i>write</i> <s>well-wishings</s> <u>to</u> <strong>kitties</strong> <small>there</small> <sub>!</sub>
+    </p>
+    <!-- HIDDEN here -->
+    <p hidden>Nobody can write their banes to kitties here!</p>
+    <!-- CODE VAR SAMP KBD here -->
+    <p>
+        <code>Kitties</code>
+        <var>are</var>
+        <samp>soooo</samp>
+        <kbd>CUTE!!!!</kbd>
+    </p>
+    <!-- ONCLICK here -->
+    <button onclick="alert('hello!');">Tap me!!!</button>
+
     {% if latest_news %}
-    <div style="background-color: #f0f8ff; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
+    <!-- CLASS and 
+     ID and 
+     STYLE and
+     DRAGGABLE DROPZONE and 
+     TITLE and
+     here -->
+    <div class="news" 
+        id="latest_news" 
+        draggable="true"
+        dropzone="copy"
+        title="LATEST NEWS"
+        style="background-color: #f0f8ff; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
         <h2>Latest News</h2>
         <h3>{{ latest_news.title }}</h3>
         
         {% if latest_news.image %}
         <div>
-            <img src="{{ latest_news.image.url }}" alt="{{ latest_news.title }}" style="max-width: 200px; max-height: 150px;">
+            <img src="{{ latest_news.image.url }}" 
+                alt="{{ latest_news.title }}" 
+                style="max-width: 200px; max-height: 150px;">
         </div>
         {% endif %}
         
         <p>{{ latest_news.short_content }}</p>
         <p><small>Published: {{ latest_news.created_date }}</small></p>
-        <a href="{% url 'news_list' %}">Read all news →</a>
+        <!-- ACCESSKEY here -->
+        <a href="{% url 'news_list' %}" accesskey="n">Read all news →</a>
     </div>
     {% endif %}
 
@@ -89,10 +133,17 @@
         {% endfor %}
     </ul>
     
+    <!-- ITEMSCOPE 
+     ITEMPROP 
+     ITEMID 
+     ITEMTYPE here -->
     {% if client_info %}
-    <div style="background-color: #e8f5e9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
-        <h2>🕒 Timezone Information</h2>
-        <p><strong>Current timezone:</strong> {{ client_info.name }}</p>
+    <div 
+        itemscope 
+        itemtype="https://www.timeanddate.com/time/map/"
+        style="background-color: #e8f5e9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
+        <h2 itemid="main_defenition">🕒 Timezone Information</h2>
+        <p itemprop="timezone"><strong>Current timezone:</strong> {{ client_info.name }}</p>
         <p><strong>Current date:</strong> {{ client_info.current_date|date:"d/m/Y" }}</p>
         <p><strong>Timezone last updated:</strong> {{ client_info.timezone_updated|date:"d/m/Y H:i" }}</p>
         <h3>📅 Calendar for {{ client_info.current_date|date:"F Y" }}</h3>

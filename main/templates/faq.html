@@ -1,9 +1,12 @@
 {% extends "base_generic.html" %}
 
-{% block title %}Frequently Asked Questions{% endblock %}
+<!-- SUMMARY here-->
+ <!-- ABBR DFN here-->
+
+{% block title %}FAQ{% endblock %}
 
 {% block content %}
-    <h1>Frequently Asked Questions</h1>
+    <h1><abbr title="Frequently Asked Questions">FAQ</abbr></h1>
 
     <!-- Search form -->
     <form method="get" action="{% url 'faq' %}" style="margin-bottom: 20px;">
