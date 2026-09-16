@@ -64,8 +64,8 @@
                     Kitties
         </code>
         <var>are</var>
-        <samp>soooo</samp>
-        <kbd>CUTE!!!!</kbd>
+        <samp>result</samp>
+        <kbd>Input!!!!</kbd>
     </p>
 
     <!-- BR WBR here -->
@@ -264,6 +264,75 @@
             a footrest, seat, or small table.
         </dd>
     </dl>
+
+    <div itemscope
+        itemtype="https://schema.org/Product"
+        itemid="https://furniturefactory.com/products/loft-table">
+
+        <h1 itemprop="name">Loft Dining Table</h1>
+
+        <img itemprop="image"
+            src="/media/furniture/loft-table.jpg"
+            alt="Loft Dining Table"
+            width="300">
+
+        <p itemprop="description">
+            Solid oak dining table with metal legs, 180 × 90 cm.
+        </p>
+
+        <p>
+            Price:
+            <span itemprop="price">1249</span>
+            <span itemprop="priceCurrency">USD</span>
+        </p>
+
+        <p>
+            Brand:
+            <span itemprop="brand"
+                itemscope
+                itemtype="https://schema.org/Brand">
+                <span itemprop="name">Furniture Factory</span>
+            </span>
+        </p>
+
+        <p>
+            Rating:
+            <span itemprop="aggregateRating"
+                itemscope
+                itemtype="https://schema.org/AggregateRating">
+                <span itemprop="ratingValue">4.8</span>
+                out of
+                <span itemprop="bestRating">5</span>
+                —
+                <span itemprop="reviewCount">120</span> reviews
+            </span>
+        </p>
+
+        <p itemprop="availability"
+        href="https://schema.org/InStock">
+            In stock
+        </p>
+
+    </div>
+
+    <!-- ===== itemref — связь с внешними свойствами ===== -->
+    <div itemscope
+        itemtype="https://schema.org/Offer"
+        itemref="shipping-info warranty-info">
+
+        <p>Special offer: 10% off this week.</p>
+    </div>
+
+    <p id="shipping-info">
+        Shipping: <span itemprop="shippingDetails">Free delivery in Minsk</span>
+    </p>
+
+    <p id="warranty-info">
+        Warranty: <span itemprop="warranty">3 years</span>
+    </p>
+
+    </body>
+    </html>
 
     <!-- ARTICLE SECTION ADDRESS HGROUP -->
     <article>
