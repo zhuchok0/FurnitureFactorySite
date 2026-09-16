@@ -8,26 +8,41 @@
     <figure>
         <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
             <picture>
-                <source media="(max-width: 40em)" srcset="/media/add/cat2.gif">
-                <source media="(max-width: 80em)" srcset="/media/add/cat3.gif">
-                <img src="/media/add/cat1.gif" alt="Love kitties!" border="0">
+                <source media="(max-width: 60em)"
+                        sizes="(max-width: 30em) 100vw, 30vw"
+                        srcset="/media/add/cat2.gif 600w">
+                <source media="(max-width: 80em)"
+                        sizes="(max-width: 60em) 100vw, 50vw"
+                        srcset="/media/add/cat3.gif 1600w">
+                <img src="/media/add/cat1.gif"
+                    alt="Love kitties!">
             </picture>
         </a>
         <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
             <picture>
-                <source media="(max-width: 40em)" srcset="/media/add/cat4.gif">
-                <source media="(max-width: 80em)" srcset="/media/add/cat5.gif 1x">
-                <img src="/media/add/cat1.gif" alt="Love kitties!">
+                <source media="(max-width: 60em)"
+                        sizes="(max-width: 30em) 100vw, 30vw"
+                        srcset="/media/add/cat8.gif 600w">
+                <source media="(max-width: 80em)"
+                        sizes="(max-width: 60em) 100vw, 50vw"
+                        srcset="/media/add/cat5.gif 1600w">
+                <img src="/media/add/cat1.gif"
+                    alt="Love kitties!">
             </picture>
         </a>
         <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
             <picture>
-                <source media="(max-width: 40em)" srcset="/media/add/cat6.gif 1x">
-                <source media="(max-width: 80em)" srcset="/media/add/cat7.gif 1x">
-                <img src="/media/add/cat1.gif" alt="Love kitties!">
+                <source media="(max-width: 60em)"
+                        sizes="(max-width: 30em) 100vw, 30vw"
+                        srcset="/media/add/cat6.gif 600w">
+                <source media="(max-width: 80em)"
+                        sizes="(max-width: 60em) 100vw, 50vw"
+                        srcset="/media/add/cat7.gif 1600w">
+                <img src="/media/add/cat1.gif"
+                    alt="Love kitties!">
             </picture>
         </a>
-        <!-- A # here -->
+<!-- A # here -->
         <figcaption>
             To see our furniture tap here: <a href="#trap">open</a>
             <br>
@@ -46,6 +61,7 @@
      here 
      -->
      <!-- B EM I S U STRONG SMALL SUB here-->
+    <hr>
     <p contenteditable="true" 
         tabindex="1" dir="rtl" 
         lang="en" 
@@ -54,34 +70,64 @@
         data-kittiestype="wishies">
         <b>Anyone</b> <em>can</em> <i>write</i> <s>well-wishings</s> <u>to</u> <strong>kitties</strong> <small>there</small> <sub>!</sub>
     </p>
+    <hr>
+
     <!-- HIDDEN here -->
     <p hidden>Nobody can write their banes to kitties here!</p>
-    <!-- CODE VAR SAMP KBD here -->
-    <p>
-        <code>
-            Kitties
-                Kitties
-                    Kitties
-        </code>
-        <var>are</var>
-        <samp>result</samp>
-        <kbd>Input!!!!</kbd>
-    </p>
+    <hr>
 
-    <!-- BR WBR here -->
-    <p>
-        In<wbr> every<wbr> home,<wbr> a<wbr> silent<wbr> friend,<br>
+    <!-- PRE CODE VAR SAMP KBD here -->
+     <pre>
+        <code>
+            void SayHI(){
+                std::cout << "hiiii";
+            }
+
+            int main(){
+                SayHi();
+            }
+        </code>
+        <var>I can change!</var>
+        <samp>The program just print greeting</samp>
+        <kbd>User don't nees to input anything</kbd>
+    </pre>
+    <hr>
+
+    <!-- PRE Q BLOCKQUOTE HR CITE here -->
+    <!-- BR WBR HR here -->
+    <hr>
+    <pre>
+        Are 
+            you 
+                ready
+                     ?
+    </pre>
+
+    <hr>
+    <blockquote cite="ME">
+        In<wbr> every<wbr> home,<wbr> a<wbr> silent<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<br>
         A<wbr> table,<wbr> chair,<wbr> or<wbr> cabinet<wbr> tall,<br>
         We<wbr> craft<wbr> with<wbr> love<wbr> from<wbr> start<wbr> to<wbr> end,<br>
         To<wbr> fill<wbr> with<wbr> warmth<wbr> your<wbr> every<wbr> hall.
-    </p>
+    </blockquote>
+
+    <hr>
+    <cite>wuahahah</cite>
+
+    <hr>
+    <q cite="Arthur Miller">Fur<wbr>niture that is too clean has no lan<wbr>guage.</q>
+    <br>
+    <p>This is word of <cite>Arthur Miller</cite></p>
+    <hr>
     
     <!-- ONCLICK here -->
     <button onclick="alert('hello!');">Tap me!!!</button>
+    <br><br>
+    <hr>
 
     {% if latest_news %}
     <!-- 
-     DIV
+     DIV P
      CLASS and 
      ID and 
      STYLE and
@@ -112,24 +158,8 @@
     </div>
     {% endif %}
 
-    <!-- PRE BLOCKQUOTE HR CITE here -->
-    <pre>
-        ?
-        ?
-        ?
-    </pre>
-    <hr>
-    <cite>wuahahah</cite>
-    <hr>
-    <blockquote cite="ME">
-        bla
-        bla 
-        bla!
-    </blockquote>
-
     <!-- TABLE TR TH TD COLUMNSPAN ROWSPAN THEAD TBODY TFOOT CAPTION here -->
     <h2>Orders by Client</h2>
-
     <table border="1" cellpadding="10" cellspacing="0">
         <caption>Furniture orders summary — September 2026</caption>
 
@@ -177,41 +207,6 @@
             </tr>
         </tfoot>
     </table>
-
-    <h2>Our Partners</h2>
-
-    <!--  -->
-    <table border="1" cellpadding="15" cellspacing="5" width="100%">
-        <tr>
-            {% for partner in partners %}
-            <td align="center" valign="middle" width="200">
-                <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
-                    <img src="{{ partner.logo.url }}"
-                        alt="{{ partner.name }}"
-                        width="150"
-                        height="80">
-                </a>
-                <br>
-                <strong>{{ partner.name }}</strong>
-                <br>
-                <small>
-                    <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
-                        Visit site →
-                    </a>
-                </small>
-            </td>
-            {% if forloop.counter|divisibleby:3 and not forloop.last %}
-        </tr><tr>
-            {% endif %}
-            {% endfor %}
-        </tr>
-    </table>
-
-    <!-- Q and CITE here -->
-    <!-- BR WBR here -->
-    <q cite="Arthur Miller">Fur<wbr>niture that is too clean has no lan<wbr>guage.</q>
-    <br>
-    <p>This is word of <cite>Arthur Miller</cite></p>
 
     <!-- UL here -->
     <h2>Furniture List (Alphabetical Order)</h2>
@@ -265,16 +260,13 @@
         </dd>
     </dl>
 
+    <!-- ITEMSCOPE ITEMTYPE ITEMID ITEMPROP ITEMREF-->
+    <hr>
     <div itemscope
         itemtype="https://schema.org/Product"
         itemid="https://furniturefactory.com/products/loft-table">
 
         <h1 itemprop="name">Loft Dining Table</h1>
-
-        <img itemprop="image"
-            src="/media/furniture/loft-table.jpg"
-            alt="Loft Dining Table"
-            width="300">
 
         <p itemprop="description">
             Solid oak dining table with metal legs, 180 × 90 cm.
@@ -315,7 +307,6 @@
 
     </div>
 
-    <!-- ===== itemref — связь с внешними свойствами ===== -->
     <div itemscope
         itemtype="https://schema.org/Offer"
         itemref="shipping-info warranty-info">
@@ -331,10 +322,8 @@
         Warranty: <span itemprop="warranty">3 years</span>
     </p>
 
-    </body>
-    </html>
-
     <!-- ARTICLE SECTION ADDRESS HGROUP -->
+    <hr>
     <article>
         <hgroup>
             <h2>Loft Dining Table</h2>
@@ -359,21 +348,28 @@
             </address>
         </section>
     </article>
-        
-    <!-- ITEMSCOPE 
-     ITEMPROP 
-     ITEMID 
-     ITEMTYPE here -->
+
+    <!-- IFRAME here -->
+    <hr>
+{% if video_data %}
+    <h3>{{ video_data.title }}</h3>
+    <iframe width="560" height="315" 
+            src="https://www.youtube-nocookie.com/embed/{{ video_data.id }}" 
+            frameborder="0" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+    </iframe>
+{% endif %}
+
     <!-- TIME here -->
     <!-- MARK here-->
     <!-- SPAN here -->
-    {% if client_info %}
+    <hr>
+{% if client_info %}
     <div 
-        itemscope 
-        itemtype="https://www.timeanddate.com/time/map/"
         style="background-color: #e8f5e9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
-        <h2 itemid="main_defenition">🕒 <span class="letter">T</span>imezone Information</h2>
-        <p itemprop="timezone"><mark>Current timezone:</mark> {{ client_info.name }}</p>
+        <h2>🕒 <span class="letter">T</span>imezone Information</h2>
+        <p><mark>Current timezone:</mark> {{ client_info.name }}</p>
         <p><strong>Current date:</strong> <time>{{ client_info.current_date|date:"d/m/Y" }}</time></p>
         <p><strong>Timezone last updated:</strong> {{ client_info.timezone_updated|date:"d/m/Y H:i" }}</p>
         <h3>📅 Calendar for {{ client_info.current_date|date:"F Y" }}</h3>
@@ -392,7 +388,49 @@
     </div>
 {% endif %}
 
-<!-- DIV P here -->
+    <hr>
+    <p>Here random text</p>
+    <div id="fish-text-container"></div>
+    <script>
+        fetch('https://fish-text.ru/get?format=html&number=3&type=paragraph')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('fish-text-container').innerHTML = html;
+            })
+            .catch(error => console.error('Ошибка:', error));
+    </script>
+
+    <hr>
+    <p>Random picture her</p>
+    <img src="https://picsum.photos/200/300" alt="Random picture" />
+    
+    <h2>Our Partners</h2>
+    <table border="1" cellpadding="15" cellspacing="5" width="100%">
+        <tr>
+            {% for partner in partners %}
+            <td align="center" valign="middle" width="200">
+                <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ partner.logo.url }}"
+                        alt="{{ partner.name }}"
+                        width="150"
+                        height="80">
+                </a>
+                <br>
+                <strong>{{ partner.name }}</strong>
+                <br>
+                <small>
+                    <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
+                        Visit site →
+                    </a>
+                </small>
+            </td>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </tr><tr>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+
 {% if weather_info %}
     <div class="weather-info">
         <h3>Weather in {{ weather_info.city }}</h3>
@@ -402,26 +440,7 @@
     </div>
 {% endif %}
 
-{% if video_data %}
-    <h3>{{ video_data.title }}</h3>
-    <iframe width="560" height="315" 
-            src="https://www.youtube-nocookie.com/embed/{{ video_data.id }}" 
-            frameborder="0" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            allowfullscreen>
-    </iframe>
-{% endif %}
-
-<!-- <iframe width="560" height="315" 
-        src="https://www.youtube-nocookie.com/embed/qlpE7SFtMPQ" 
-        frameborder="0" 
-        referrerpolicy="strict-origin-when-cross-origin" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-</iframe> -->
-
     <h1>Furniture Factory Dashboard</h1>
-    <!-- OL here -->
     <h2>Clients List (Alphabetical Order)</h2>
     <ol>
         {% for client in clients %}
