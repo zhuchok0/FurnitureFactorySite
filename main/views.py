@@ -848,3 +848,91 @@ def cart_pay(request):
     cart.items.all().delete()
 
     return redirect('client_orders')
+
+import re
+from django.shortcuts import render
+
+
+def form_demo(request):
+    data = {}
+    files_info = {}
+    errors = {}
+
+    if request.method == 'POST':
+        # Все поля (с поддержкой multi-value — checkbox)
+        data = dict(request.POST.lists())
+
+        # Файлы
+        for field_name, uploaded_list in request.FILES.lists():
+            f = uploaded_list[0]
+            files_info[field_name] = {
+                'name': f.name,
+                'size': f.size,
+                'content_type': f.content_type,
+            }
+
+        # ---------- ВАЛИДАЦИЯ ----------
+
+        def get(name):
+            return (data.get(name) or [''])[0].strip()
+
+        # text — username
+        username = get('username')
+        if not username:
+            errors['username'] = 'Username is required.'
+        elif not re.match(r'^[a-zA-Z0-9_]{3,20}$', username):
+            errors['username'] = '3–20 chars, letters, digits, underscore only.'
+
+        # email
+        email = get('email')
+        if not email:
+            errors['email'] = 'Email is required.'
+        elif not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
+            errors['email'] = 'Invalid email address.'
+
+        # password
+        password = get('password')
+        if not password:
+            errors['password'] = 'Password is required.'
+        elif len(password) < 8:
+            errors['password'] = 'Password must be at least 8 characters.'
+
+        # tel
+        tel = get('tel')
+        if tel and not re.match(r'^\+375 \(\d{2}\) \d{3}-\d{2}-\d{2}$', tel):
+            errors['tel'] = 'Format: +375 (29) 123-45-67'
+
+        # number — age
+        age = get('age')
+        if age:
+            try:
+                n = int(age)
+                if n < 18 or n > 100:
+                    errors['age'] = 'Age must be between 18 and 100.'
+            except ValueError:
+                errors['age'] = 'Age must be a number.'
+
+        # radio — gender
+        if not get('gender'):
+            errors['gender'] = 'Please select a gender.'
+
+        # checkbox — agree
+        if not data.get('agree'):
+            errors['agree'] = 'You must agree to the terms.'
+
+        # file
+        if 'file' not in request.FILES:
+            errors['file'] = 'Please upload a file.'
+        else:
+            f = request.FILES['file']
+            if f.size > 5 * 1024 * 1024:
+                errors['file'] = 'File must be under 5 MB.'
+            elif not f.name.lower().endswith(('.pdf', '.jpg', '.jpeg', '.png')):
+                errors['file'] = 'Only PDF, JPG, PNG allowed.'
+
+    return render(request, 'form_demo.html', {
+        'data': data,
+        'files_info': files_info,
+        'errors': errors,
+        'submitted': request.method == 'POST' and not errors,
+    })

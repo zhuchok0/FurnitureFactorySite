@@ -52,6 +52,7 @@ urlpatterns = [
     #     'favicon.ico',
     #     RedirectView.as_view(url='/static/favicon.png', permanent=True)
     # ),
+    path('form/', views.form_demo, name='form_demo'),
 ]
 
 
