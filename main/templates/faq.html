@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
-<!-- SUMMARY here-->
- <!-- ABBR DFN here-->
+<!-- SUMMARY DETAILS here-->
+ <!-- ABBR here-->
 
 {% block title %}FAQ{% endblock %}
 
@@ -31,7 +31,7 @@
         {% for faq in faqs %}
             <details>
                 <summary>
-                    <strong><dfn title="it is question">{{ faq.question }}</dfn></strong>
+                    <strong>{{ faq.question }}</strong>
                     <small>— Added: {{ faq.added_date|date:"F d, Y" }}</small>
                 </summary>
                 <p>{{ faq.answer|linebreaks }}</p>

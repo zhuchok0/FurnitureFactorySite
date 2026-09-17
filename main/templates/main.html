@@ -2,8 +2,42 @@
 
 {% block title %}Home - Statistics{% endblock %}
 
+<div
+    class="content-box"
+    id="main-content"
+
+    hidden
+    style="border: 1px solid #ccc; padding: 10px;"
+
+    title="Это всплывающая подсказка"
+    accesskey="m"
+    tabindex="0"
+
+    dir="ltr"
+    lang="en"
+
+    contenteditable="true"
+    spellcheck="true"
+    translate="no"
+
+    data-type="article"
+
+    dropzone="copy"
+    draggable="true"
+
+    itemid="https://furniturefactory.com/article/1"
+    itemprop="articleBody"
+    itemscope
+    itemref="footer-meta"
+    itemtype="https://schema.org/Article"
+
+    onclick="console.log('clicked')"
+    onfocus="console.log('focused')"
+    onload="console.log('loaded')"
+></div>
+
 <!-- FIGURE FIGCAPTION here -->
-<!-- REL TARGET DOWNLOAD here -->
+<!-- A REL TARGET DOWNLOAD here -->
 {% block content %}
     <figure>
         <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
@@ -42,15 +76,18 @@
                     alt="Love kitties!">
             </picture>
         </a>
-<!-- A # here -->
+<!-- A href="#" and download type hreflang here -->
         <figcaption>
             To see our furniture tap here: <a href="#trap">open</a>
             <br>
-            <a href="/media/add/cat1.gif" download>
+            <a href="/media/add/cat1.gif" download hreflang="eng" type="gif">
                 Download gif with cat tap here
             </a>
         </figcaption>
     </figure>
+
+    <!-- HIDDEN here -->
+    <p hidden>Nobody can write their banes to kitties here!</p>
 
     <!-- CONTENTEDITABLE and  
      TABINDEX and
@@ -60,7 +97,7 @@
      DATA* and
      here 
      -->
-     <!-- B EM I S U STRONG SMALL SUB here-->
+     <!-- B EM I S U STRONG SMALL SUB FONT MARK SPAN TIME here-->
     <hr>
     <p contenteditable="true" 
         tabindex="1" dir="rtl" 
@@ -68,13 +105,22 @@
         spellcheck="true"
         translate="yes"
         data-kittiestype="wishies">
-        <b>Anyone</b> <em>can</em> <i>write</i> <s>well-wishings</s> <u>to</u> <strong>kitties</strong> <small>there</small> <sub>!</sub>
+        <b>Anyone</b> <em>can</em> <i>write</i> <s>well-wishings</s> <u>to</u> 
+        <strong>kitties</strong> <small>there</small> <sub>!</sub> <mark>Do it!!!</mark>
+        <span class="letter">F</span>or example at <time datetime="15:00">3 o'clock</time>
+        <font color="red" size="5" face="Arial">Текст</font>
     </p>
     <hr>
 
-    <!-- HIDDEN here -->
-    <p hidden>Nobody can write their banes to kitties here!</p>
-    <hr>
+    <!--   DFN ABBR here  -->
+    <p>
+        <dfn title="Cascading Style Sheets">CSS</dfn>
+        is used to style web pages.
+    </p>
+        <p>
+        We use <abbr title="HyperText Markup Language">HTML</abbr>
+        to structure our pages.
+    </p>
 
     <!-- PRE CODE VAR SAMP KBD here -->
      <pre>
@@ -157,56 +203,6 @@
         <a href="{% url 'news_list' %}" accesskey="n">Read all news →</a>
     </div>
     {% endif %}
-
-    <!-- TABLE TR TH TD COLUMNSPAN ROWSPAN THEAD TBODY TFOOT CAPTION here -->
-    <h2>Orders by Client</h2>
-    <table border="1" cellpadding="10" cellspacing="0">
-        <caption>Furniture orders summary — September 2026</caption>
-
-        <thead>
-            <tr>
-                <th rowspan="2">Client</th>
-                <th colspan="3">Orders</th>
-                <th rowspan="2">Total</th>
-            </tr>
-            <tr>
-                <th>Tables</th>
-                <th>Chairs</th>
-                <th>Cabinets</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>Acme Corp</td>
-                <td>5</td>
-                <td>12</td>
-                <td>3</td>
-                <td>$4,250</td>
-            </tr>
-            <tr>
-                <td>Nordic Home</td>
-                <td>2</td>
-                <td>8</td>
-                <td>1</td>
-                <td>$1,980</td>
-            </tr>
-            <tr>
-                <td>City Office</td>
-                <td>0</td>
-                <td>20</td>
-                <td>7</td>
-                <td>$3,140</td>
-            </tr>
-        </tbody>
-
-        <tfoot>
-            <tr>
-                <td colspan="4"><strong>Grand Total</strong></td>
-                <td><strong>$9,370</strong></td>
-            </tr>
-        </tfoot>
-    </table>
 
     <!-- UL here -->
     <h2>Furniture List (Alphabetical Order)</h2>
@@ -322,7 +318,8 @@
         Warranty: <span itemprop="warranty">3 years</span>
     </p>
 
-    <!-- ARTICLE SECTION ADDRESS HGROUP -->
+    <!-- ARTICLE SECTION ADDRESS DIV
+     HGROUP -->
     <hr>
     <article>
         <hgroup>
@@ -349,6 +346,56 @@
         </section>
     </article>
 
+    <!-- TABLE TR TH TD COLUMNSPAN ROWSPAN THEAD TBODY TFOOT CAPTION here -->
+    <h2>Orders by Client</h2>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <caption>Furniture orders summary — September 2026</caption>
+
+        <thead>
+            <tr>
+                <th rowspan="2">Client</th>
+                <th colspan="3">Orders</th>
+                <th rowspan="2">Total</th>
+            </tr>
+            <tr>
+                <th>Tables</th>
+                <th>Chairs</th>
+                <th>Cabinets</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Acme Corp</td>
+                <td>5</td>
+                <td>12</td>
+                <td>3</td>
+                <td>$4,250</td>
+            </tr>
+            <tr>
+                <td>Nordic Home</td>
+                <td>2</td>
+                <td>8</td>
+                <td>1</td>
+                <td>$1,980</td>
+            </tr>
+            <tr>
+                <td>City Office</td>
+                <td>0</td>
+                <td>20</td>
+                <td>7</td>
+                <td>$3,140</td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="4"><strong>Grand Total</strong></td>
+                <td><strong>$9,370</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
     <!-- IFRAME here -->
     <hr>
 {% if video_data %}
@@ -361,14 +408,11 @@
     </iframe>
 {% endif %}
 
-    <!-- TIME here -->
-    <!-- MARK here-->
-    <!-- SPAN here -->
     <hr>
 {% if client_info %}
     <div 
         style="background-color: #e8f5e9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
-        <h2>🕒 <span class="letter">T</span>imezone Information</h2>
+        <h2>🕒Timezone Information</h2>
         <p><mark>Current timezone:</mark> {{ client_info.name }}</p>
         <p><strong>Current date:</strong> <time>{{ client_info.current_date|date:"d/m/Y" }}</time></p>
         <p><strong>Timezone last updated:</strong> {{ client_info.timezone_updated|date:"d/m/Y H:i" }}</p>
@@ -392,7 +436,7 @@
     <p>Here random text</p>
     <div id="fish-text-container"></div>
     <script>
-        fetch('https://fish-text.ru/get?format=html&number=3&type=paragraph')
+        fetch('https://fish-text.ru/get?format=html&number=5&type=sentence')
             .then(response => response.text())
             .then(html => {
                 document.getElementById('fish-text-container').innerHTML = html;
