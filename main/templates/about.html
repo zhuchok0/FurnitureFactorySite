@@ -55,7 +55,15 @@
 
 {% if company.video_file %}
 <h2>{{ company.video_title|default:"Watch Our Video" }}</h2>
-<video width="560" height="315" controls>
+<video width="560"
+       height="315"
+       controls
+       autoplay
+       muted
+       loop
+       preload="metadata"
+       poster="{{ company.logo.url }}"
+       src="{{ company.video_file.url }}">
     <source src="{{ company.video_file.url }}" type="video/mp4">
     Your browser does not support the video tag.
 </video>

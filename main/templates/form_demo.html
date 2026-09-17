@@ -5,10 +5,9 @@
 {% block content %}
 <h1>Registration Form</h1>
 
-{#Errors#}
 {% if errors %}
 <fieldset>
-    <legend>❌ Errors</legend>
+    <legend>Errors</legend>
     <ul>
         {% for field, msg in errors.items %}
         <li><strong>{{ field }}:</strong> {{ msg }}</li>
@@ -17,7 +16,6 @@
 </fieldset>
 {% endif %}
 
-{# ---- Form ---- #}
 <form method="post" enctype="multipart/form-data" action="{% url 'form_demo' %}">
     {% csrf_token %}
 
@@ -37,6 +35,18 @@
                    autocomplete="username"
                    autofocus
                    required>
+        </p>
+
+        <p>
+            <label for="about">About you (optional, max 500 chars)</label><br>
+            <textarea id="about"
+                    name="about"
+                    rows="5"
+                    cols="40"
+                    maxlength="500"
+                    placeholder="Tell us a bit about yourself...">
+                    {{ data.about.0|default:'' }}
+            </textarea>
         </p>
 
         <p>
@@ -185,7 +195,7 @@
             <label for="country">Country</label><br>
             <select id="country" name="country">
                 <optgroup label="Europe">
-                    <option value="by">Belarus</option>
+                    <option value="by" selected>Belarus</option>
                     <option value="pl">Poland</option>
                     <option value="de">Germany</option>
                 </optgroup>
