@@ -15,7 +15,8 @@
                 <th>Order Date</th>
                 <th>Delivery Date</th>
                 <th>Total Price ($)</th>
-             </tr>
+                <th>Status</th>
+            </tr>
         </thead>
         <tbody>
             {% for order in orders %}
@@ -26,10 +27,27 @@
                 <td>{{ order.order_date|date:"Y-m-d" }}</td>
                 <td>{{ order.delivery_date|date:"Y-m-d"|default:"Not scheduled" }}</td>
                 <td>${{ order.total_price|floatformat:2 }}</td>
+                <td>
+                    {% if order.status == 'delivered' %}
+                        <span style="color: green; font-weight: bold;">{{ order.get_status_display }}</span>
+                    {% elif order.status == 'cancelled' %}
+                        <span style="color: red;">{{ order.get_status_display }}</span>
+                    {% else %}
+                        <span style="color: #ff9800;">{{ order.get_status_display }}</span>
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div style="margin-top: 20px; padding: 15px; border-left: 4px solid #ff9800; background-color: #fff8e1; border-radius: 6px;">
+        <strong>⚠️ To cancel or modify an order, please contact our manager:</strong>
+        <p style="margin: 8px 0 0 0;">
+            Bieber Hailey<br>
+            Phone: <a href="tel:+375292222222">+375 (29) 222-22-22</a><br>
+            Email: <a href="mailto:hailey@mail.ru">hailey@mail.ru</a>
+        </p>
+    </div>
 {% else %}
     <p>You have not placed any orders yet.</p>
     <p><a href="{% url 'create_order' %}">Place your first order</a></p>

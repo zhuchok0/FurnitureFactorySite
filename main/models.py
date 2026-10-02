@@ -260,6 +260,16 @@ class Employee(models.Model):
 
 
 class Order(models.Model):
+    STATUS_NEW = 'new'
+    STATUS_DELIVERED = 'delivered'
+    STATUS_CANCELLED = 'cancelled'
+
+    STATUS_CHOICES = [
+        (STATUS_NEW, 'Оформлен'),
+        (STATUS_DELIVERED, 'Доставлен'),
+        (STATUS_CANCELLED, 'Отменён'),
+    ] 
+
     client = models.ForeignKey(
         'Client',
         on_delete=models.PROTECT, 
@@ -281,6 +291,16 @@ class Order(models.Model):
         null=True,
         blank=True
     )
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default=STATUS_NEW,
+        verbose_name='Статус',
+    )
+
+    @property
+    def is_cancellable(self):
+        return self.status == self.STATUS_NEW
     
     @property
     def total_price(self):

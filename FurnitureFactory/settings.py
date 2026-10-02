@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 from dotenv import load_dotenv  
 
-# load_dotenv()
-
 from pathlib import Path
 import os
 
@@ -173,8 +171,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-OPENWEATHER_API_KEY = os.environ.get("OPENWEATHER_API_KEY ")
+OPENWEATHER_API_KEY = os.environ.get("OPENWEATHER_API_KEY")
 YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY")
+YOUTUBE_CHANNEL_ID = os.environ.get("YOUTUBE_CHANNEL_ID", "UCRrX7JDhqmJVbHQ2wun78Gw")
 
 LOGGING = {
     'version': 1,

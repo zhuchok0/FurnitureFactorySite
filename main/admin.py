@@ -37,13 +37,19 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display=('id', 'furniture', 'quantity', 'delivery_date', 'client', 'total_price')
-    list_filter=('order_date',)
-    readonly_fields = ('total_price',)
-    
+    list_display = (
+        'id', 'furniture', 'quantity',
+        'delivery_date', 'client', 'total_price', 'status',
+    )
+    list_filter = ('status', 'order_date', 'delivery_date')
+    search_fields = ('client__company_name', 'furniture__title')
+    list_editable = ('status',)
+    date_hierarchy = 'order_date'
+    ordering = ('-order_date',)
+
+    @admin.display(description='Total Price')
     def total_price(self, obj):
         return obj.total_price
-    total_price.short_description = 'Total Price'
 
 @admin.register(Vacancy)
 class VacancyAdmin(admin.ModelAdmin):

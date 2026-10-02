@@ -189,24 +189,38 @@ def main(request):
             except requests.RequestException as e:
                 logger.warning(f'Weather API failed: {e}')
 
+            video_data = None
             api_key = settings.YOUTUBE_API_KEY
-            search_video_id = 'qlpE7SFtMPQ'
-            url = f'https://www.googleapis.com/youtube/v3/videos?id={search_video_id}&key={api_key}&part=snippet,contentDetails,status'
-            try:
-                response = requests.get(url, timeout=10)
-                response.raise_for_status()
-                data = response.json()
-                if data.get('items'):
-                    item = data['items'][0]
-                    video_data = {
-                        'id': item['id'],
-                        'title': item['snippet']['title'],
-                    }
-            except requests.RequestException:
-                video_data = None
+            channel_id = settings.YOUTUBE_CHANNEL_ID
+
+            if api_key and channel_id:
+                uploads_playlist_id = 'UU' + channel_id[2:]
+                params = {
+                    'key': api_key,
+                    'playlistId': uploads_playlist_id,
+                    'part': 'snippet',
+                    'maxResults': 1,
+                }
+                try:
+                    response = requests.get(
+                        'https://www.googleapis.com/youtube/v3/playlistItems',
+                        params=params,
+                        timeout=10,
+                    )
+                    response.raise_for_status()
+                    data = response.json()
+                    items = data.get('items') or []
+                    if items:
+                        snippet = items[0]['snippet']
+                        video_data = {
+                            'id': snippet['resourceId']['videoId'],
+                            'title': snippet['title'],
+                        }
+                except requests.RequestException as e:
+                    logger.warning(f'YouTube API failed: {e}')
 
         except requests.RequestException as e:
-            logger.warning(f'YouTube API failed: {e}')
+            logger.warning(f'Request failed: {e}')
     
     context = {
         'latest_news': latest_news,
