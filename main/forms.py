@@ -80,7 +80,10 @@ class ClientRegistrationForm(UserCreationForm):
         max_length=20,
         label='Phone number',
         help_text='Format: +375 (29) 123-45-67',
-        validators=[RegexValidator(...)],  # серверная
+        validators=[RegexValidator(
+            regex=r'^\+375 \(29\) \d{3}-\d{2}-\d{2}$',
+            message='Enter a valid phone number (e.g., +375 (29) 123-45-67)'
+        )],
         widget=forms.TextInput(attrs={
             'required': True,
             'pattern': r'^\+375 \(29\) \d{3}-\d{2}-\d{2}$',

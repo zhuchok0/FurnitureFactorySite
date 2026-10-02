@@ -148,8 +148,13 @@ class ViewsTestCase(TestCase):
         mock_video_response = MagicMock()
         mock_video_response.json.return_value = {
             'items': [{
-                'id': 'qlpE7SFtMPQ',
-                'snippet': {'title': 'Test Video'}
+                'snippet': {
+                    'title': 'Test Video',
+                    'resourceId': {
+                        'kind': 'youtube#video',
+                        'videoId': 'qlpE7SFtMPQ',
+                    },
+                },
             }]
         }
         mock_video_response.raise_for_status = MagicMock()
@@ -165,6 +170,7 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.context['weather_info']['city'], 'Minsk')
         self.assertIsNotNone(response.context['video_data'])
         self.assertEqual(response.context['video_data']['title'], 'Test Video')
+        self.assertEqual(response.context['video_data']['id'], 'qlpE7SFtMPQ')
 
     def test_news_list(self):
         response = self.client.get(reverse('news_list'))

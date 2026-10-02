@@ -10,6 +10,8 @@ from main.models import Type, Design, Furniture, Client, Position, Employee, Ord
 
 from dateutil.relativedelta import relativedelta 
 
+from django.db import IntegrityError
+
 User = get_user_model()
 
 
@@ -20,7 +22,7 @@ class TypeModelTest(TestCase):
 
     def test_unique_name(self):
         Type.objects.create(name='Office')
-        with self.assertRaises(Exception):
+        with self.assertRaises(IntegrityError):
             Type.objects.create(name='Office')
 
     def test_case_insensitive_unique(self):
@@ -216,7 +218,7 @@ class EmployeeModelTest(TestCase):
             position=self.position
         )
         user2 = User.objects.create_user(username='emp2', password='testpass')
-        with self.assertRaises(Exception):
+        with self.assertRaises(IntegrityError):
             Employee.objects.create(
                 user=user2,
                 first_name='C',
