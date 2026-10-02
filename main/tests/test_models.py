@@ -120,25 +120,29 @@ class ClientModelTest(TestCase):
 
     def test_date_of_birth_validator_min_age(self):
         today = date.today()
-        dob_17 = today - relativedelta(years=17)
-        client = Client(
-            user=self.user,
-            company_name='Test',
-            date_of_birth=dob_17,
-            phone='+375 (29) 123-45-67',
-            city='Minsk',
-            address='Street',
-            timezone='UTC'
-        )
-        with self.assertRaises(ValidationError):
-            client.full_clean()
-
-        dob_18 = today - relativedelta(years=18)
-        client.date_of_birth = dob_18
-        try:
-            client.full_clean()
-        except ValidationError:
-            self.fail("Age exactly 18 should be valid")
+        cases = [
+            (16, False),
+            (17, False),
+            (18, True),
+            (25, True),
+            (65, True),
+        ]
+        for years, should_be_valid in cases:
+            with self.subTest(years=years):
+                client = Client(
+                    user=self.user,
+                    company_name='Test',
+                    date_of_birth=today - relativedelta(years=years),
+                    phone='+375 (29) 123-45-67',
+                    city='Minsk',
+                    address='Street',
+                    timezone='UTC',
+                )
+                if should_be_valid:
+                    client.full_clean()   # не должно бросить
+                else:
+                    with self.assertRaises(ValidationError):
+                        client.full_clean()
 
     def test_phone_validator(self):
         client = Client(
@@ -231,25 +235,28 @@ class EmployeeModelTest(TestCase):
 
     def test_date_of_birth_validator_min_age(self):
         today = date.today()
-        dob_17 = today - relativedelta(years=17)
-        emp = Employee(
-            user=self.user,
-            first_name='A',
-            last_name='B',
-            date_of_birth=dob_17,
-            phone='+375 (29) 123-45-67',
-            email='a@b.com',
-            position=self.position
-        )
-        with self.assertRaises(ValidationError):
-            emp.full_clean()
-
-        dob_65 = today - relativedelta(years=65)
-        emp.date_of_birth = dob_65
-        try:
-            emp.full_clean()
-        except ValidationError:
-            self.fail("Age 65 should be valid")
+        cases = [
+            (17, False),
+            (18, True),
+            (30, True),
+            (65, True),
+        ]
+        for years, should_be_valid in cases:
+            with self.subTest(years=years):
+                emp = Employee(
+                    user=self.user,
+                    first_name='A',
+                    last_name='B',
+                    date_of_birth=today - relativedelta(years=years),
+                    phone='+375 (29) 123-45-67',
+                    email=f'user{years}@example.com',   # ← уникальный email на итерацию
+                    position=self.position,
+                )
+                if should_be_valid:
+                    emp.full_clean()
+                else:
+                    with self.assertRaises(ValidationError):
+                        emp.full_clean()
 
 
 class OrderModelTest(TestCase):
@@ -337,12 +344,12 @@ class ReviewModelTest(TestCase):
         self.assertEqual(str(r), 'Alice: 5 stars')
 
     def test_rating_validator(self):
-        r = Review(name='Bob', text='Bad', rating=0)
-        with self.assertRaises(ValidationError):
-            r.full_clean()
-        r.rating = 6
-        with self.assertRaises(ValidationError):
-            r.full_clean()
+        invalid_ratings = [0, -1, 6, 100]
+        for rating in invalid_ratings:
+            with self.subTest(rating=rating):
+                r = Review(name='Bob', text='Bad', rating=rating)
+                with self.assertRaises(ValidationError):
+                    r.full_clean()
 
 
 class SimpleModelsTest(TestCase):
