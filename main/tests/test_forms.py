@@ -66,34 +66,32 @@ class OrderFormTest(TestCase):
         self.assertFalse(form.is_valid())
         self.assertIn('quantity', form.errors)
 
-    def test_delivery_date_too_early(self):
-        data = {
-            'furniture': self.furniture_in_prod.id,
-            'quantity': 1,
-            'delivery_date': date.today() + self._months(2),
-        }
-        form = OrderForm(data)
-        self.assertFalse(form.is_valid())
-        self.assertIn('delivery_date', form.errors)
-        self.assertIn('at least 3 months', form.errors['delivery_date'][0])
+    def test_delivery_date_validation(self):
+        cases = [
+            (2, False, 'at least 3 months'),   # слишком рано
+            (3, True, None),                    # ровно 3 месяца
+            (4, True, None),                    # с запасом
+            (12, True, None),                   # сильно вперёд
+            (None, True, None),                 # поле необязательное
+        ]
+        for months, should_be_valid, expected_error in cases:
+            with self.subTest(months=months):
+                data = {
+                    'furniture': self.furniture_in_prod.id,
+                    'quantity': 1,
+                }
+                if months is not None:
+                    data['delivery_date'] = date.today() + self._months(months)
 
-    def test_delivery_date_exactly_3_months(self):
-        data = {
-            'furniture': self.furniture_in_prod.id,
-            'quantity': 1,
-            'delivery_date': date.today() + self._months(3),
-        }
-        form = OrderForm(data)
-        self.assertTrue(form.is_valid(), form.errors)
-
-    def test_delivery_date_optional(self):
-        data = {
-            'furniture': self.furniture_in_prod.id,
-            'quantity': 3,
-        }
-        form = OrderForm(data)
-        self.assertTrue(form.is_valid(), form.errors)
-        self.assertIsNone(form.cleaned_data['delivery_date'])
+                form = OrderForm(data)
+                if should_be_valid:
+                    self.assertTrue(form.is_valid(), form.errors)
+                    if months is None:
+                        self.assertIsNone(form.cleaned_data['delivery_date'])
+                else:
+                    self.assertFalse(form.is_valid())
+                    self.assertIn('delivery_date', form.errors)
+                    self.assertIn(expected_error, form.errors['delivery_date'][0])
 
     @staticmethod
     def _months(n):
@@ -102,22 +100,25 @@ class OrderFormTest(TestCase):
 
 
 class ReviewFormTest(TestCase):
-    def test_valid_review(self):
-        data = {'name': 'Alice', 'text': 'Great product!', 'rating': 5}
-        form = ReviewForm(data)
-        self.assertTrue(form.is_valid(), form.errors)
-
-    def test_invalid_rating_below_1(self):
-        data = {'name': 'Bob', 'text': 'Bad', 'rating': 0}
-        form = ReviewForm(data)
-        self.assertFalse(form.is_valid())
-        self.assertIn('rating', form.errors)
-
-    def test_invalid_rating_above_5(self):
-        data = {'name': 'Bob', 'text': 'Super', 'rating': 6}
-        form = ReviewForm(data)
-        self.assertFalse(form.is_valid())
-        self.assertIn('rating', form.errors)
+    def test_rating_validation(self):
+        cases = [
+            (5, True),
+            (1, True),
+            (3, True),
+            (0, False),
+            (-1, False),
+            (6, False),
+            (100, False),
+        ]
+        for rating, should_be_valid in cases:
+            with self.subTest(rating=rating):
+                data = {'name': 'Alice', 'text': 'Some text', 'rating': rating}
+                form = ReviewForm(data)
+                if should_be_valid:
+                    self.assertTrue(form.is_valid(), form.errors)
+                else:
+                    self.assertFalse(form.is_valid())
+                    self.assertIn('rating', form.errors)
 
     def test_required_fields(self):
         form = ReviewForm({})
@@ -216,33 +217,34 @@ class ClientRegistrationFormTest(TestCase):
 
     def test_date_of_birth_validation_min_age(self):
         today = date.today()
-        dob_17 = today - relativedelta(years=17)
-        data = {
-            'username': 'younguser',
-            'email': 'young@example.com',
-            'password1': 'StrongPass1!',
-            'password2': 'StrongPass1!',
-            'company_name': 'Young Co',
-            'phone': '+375 (29) 123-45-67',
-            'city': 'Minsk',
-            'address': 'Addr',
-            'date_of_birth': dob_17.isoformat(),
-            'timezone': 'UTC',
-        }
-        form = ClientRegistrationForm(data)
-        self.assertFalse(form.is_valid())
-        self.assertIn('date_of_birth', form.errors)
-        self.assertIn('at least 18 years old', form.errors['date_of_birth'][0])
-
-        dob_exactly_18 = today - relativedelta(years=18)
-        data['date_of_birth'] = dob_exactly_18.isoformat()
-        form = ClientRegistrationForm(data)
-        self.assertTrue(form.is_valid(), form.errors)
-
-        dob_19 = today - relativedelta(years=19)
-        data['date_of_birth'] = dob_19.isoformat()
-        form = ClientRegistrationForm(data)
-        self.assertTrue(form.is_valid(), form.errors)
+        cases = [
+            (17, False),
+            (18, True),
+            (19, True),
+            (25, True),
+        ]
+        for years, should_be_valid in cases:
+            with self.subTest(years=years):
+                data = {
+                    'username': f'user{years}',
+                    'email': f'user{years}@example.com',
+                    'password1': 'StrongPass1!',
+                    'password2': 'StrongPass1!',
+                    'company_name': 'Co',
+                    'phone': '+375 (29) 123-45-67',
+                    'city': 'Minsk',
+                    'address': 'Addr',
+                    'date_of_birth': (today - relativedelta(years=years)).isoformat(),
+                    'timezone': 'UTC',
+                }
+                form = ClientRegistrationForm(data)
+                if should_be_valid:
+                    self.assertTrue(form.is_valid(), form.errors)
+                else:
+                    self.assertFalse(form.is_valid())
+                    self.assertIn('date_of_birth', form.errors)
+                    self.assertIn('at least 18 years old',
+                                form.errors['date_of_birth'][0])
 
     def test_save_creates_user_and_client(self):
         today = date.today()
