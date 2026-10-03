@@ -6,13 +6,15 @@ from unittest.mock import patch, MagicMock
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from django.test import TestCase, Client as TestClient
+from django.test import TestCase, Client as ClientForTest
 from django.urls import reverse
 
 from main.models import (
     Type, Design, Furniture, Client, Position, Employee,
     Order, News, Vacancy, PromoCode, Review
 )
+
+from django.core.management import call_command
 
 User = get_user_model()
 
@@ -25,7 +27,7 @@ class ViewsTestCase(TestCase):
         matplotlib.use('Agg')
 
     def setUp(self):
-        self.client = TestClient()
+        self.client = ClientForTest()
 
         self.client_group = Group.objects.create(name='Client')
         self.employee_group = Group.objects.create(name='Employee')
@@ -42,7 +44,7 @@ class ViewsTestCase(TestCase):
         dob_client = today - relativedelta(years=30)
         self.client_profile = Client.objects.create(
             user=self.client_user,
-            company_name='TestClient Ltd',
+            company_name='ClientForTest Ltd',
             responsible_person='John Doe',
             date_of_birth=dob_client,
             phone='+375 (29) 123-45-67',
@@ -264,8 +266,7 @@ class ViewsTestCase(TestCase):
 
     def test_add_review_requires_login(self):
         response = self.client.get(reverse('add_review'))
-        self.assertNotEqual(response.status_code, 200)  
-        self.assertIn('/accounts/login/', response.url)
+        self.assertRedirects(response, '/accounts/login/?next=' + reverse('add_review'))
 
     def test_add_review_post(self):
         self.client.login(username='clientuser', password='clientpass')
@@ -282,7 +283,10 @@ class ViewsTestCase(TestCase):
     def test_client_orders_requires_client_group(self):
         self.client.login(username='plainuser', password='plainpass')
         response = self.client.get(reverse('client_orders'))
-        self.assertNotEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=' + reverse('client_orders')
+        )
 
     def test_client_orders_as_client(self):
         self.client.login(username='clientuser', password='clientpass')
@@ -301,22 +305,34 @@ class ViewsTestCase(TestCase):
     def test_create_order_post(self):
         self.client.login(username='clientuser', password='clientpass')
         future_delivery = date.today() + relativedelta(months=3)
+        orders_before = Order.objects.count()
+
         response = self.client.post(reverse('create_order'), {
             'furniture': self.furniture1.id,
             'quantity': 1,
-            'delivery_date': future_delivery
+            'delivery_date': future_delivery,
         })
+
         self.assertRedirects(response, reverse('client_orders'))
-        self.assertEqual(Order.objects.count(), 3)
-        new_order = Order.objects.last()
+        self.assertEqual(Order.objects.count(), orders_before + 1)
+
+        new_order = Order.objects.latest('id')
+
         self.assertEqual(new_order.client, self.client_profile)
+        self.assertEqual(new_order.furniture, self.furniture1)
+        self.assertEqual(new_order.quantity, 1)
+        self.assertEqual(new_order.delivery_date, future_delivery)
+        self.assertEqual(new_order.status, Order.STATUS_NEW)
 
     # employee pages
 
     def test_employee_dashboard_requires_employee_group(self):
         self.client.login(username='plainuser', password='plainpass')
         response = self.client.get(reverse('employee_dashboard'))
-        self.assertNotEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            '/?next=' + reverse('employee_dashboard'),
+        )
 
     def test_employee_dashboard_as_employee(self):
         self.client.login(username='employeeuser', password='employeepass')
@@ -340,7 +356,10 @@ class ViewsTestCase(TestCase):
     def test_analytics_dashboard_redirect_for_non_admin(self):
         self.client.login(username='clientuser', password='clientpass')
         response = self.client.get(reverse('analytics_dashboard'))
-        self.assertNotEqual(response.status_code, 200)
+        self.assertRedirects(
+            response,
+            '/?next=' + reverse('analytics_dashboard'),
+        )
 
     def test_edit_review_admin(self):
         self.client.login(username='admin', password='adminpass')
@@ -366,3 +385,82 @@ class ViewsTestCase(TestCase):
         response = self.client.post(reverse('delete_review', args=[self.review.pk]))
         self.assertRedirects(response, reverse('reviews_list'))
         self.assertFalse(Review.objects.filter(pk=self.review.pk).exists())
+
+class OrderStateTransitionTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.design = Design.objects.create(name='Modern')
+        cls.furniture = Furniture.objects.create(
+            title='Table',
+            design=cls.design,
+            price=Decimal('100.00'),
+        )
+        cls.client_profile = Client.objects.create(
+            company_name='ClientForTest Ltd',
+            phone='+375 (29) 123-45-67',
+            city='Minsk',
+            address='Lenina 1',
+            date_of_birth=date.today() - relativedelta(years=30),
+            timezone='Europe/Minsk',
+        )
+
+    def setUp(self):
+        self._run_command = lambda: call_command(
+            'update_order_statuses',
+            stdout=io.StringIO(),
+        )
+
+    def _make_order(self, status=Order.STATUS_NEW, delivery_date='today_plus_7'):
+        if delivery_date == 'today_plus_7':
+            delivery_date = date.today() + relativedelta(days=7)
+        elif delivery_date == 'today':
+            delivery_date = date.today()
+        elif delivery_date == 'none':
+            delivery_date = None
+
+        return Order.objects.create(
+            client=self.client_profile,
+            furniture=self.furniture,
+            quantity=1,
+            delivery_date=delivery_date,
+            status=status,
+        )
+
+    def test_new_order_starts_in_new_status(self):
+        order = self._make_order()
+        self.assertEqual(order.status, Order.STATUS_NEW)
+
+    def test_transition_new_to_delivered_by_command(self):
+        order = self._make_order(delivery_date='today')
+        self._run_command()
+        order.refresh_from_db()
+        self.assertEqual(order.status, Order.STATUS_DELIVERED)
+
+    def test_transition_new_to_cancelled(self):
+        order = self._make_order()
+        order.status = Order.STATUS_CANCELLED
+        order.save()
+        order.refresh_from_db()
+        self.assertEqual(order.status, Order.STATUS_CANCELLED)
+        self.assertFalse(order.is_cancellable)
+
+    def test_delivered_is_final_state(self):
+        order = self._make_order(status=Order.STATUS_DELIVERED)
+        self._run_command()
+        order.refresh_from_db()
+        self.assertEqual(order.status, Order.STATUS_DELIVERED)
+
+    def test_cancelled_order_not_updated_by_command(self):
+        order = self._make_order(
+            status=Order.STATUS_CANCELLED,
+            delivery_date='today',
+        )
+        self._run_command()
+        order.refresh_from_db()
+        self.assertEqual(order.status, Order.STATUS_CANCELLED)
+
+    def test_command_ignores_orders_without_delivery_date(self):
+        order = self._make_order(delivery_date='none')
+        self._run_command()
+        order.refresh_from_db()
+        self.assertEqual(order.status, Order.STATUS_NEW)

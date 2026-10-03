@@ -1,0 +1,31 @@
+[run]
+source = main
+omit =
+    */migrations/*
+    */tests/*
+    */__init__.py
+    main/apps.py
+    main/admin.py
+    main/urls.py
+    main/management/commands/fill_news.py
+    main/management/commands/fill_positions.py
+    FurnitureFactory/settings.py
+    FurnitureFactory/wsgi.py
+    FurnitureFactory/asgi.py
+    manage.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    if self.debug:
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    @abstractmethod
+
+show_missing = True
+skip_covered = False
+
+[html]
+directory = htmlcov

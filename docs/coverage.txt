@@ -1,0 +1,100 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0 -- /Users/maria/Documents/sem5/strweb/FurnitureFactorySite/.venv/bin/python3.14
+cachedir: .pytest_cache
+django: version: 5.2.14, settings: FurnitureFactory.settings (from ini)
+rootdir: /Users/maria/Documents/sem5/strweb/FurnitureFactorySite
+configfile: pytest.ini
+plugins: cov-7.1.0, Faker-40.38.0, django-4.14.0
+collecting ... collected 71 items
+
+main/tests/test_forms.py::OrderFormTest::test_delivery_date_validation 
+main/tests/test_forms.py::OrderFormTest::test_delivery_date_validation PASSED [  1%]
+main/tests/test_forms.py::OrderFormTest::test_invalid_furniture_not_in_production PASSED [  2%]
+main/tests/test_forms.py::OrderFormTest::test_quantity_min_value PASSED  [  4%]
+main/tests/test_forms.py::OrderFormTest::test_valid_order PASSED         [  5%]
+main/tests/test_forms.py::ReviewFormTest::test_rating_validation 
+main/tests/test_forms.py::ReviewFormTest::test_rating_validation PASSED  [  7%]
+main/tests/test_forms.py::ReviewFormTest::test_required_fields PASSED    [  8%]
+main/tests/test_forms.py::ReviewFormTest::test_widget_choices PASSED     [  9%]
+main/tests/test_forms.py::ClientRegistrationFormTest::test_date_of_birth_validation_min_age 
+main/tests/test_forms.py::ClientRegistrationFormTest::test_date_of_birth_validation_min_age PASSED [ 11%]
+main/tests/test_forms.py::ClientRegistrationFormTest::test_email_validation PASSED [ 12%]
+main/tests/test_forms.py::ClientRegistrationFormTest::test_password_mismatch PASSED [ 14%]
+main/tests/test_forms.py::ClientRegistrationFormTest::test_phone_format_validation PASSED [ 15%]
+main/tests/test_forms.py::ClientRegistrationFormTest::test_required_fields PASSED [ 16%]
+main/tests/test_forms.py::ClientRegistrationFormTest::test_save_creates_user_and_client PASSED [ 18%]
+main/tests/test_forms.py::ClientRegistrationFormTest::test_valid_registration PASSED [ 19%]
+main/tests/test_models.py::TypeModelTest::test_case_insensitive_unique PASSED [ 21%]
+main/tests/test_models.py::TypeModelTest::test_create_type PASSED        [ 22%]
+main/tests/test_models.py::TypeModelTest::test_unique_name PASSED        [ 23%]
+main/tests/test_models.py::DesignModelTest::test_case_insensitive_unique PASSED [ 25%]
+main/tests/test_models.py::DesignModelTest::test_create_design PASSED    [ 26%]
+main/tests/test_models.py::FurnitureModelTest::test_create_furniture PASSED [ 28%]
+main/tests/test_models.py::FurnitureModelTest::test_many_to_many_types PASSED [ 29%]
+main/tests/test_models.py::FurnitureModelTest::test_product_code_generation PASSED [ 30%]
+main/tests/test_models.py::FurnitureModelTest::test_product_code_unique_and_not_editable PASSED [ 32%]
+main/tests/test_models.py::ClientModelTest::test_create_client PASSED    [ 33%]
+main/tests/test_models.py::ClientModelTest::test_date_of_birth_validator_min_age 
+main/tests/test_models.py::ClientModelTest::test_date_of_birth_validator_min_age PASSED [ 35%]
+main/tests/test_models.py::ClientModelTest::test_phone_validator PASSED  [ 36%]
+main/tests/test_models.py::ClientModelTest::test_timezone_update_tracking PASSED [ 38%]
+main/tests/test_models.py::PositionModelTest::test_create_position PASSED [ 39%]
+main/tests/test_models.py::EmployeeModelTest::test_create_employee PASSED [ 40%]
+main/tests/test_models.py::EmployeeModelTest::test_date_of_birth_validator_min_age 
+main/tests/test_models.py::EmployeeModelTest::test_date_of_birth_validator_min_age PASSED [ 42%]
+main/tests/test_models.py::EmployeeModelTest::test_email_unique PASSED   [ 43%]
+main/tests/test_models.py::OrderModelTest::test_create_order PASSED      [ 45%]
+main/tests/test_models.py::OrderModelTest::test_quantity_validation PASSED [ 46%]
+main/tests/test_models.py::PromoCodeModelTest::test_active_promo PASSED  [ 47%]
+main/tests/test_models.py::PromoCodeModelTest::test_is_expired PASSED    [ 49%]
+main/tests/test_models.py::PromoCodeModelTest::test_is_upcoming PASSED   [ 50%]
+main/tests/test_models.py::ReviewModelTest::test_create_review PASSED    [ 52%]
+main/tests/test_models.py::ReviewModelTest::test_rating_validator 
+main/tests/test_models.py::ReviewModelTest::test_rating_validator PASSED [ 53%]
+main/tests/test_models.py::SimpleModelsTest::test_news PASSED            [ 54%]
+main/tests/test_models.py::SimpleModelsTest::test_vacancy PASSED         [ 56%]
+main/tests/test_views.py::ViewsTestCase::test_about PASSED               [ 57%]
+main/tests/test_views.py::ViewsTestCase::test_add_review_post PASSED     [ 59%]
+main/tests/test_views.py::ViewsTestCase::test_add_review_requires_login PASSED [ 60%]
+main/tests/test_views.py::ViewsTestCase::test_analytics_dashboard_admin_access PASSED [ 61%]
+main/tests/test_views.py::ViewsTestCase::test_analytics_dashboard_redirect_for_non_admin PASSED [ 63%]
+main/tests/test_views.py::ViewsTestCase::test_catalog_default_sort PASSED [ 64%]
+main/tests/test_views.py::ViewsTestCase::test_catalog_sort_desc PASSED   [ 66%]
+main/tests/test_views.py::ViewsTestCase::test_client_orders_as_client PASSED [ 67%]
+main/tests/test_views.py::ViewsTestCase::test_client_orders_requires_client_group PASSED [ 69%]
+main/tests/test_views.py::ViewsTestCase::test_contacts PASSED            [ 70%]
+main/tests/test_views.py::ViewsTestCase::test_create_order_get PASSED    [ 71%]
+main/tests/test_views.py::ViewsTestCase::test_create_order_post PASSED   [ 73%]
+main/tests/test_views.py::ViewsTestCase::test_delete_review_admin PASSED [ 74%]
+main/tests/test_views.py::ViewsTestCase::test_edit_review_admin PASSED   [ 76%]
+main/tests/test_views.py::ViewsTestCase::test_employee_dashboard_as_employee PASSED [ 77%]
+main/tests/test_views.py::ViewsTestCase::test_employee_dashboard_requires_employee_group PASSED [ 78%]
+main/tests/test_views.py::ViewsTestCase::test_main_page_anonymous PASSED [ 80%]
+main/tests/test_views.py::ViewsTestCase::test_main_page_authenticated_client_weather_and_video_mocked PASSED [ 81%]
+main/tests/test_views.py::ViewsTestCase::test_news_list PASSED           [ 83%]
+main/tests/test_views.py::ViewsTestCase::test_privacy_policy PASSED      [ 84%]
+main/tests/test_views.py::ViewsTestCase::test_promocodes_list PASSED     [ 85%]
+main/tests/test_views.py::ViewsTestCase::test_register_client_get PASSED [ 87%]
+main/tests/test_views.py::ViewsTestCase::test_register_client_post_valid PASSED [ 88%]
+main/tests/test_views.py::ViewsTestCase::test_reviews_list PASSED        [ 90%]
+main/tests/test_views.py::ViewsTestCase::test_vacancies_list PASSED      [ 91%]
+main/tests/test_views.py::OrderStateTransitionTests::test_cancelled_order_not_updated_by_command PASSED [ 92%]
+main/tests/test_views.py::OrderStateTransitionTests::test_command_ignores_orders_without_delivery_date PASSED [ 94%]
+main/tests/test_views.py::OrderStateTransitionTests::test_delivered_is_final_state PASSED [ 95%]
+main/tests/test_views.py::OrderStateTransitionTests::test_new_order_starts_in_new_status PASSED [ 97%]
+main/tests/test_views.py::OrderStateTransitionTests::test_transition_new_to_cancelled PASSED [ 98%]
+main/tests/test_views.py::OrderStateTransitionTests::test_transition_new_to_delivered_by_command PASSED [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.7-final-0 _______________
+
+Name                                                Stmts   Miss  Cover   Missing
+---------------------------------------------------------------------------------
+main/forms.py                                          61      0   100%
+main/management/commands/update_order_statuses.py      26      4    85%   25-32, 46
+main/models.py                                        263     10    96%   419, 486, 506, 519, 538, 542-548, 552, 576, 580
+main/views.py                                         571    161    72%   37-42, 63-68, 76-77, 133-137, 189-190, 219-223, 254-255, 258-259, 346, 378-380, 417, 442, 475, 495-513, 519-521, 572-578, 618, 641-642, 676-677, 754-773, 776-777, 782-784, 790-792, 803-815, 822-840, 847-864, 871-947
+---------------------------------------------------------------------------------
+TOTAL                                                 921    175    81%
+Coverage HTML written to dir htmlcov
+=================== 71 passed, 29 subtests passed in 13.60s ====================
