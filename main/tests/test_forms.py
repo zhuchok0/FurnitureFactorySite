@@ -100,6 +100,7 @@ class OrderFormTest(TestCase):
 
 
 class ReviewFormTest(TestCase):
+    # negative
     def test_rating_validation(self):
         cases = [
             (5, True),
@@ -181,6 +182,7 @@ class ClientRegistrationFormTest(TestCase):
         self.assertFalse(form.is_valid())
         self.assertIn('email', form.errors)
 
+    # negative
     def test_password_mismatch(self):
         data = {
             'username': 'user',
@@ -198,6 +200,7 @@ class ClientRegistrationFormTest(TestCase):
         self.assertFalse(form.is_valid())
         self.assertIn('password2', form.errors)
 
+    # negative
     def test_phone_format_validation(self):
         data = {
             'username': 'user',

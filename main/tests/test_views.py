@@ -15,6 +15,7 @@ from main.models import (
 )
 
 from django.core.management import call_command
+import responses
 
 User = get_user_model()
 
@@ -135,6 +136,31 @@ class ViewsTestCase(TestCase):
         self.assertIn('latest_news', response.context)
         self.assertIn('clients', response.context)
         self.assertIn('total_sales', response.context)
+
+    @responses.activate
+    def test_main_page_with_http_stubs(self):
+        responses.add(
+            responses.GET,
+            'https://api.openweathermap.org/data/2.5/weather',
+            json={'cod': 200, 'name': 'Minsk', 'main': {'temp': 15},
+                'weather': [{'icon': '01d', 'description': 'clear'}]},
+            status=200,
+        )
+        responses.add(
+            responses.GET,
+            'https://www.googleapis.com/youtube/v3/playlistItems',
+            json={'items': [{'snippet': {
+                'title': 'Test Video',
+                'resourceId': {'videoId': 'abc123'},
+            }}]},
+            status=200,
+        )
+
+        self.client.login(username='clientuser', password='clientpass')
+        response = self.client.get(reverse('main'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['weather_info']['city'], 'Minsk')
+        self.assertEqual(response.context['video_data']['id'], 'abc123')
 
     @patch('main.views.requests.get')
     def test_main_page_authenticated_client_weather_and_video_mocked(self, mock_get):
@@ -264,6 +290,7 @@ class ViewsTestCase(TestCase):
         self.assertTrue(user.groups.filter(name='Client').exists())
         self.assertTrue(Client.objects.filter(user=user).exists())
 
+    # negative
     def test_add_review_requires_login(self):
         response = self.client.get(reverse('add_review'))
         self.assertRedirects(response, '/accounts/login/?next=' + reverse('add_review'))
@@ -280,6 +307,7 @@ class ViewsTestCase(TestCase):
 
     # client pages-
 
+    # negative
     def test_client_orders_requires_client_group(self):
         self.client.login(username='plainuser', password='plainpass')
         response = self.client.get(reverse('client_orders'))
@@ -326,6 +354,7 @@ class ViewsTestCase(TestCase):
 
     # employee pages
 
+    # negative
     def test_employee_dashboard_requires_employee_group(self):
         self.client.login(username='plainuser', password='plainpass')
         response = self.client.get(reverse('employee_dashboard'))
@@ -353,6 +382,7 @@ class ViewsTestCase(TestCase):
         self.assertIn('price_list', response.context)
         self.assertIn('yearly_stats', response.context)
 
+    # negative
     def test_analytics_dashboard_redirect_for_non_admin(self):
         self.client.login(username='clientuser', password='clientpass')
         response = self.client.get(reverse('analytics_dashboard'))

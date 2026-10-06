@@ -144,6 +144,7 @@ class ClientModelTest(TestCase):
                     with self.assertRaises(ValidationError):
                         client.full_clean()
 
+    # negative
     def test_phone_validator(self):
         client = Client(
             user=self.user,
@@ -289,6 +290,7 @@ class OrderModelTest(TestCase):
         self.assertEqual(order.total_price, Decimal('1000.00'))
         self.assertIn('Order #', str(order))
 
+    # negative
     def test_quantity_validation(self):
         order = Order(
             client=self.client,
