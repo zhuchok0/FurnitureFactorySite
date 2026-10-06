@@ -1,11 +1,4 @@
-# Реестр дефектов — FurnitureFactorySite
-
-**Дата создания:** 2026-10-01
-**Связанный документ:** `docs/requirements.md`
-
-Формат: `ISSUE-N — Заголовок`. Статусы: `OPEN`, `IN PROGRESS`, `RESOLVED`, `WONTFIX`.
-
----
+# Дефекты FurnitureFactorySite
 
 ## ISSUE-1 — Пробел в имени переменной окружения
 

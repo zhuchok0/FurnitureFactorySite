@@ -26,6 +26,3 @@ exclude_lines =
 
 show_missing = True
 skip_covered = False
-
-[html]
-directory = htmlcov
