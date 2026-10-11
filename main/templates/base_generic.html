@@ -5,11 +5,11 @@
     <title>{% block title %}Furniture Factory{% endblock %}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Language">
+    <meta http-equiv="Content-Language" content="en">
 
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
-    
-    <base href="/" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    />
 </head>
 
 <!--
@@ -24,7 +24,7 @@
     <header class="main-header">
       <nav class="main-nav">
         <a class="logo" href="{% url 'main' %}">
-          <img src="/media/logo.png" width="70" height="30" alt="Logo" longdesc="about.html">
+          <img src="/media/logo.png" width="70" height="30" alt="Logo">
         </a>
         <a href="{% url 'main' %}">Main</a>
         <a href="{% url 'news_list' %}">News</a>
@@ -79,7 +79,7 @@
                 {% if user.is_authenticated %}
                     <li><strong>User:</strong> {{ user.get_username }}</li>
                     <li>
-                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
                             <button type="submit">Logout</button>
                         </form>
