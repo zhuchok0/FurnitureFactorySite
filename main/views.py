@@ -856,7 +856,7 @@ def cart_pay(request):
             furniture=item.furniture,
             quantity=item.quantity,
             order_date=timezone.now().date(),
-            delivery_date=timezone.now().date() + timedelta(days=7)
+            delivery_date=timezone.now().date() + relativedelta(months=3)
         )
 
     cart.items.all().delete()
