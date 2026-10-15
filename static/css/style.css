@@ -26,7 +26,7 @@ a:link {
 }
 
 a:visited {
-    color: #0c1813;
+    color: #544a8b;
 }
 
 a:hover {
@@ -45,12 +45,16 @@ a:focus {
 
 /* --------------------------HEADER NAV--------------------------*/
 header {
-    background-color: #fdffb6;
+    background-color: #e5e6aa;
     padding: 10px 20px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .main-nav {
-    background-color: #b5dcff;
+    background-color: #99caf2;
     padding: 10px 20px;
 
     display: flex;
