@@ -137,6 +137,7 @@ class ViewsTestCase(TestCase):
         self.assertIn('clients', response.context)
         self.assertIn('total_sales', response.context)
 
+    # responses stub
     @responses.activate
     def test_main_page_with_http_stubs(self):
         responses.add(
@@ -158,10 +159,12 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username='clientuser', password='clientpass')
         response = self.client.get(reverse('main'))
+        
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['weather_info']['city'], 'Minsk')
         self.assertEqual(response.context['video_data']['id'], 'abc123')
 
+    # mock
     @patch('main.views.requests.get')
     def test_main_page_authenticated_client_weather_and_video_mocked(self, mock_get):
         mock_weather_response = MagicMock()
@@ -191,6 +194,7 @@ class ViewsTestCase(TestCase):
 
         self.client.login(username='clientuser', password='clientpass')
         response = self.client.get(reverse('main'))
+
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(response.context['client_info'])
         self.assertIsNotNone(response.context['client_info']['calendar'])
@@ -330,6 +334,7 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'order_form.html')
 
+    # integration
     def test_create_order_post(self):
         self.client.login(username='clientuser', password='clientpass')
         future_delivery = date.today() + relativedelta(months=3)
