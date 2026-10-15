@@ -1,8 +1,13 @@
-# Дефекты FurnitureFactorySite
+# Реестр дефектов — FurnitureFactorySite
+
+**Дата создания:** 2026-10-01
+**Связанный документ:** `docs/requirements.md`
+
+Формат: `ISSUE-N — Заголовок`. Статусы: `OPEN`, `IN PROGRESS`, `RESOLVED`.
 
 ## ISSUE-1 — Пробел в имени переменной окружения
 
-**Статус:** OPEN
+**Статус:** RESOLVED
 **Приоритет:** High
 **Связано с:** FR-17, NFR-6
 
@@ -29,7 +34,7 @@ OPENWEATHER_API_KEY = os.environ.get("OPENWEATHER_API_KEY")
 
 ## ISSUE-2 — `YOUTUBE_CHANNEL_ID` захардкожен в settings.py
 
-**Статус:** OPEN
+**Статус:** RESOLVED
 **Приоритет:** Medium
 **Связано с:** FR-17, NFR-7
 
@@ -49,7 +54,7 @@ YOUTUBE_CHANNEL_ID = os.environ.get(
 
 ## ISSUE-3 — Виджет YouTube не скрывается при ошибке API
 
-**Статус:** OPEN
+**Статус:** RESOLVED
 **Приоритет:** Medium
 **Связано с:** NFR-6
 
@@ -90,7 +95,7 @@ if api_key and channel_id:
 
 ## ISSUE-4 — Двойной вызов `load_dotenv()`
 
-**Статус:** OPEN
+**Статус:** RESOLVED
 **Приоритет:** Low
 **Связано с:** NFR-7
 

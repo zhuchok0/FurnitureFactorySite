@@ -445,9 +445,9 @@ class OrderStateTransitionTests(TestCase):
             stdout=io.StringIO(),
         )
 
-    def _make_order(self, status=Order.STATUS_NEW, delivery_date='today_plus_7'):
-        if delivery_date == 'today_plus_7':
-            delivery_date = date.today() + relativedelta(days=7)
+    def _make_order(self, status=Order.STATUS_NEW, delivery_date='today_plus_3'):
+        if delivery_date == 'today_plus_3':
+            delivery_date = date.today() + relativedelta(monthes=3)
         elif delivery_date == 'today':
             delivery_date = date.today()
         elif delivery_date == 'none':
