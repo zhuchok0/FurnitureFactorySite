@@ -23,7 +23,7 @@
 
 | Слой | Технология |
 |---|---|
-| Язык | Python 3.14.17 |
+| Язык | Python 3.14.7 |
 | Фреймворк | Django 5.2.14|
 | СУБД (dev) | SQLite |
 | СУБД (prod) | PostgreSQL (Render) |
@@ -59,7 +59,7 @@ flowchart LR
 | `FurnitureFactory/settings.py` | Настройки, подключение БД, статики, media, приложений. |
 | `FurnitureFactory/urls.py` | Корневая маршрутизация, подключение `main.urls` и admin. |
 | `FurnitureFactory/wsgi.py` / `asgi.py` | Точки входа для WSGI/ASGI-серверов. |
-| `main/models.py` | Модели данных: Product, Order и т.д.|
+| `main/models.py` | Модели: `Type`, `Design`, `Furniture`, `Client`, `Employee`, `Order`, `Cart`, `Review`, `PromoCode`, `News`, `Vacancy`. |
 | `main/views.py` | Представления: каталог, карточка товара, страница формы заявки. |
 | `main/forms.py` | Формы (заявка, отзыв, регистрация клиента). |
 | `main/admin.py` | Регистрация моделей в админке, настройка отображения. |
@@ -73,9 +73,9 @@ flowchart LR
 - **Файловая система:**
   - `media/` — пользовательские загрузки;
   - `static/` → `staticfiles/` — статика после `collectstatic`.
-- **Внешние сервисы:** 
-  **Weather API** — получение текущей погоды в Минске через WeatherAPI.
-  - **YouTube Data API v3** — получение последнего видео с канала Vitra.
+- **Внешние сервисы:**
+  - **OpenWeatherMap API** — текущая погода в Минске для виджета на главной.
+  - **YouTube Data API v3** — последнее видео с канала.
 - **Деплой:** Render (`render.yaml` + `build.sh`), Docker (`Dockerfile`, `docker-compose.yml`).
 - **Логи:** `debug.log`.
 
@@ -83,8 +83,10 @@ flowchart LR
 
 ### Требования
 
-- Python 3.14.17
+- Python 3.14+
 - pip / venv
+
+**Опционально** (для запуска в контейнере):
 - Docker и docker-compose
 
 ### 1. Клонирование и окружение

@@ -20,6 +20,7 @@ class TypeModelTest(TestCase):
         t = Type.objects.create(name='Kitchen')
         self.assertEqual(str(t), 'Kitchen')
 
+    # negative
     def test_unique_name(self):
         Type.objects.create(name='Office')
         with self.assertRaises(IntegrityError):
