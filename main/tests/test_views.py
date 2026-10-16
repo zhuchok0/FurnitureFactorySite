@@ -421,6 +421,22 @@ class ViewsTestCase(TestCase):
         self.assertRedirects(response, reverse('reviews_list'))
         self.assertFalse(Review.objects.filter(pk=self.review.pk).exists())
 
+    # scenario
+    def test_scenario_client_creates_and_views_order(self):
+        self.client.login(username='clientuser', password='clientpass')
+
+        self.client.post(reverse('add_to_cart', args=[self.furniture1.id]))
+
+        response = self.client.post(reverse('create_order'), {
+            'furniture': self.furniture1.id,
+            'quantity': 1,
+            'delivery_date': date.today() + relativedelta(months=3),
+        })
+        self.assertRedirects(response, reverse('client_orders'))
+
+        response = self.client.get(reverse('client_orders'))
+        self.assertContains(response, self.furniture1.title)
+
 class OrderStateTransitionTests(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -499,3 +515,39 @@ class OrderStateTransitionTests(TestCase):
         self._run_command()
         order.refresh_from_db()
         self.assertEqual(order.status, Order.STATUS_NEW)
+
+    # scenario lificycle
+    def test_order_full_lifecycle_new_to_delivered(self):
+        order = self._make_order(delivery_date='today_plus_7')
+        self.assertEqual(order.status, Order.STATUS_NEW)
+
+        self._run_command()
+        order.refresh_from_db()
+        self.assertEqual(order.status, Order.STATUS_NEW)
+
+        order.delivery_date = date.today()
+        order.save()
+        self._run_command()
+        order.refresh_from_db()
+        self.assertEqual(order.status, Order.STATUS_DELIVERED)
+
+        self._run_command()
+        order.refresh_from_db()
+        self.assertEqual(order.status, Order.STATUS_DELIVERED)
+
+    # scenario lifecycle
+    def test_order_lifecycle_new_to_cancelled(self):
+        order = self._make_order()
+        self.assertEqual(order.status, Order.STATUS_NEW)
+        self.assertTrue(order.is_cancellable)
+
+        order.status = Order.STATUS_CANCELLED
+        order.save()
+        order.refresh_from_db()
+
+        self.assertEqual(order.status, Order.STATUS_CANCELLED)
+        self.assertFalse(order.is_cancellable)
+
+        self._run_command()
+        order.refresh_from_db()
+        self.assertEqual(order.status, Order.STATUS_CANCELLED)
