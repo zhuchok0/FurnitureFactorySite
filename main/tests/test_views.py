@@ -425,7 +425,7 @@ class ViewsTestCase(TestCase):
     def test_scenario_client_creates_and_views_order(self):
         self.client.login(username='clientuser', password='clientpass')
 
-        self.client.post(reverse('add_to_cart', args=[self.furniture1.id]))
+        self.client.post(reverse('cart_add', args=[self.furniture1.id]))
 
         response = self.client.post(reverse('create_order'), {
             'furniture': self.furniture1.id,
@@ -463,7 +463,7 @@ class OrderStateTransitionTests(TestCase):
 
     def _make_order(self, status=Order.STATUS_NEW, delivery_date='today_plus_3'):
         if delivery_date == 'today_plus_3':
-            delivery_date = date.today() + relativedelta(monthes=3)
+            delivery_date = date.today() + relativedelta(months=3)
         elif delivery_date == 'today':
             delivery_date = date.today()
         elif delivery_date == 'none':
@@ -518,7 +518,7 @@ class OrderStateTransitionTests(TestCase):
 
     # scenario lificycle
     def test_order_full_lifecycle_new_to_delivered(self):
-        order = self._make_order(delivery_date='today_plus_7')
+        order = self._make_order(delivery_date='today_plus_3')
         self.assertEqual(order.status, Order.STATUS_NEW)
 
         self._run_command()
