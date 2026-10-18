@@ -1,0 +1,552 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Home - Statistics{% endblock %}
+
+<!-- <div
+    class="content-box"
+    id="main-content"
+
+    hidden
+    style="border: 1px solid #ccc; padding: 10px;"
+
+    title="title"
+    accesskey="m"
+    tabindex="0"
+
+    dir="ltr"
+    lang="en"
+
+    contenteditable="true"
+    spellcheck="true"
+    translate="no"
+
+    data-type="article"
+
+    dropzone="copy"
+    draggable="true"
+
+    itemid="https://furniturefactory.com/article/1"
+    itemprop="articleBody"
+    itemscope
+    itemref="footer-meta"
+    itemtype="https://schema.org/Article"
+
+    onclick="console.log('clicked')"
+    onfocus="console.log('focused')"
+    onload="console.log('loaded')"
+></div> -->
+
+<!-- FIGURE FIGCAPTION here -->
+<!-- A REL TARGET DOWNLOAD here -->
+{% block content %}
+    <figure>
+        <a href="#trap" target="_blank" rel="noopener noreferrer">
+            <picture>
+                <source media="(max-width: 60em)"
+                        sizes="(max-width: 30em) 100vw, 30vw"
+                        srcset="/media/add/cat2.gif 600w">
+                <source media="(max-width: 80em)"
+                        sizes="(max-width: 60em) 100vw, 50vw"
+                        srcset="/media/add/cat3.gif 1600w">
+                <img src="/media/add/cat1.gif"
+                    alt="Love kitties!">
+            </picture>
+        </a>
+        <a href="#trap" target="_blank" rel="noopener noreferrer">
+            <picture>
+                <source media="(max-width: 60em)"
+                        sizes="(max-width: 30em) 100vw, 30vw"
+                        srcset="/media/add/cat8.gif 600w">
+                <source media="(max-width: 80em)"
+                        sizes="(max-width: 60em) 100vw, 50vw"
+                        srcset="/media/add/cat5.gif 1600w">
+                <img src="/media/add/cat1.gif"
+                    alt="Love kitties!">
+            </picture>
+        </a>
+        <a href="#trap" target="_blank" rel="noopener noreferrer">
+            <picture>
+                <source media="(max-width: 60em)"
+                        sizes="(max-width: 30em) 100vw, 30vw"
+                        srcset="/media/add/cat6.gif 600w">
+                <source media="(max-width: 80em)"
+                        sizes="(max-width: 60em) 100vw, 50vw"
+                        srcset="/media/add/cat7.gif 1600w">
+                <img src="/media/add/cat1.gif"
+                    alt="Love kitties!">
+            </picture>
+        </a>
+        <figcaption>
+            To see our furniture tap on the pictures
+            <!-- <br>
+            <a href="/media/add/cat1.gif" download hreflang="eng" type="gif">
+                Download gif with cat tap here
+            </a> -->
+        </figcaption>
+    </figure>
+
+    <!-- HIDDEN here -->
+    <!-- <p hidden>Nobody can write their banes to kitties here!</p> -->
+
+    <!-- CONTENTEDITABLE and  
+     TABINDEX and
+     LANG and 
+     SPELLCHECK and 
+     TRANSLATE and 
+     DATA* and
+     here 
+     -->
+     <!-- B EM I S U STRONG SMALL SUB FONT MARK SPAN TIME here-->
+    <!-- <hr>
+    <p contenteditable="true" 
+        tabindex="1" dir="rtl" 
+        lang="en" 
+        spellcheck="true"
+        translate="yes"
+        data-kittiestype="wishies">
+        <b>Anyone</b> <em>can</em> <i>write</i> <s>well-wishings</s> <u>to</u> 
+        <strong>kitties</strong> <small>there</small> <sub>!</sub> <mark>Do it!!!</mark>
+        <span class="letter">F</span>or example at <time datetime="15:00">3 o'clock</time>
+        <font color="red" size="5" face="Arial">OR NOW</font>
+    </p>
+    <hr> -->
+
+    <!--   DFN ABBR here  -->
+    <!-- <p>
+        <dfn title="Cascading Style Sheets">CSS</dfn>
+        is used to style web pages.
+    </p>
+        <p>
+        We use <abbr title="HyperText Markup Language">HTML</abbr>
+        to structure our pages.
+    </p> -->
+
+    <!-- PRE CODE VAR SAMP KBD here -->
+     <!-- <pre>
+        <code>
+            void SayHI(){
+                std::cout << "hiiii";
+            }
+
+            int main(){
+                SayHi();
+            }
+        </code>
+        <var>I can change!</var>
+        <samp>The program just print greeting</samp>
+        <kbd>User don't nees to input anything</kbd>
+    </pre>
+    <hr> -->
+
+    <!-- PRE Q BLOCKQUOTE HR CITE here -->
+    <!-- BR WBR HR here -->
+    <!-- <hr>
+    <pre>
+        Are 
+            you 
+                ready
+                     ?
+    </pre>
+
+    <hr>
+    <blockquote cite="ME">
+        In<wbr> every<wbr> home,<wbr> a<wbr> silent<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<wbr> friend...<br>
+        A<wbr> table,<wbr> chair,<wbr> or<wbr> cabinet<wbr> tall,<br>
+        We<wbr> craft<wbr> with<wbr> love<wbr> from<wbr> start<wbr> to<wbr> end,<br>
+        To<wbr> fill<wbr> with<wbr> warmth<wbr> your<wbr> every<wbr> hall.
+    </blockquote> -->
+
+    <!-- <hr>
+    <cite>wuahahah</cite>
+
+    <hr>
+    <q cite="Arthur Miller">Fur<wbr>niture that is too clean has no lan<wbr>guage.</q>
+    <br>
+    <p>This is word of <cite>Arthur Miller</cite></p>
+    <hr>
+    
+    <button onclick="alert('hello!');">Tap me!!!</button>
+    <br><br>
+    <hr> -->
+
+    {% if latest_news %}
+    <!-- 
+     DIV P
+     CLASS and 
+     ID and 
+     STYLE and
+     DRAGGABLE DROPZONE and 
+     TITLE and
+     here -->
+    <div class="news" 
+        id="latest_news" 
+        draggable="true"
+        dropzone="copy"
+        title="LATEST NEWS"
+        style="background-color: #f0f8ff; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
+        <h2>Latest News</h2>
+        <h3>{{ latest_news.title }}</h3>
+        
+        {% if latest_news.image %}
+        <div>
+            <img src="{{ latest_news.image.url }}" 
+                alt="{{ latest_news.title }}" 
+                style="max-width: 200px; max-height: 150px;">
+        </div>
+        {% endif %}
+        
+        <p>{{ latest_news.short_content }}</p>
+        <p><small>Published: {{ latest_news.created_date }}</small></p>
+        <!-- ACCESSKEY here -->
+        <a href="{% url 'news_list' %}" accesskey="n">Read all news →</a>
+    </div>
+    {% endif %}
+
+    <!-- UL here -->
+    <h2>Furniture List (Alphabetical Order)</h2>
+    <a id="trap"></a>
+    <ul>
+        {% for item in furniture_list %}
+        <li>
+            <a href="{{ item.get_absolute_url }}">
+                {{ item.title }}
+            </a>
+            — ${{ item.price }}
+        </li>
+        {% empty %}
+        <li>No furniture</li>
+        {% endfor %}
+    </ul>
+
+    <!-- OL VALUE REVERSED here -->
+    <!-- <ol reversed>
+        <li value="1">Cat</li>
+        <li>Kitty</li>
+        <li>Hello Kitty!!!</li>
+    </ol> -->
+
+    <!-- DL DT DD here -->
+    <h2>Furniture Glossary</h2>
+    <dl>
+        <dt>Cabinet</dt>
+        <dd>
+            A piece of furniture with shelves, drawers, or doors,
+            used for storage. Usually placed in kitchens, bathrooms,
+            or living rooms.
+        </dd>
+
+        <dt>Sideboard</dt>
+        <dd>
+            A flat-topped piece of furniture used for storing
+            tableware and linens. Traditionally placed in dining rooms.
+        </dd>
+
+        <dt>Wardrobe</dt>
+        <dd>
+            A tall cabinet used for hanging clothes and storing
+            personal items. Can be freestanding or built-in.
+        </dd>
+
+        <dt>Ottoman</dt>
+        <dd>
+            A low, padded stool without a back or arms. Used as
+            a footrest, seat, or small table.
+        </dd>
+    </dl>
+
+    <!-- ITEMSCOPE ITEMTYPE ITEMID ITEMPROP ITEMREF-->
+    <!-- <hr>
+    <div itemscope
+        itemtype="https://schema.org/Product"
+        itemid="https://furniturefactory.com/products/loft-table">
+
+        <h1 itemprop="name">Loft Dining Table</h1>
+
+        <p itemprop="description">
+            Solid oak dining table with metal legs, 180 × 90 cm.
+        </p>
+
+        <p>
+            Price:
+            <span itemprop="price">1249</span>
+            <span itemprop="priceCurrency">USD</span>
+        </p>
+
+        <p>
+            Brand:
+            <span itemprop="brand"
+                itemscope
+                itemtype="https://schema.org/Brand">
+                <span itemprop="name">Furniture Factory</span>
+            </span>
+        </p>
+
+        <p>
+            Rating:
+            <span itemprop="aggregateRating"
+                itemscope
+                itemtype="https://schema.org/AggregateRating">
+                <span itemprop="ratingValue">4.8</span>
+                out of
+                <span itemprop="bestRating">5</span>
+                —
+                <span itemprop="reviewCount">120</span> reviews
+            </span>
+        </p>
+
+        <p itemprop="availability"
+        href="https://schema.org/InStock">
+            In stock
+        </p>
+
+    </div>
+
+    <div itemscope
+        itemtype="https://schema.org/Offer"
+        itemref="shipping-info warranty-info">
+
+        <p>Special offer: 10% off this week.</p>
+    </div>
+
+    <p id="shipping-info">
+        Shipping: <span itemprop="shippingDetails">Free delivery in Minsk</span>
+    </p>
+
+    <p id="warranty-info">
+        Warranty: <span itemprop="warranty">3 years</span>
+    </p> -->
+
+    <!-- ARTICLE SECTION ADDRESS DIV
+     HGROUP -->
+    <!-- <hr>
+    <article>
+        <hgroup>
+            <h2>Loft Dining Table</h2>
+            <p>Solid oak, metal legs, 180 * 90 cm</p>
+        </hgroup>
+
+        <section>
+            <h3>About this piece</h3>
+            <p>
+                A minimalist table designed for modern interiors.
+                The warm oak surface contrasts with cold steel legs,
+                creating a balance of nature and industry.
+            </p>
+        </section>
+
+        <section>
+            <h3>Where to find us</h3>
+            <address>
+                Showroom: 5 Pobediteley Ave., Minsk<br>
+                Open Mon–Sat, 10:00 – 19:00<br>
+                Phone: <a href="tel:+375291234567">+375 (29) 123-45-67</a>
+            </address>
+        </section>
+    </article> -->
+
+    <!-- TABLE TR TH TD COLUMNSPAN ROWSPAN THEAD TBODY TFOOT CAPTION here -->
+    <h2>Orders by Client</h2>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <caption>Furniture orders summary — September 2026</caption>
+
+        <thead>
+            <tr>
+                <th id="client" rowspan="2">Client</th>
+                <th id="orders" colspan="3">Orders</th>
+                <th id="total" rowspan="2">Total</th>
+            </tr>
+            <tr>
+                <th id="tables">Tables</th>
+                <th id="chairs">Chairs</th>
+                <th id="cabinets">Cabinets</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td headers="client">Acme Corp</td>
+                <td headers="orders tables">5</td>
+                <td headers="orders chairs">12</td>
+                <td headers="orders cabinets">3</td>
+                <td headers="total">$4,250</td>
+            </tr>
+            <tr>
+                <td headers="client">Nordic Home</td>
+                <td headers="orders tables">2</td>
+                <td headers="orders chairs">8</td>
+                <td headers="orders cabinets">1</td>
+                <td headers="total">$1,980</td>
+            </tr>
+            <tr>
+                <td headers="client">City Office</td>
+                <td headers="orders tables">0</td>
+                <td headers="orders chairs">20</td>
+                <td headers="orders cabinets">7</td>
+                <td headers="total">$3,140</td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="4" headers="client orders tables chairs cabinets">
+                    <strong>Grand Total</strong>
+                </td>
+                <td headers="total"><strong>$9,370</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- IFRAME here -->
+    <hr>
+<pre>video_data = {{ video_data }}</pre>
+
+{% if video_data %}
+    <h3>{{ video_data.title }}</h3>
+    <iframe width="560" height="315" 
+            src="https://www.youtube-nocookie.com/embed/{{ video_data.id }}" 
+            frameborder="0" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+    </iframe>
+{% endif %}
+
+    <hr>
+{% if client_info %}
+    <div 
+        style="background-color: #e8f5e9; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
+        <h2>🕒Timezone Information</h2>
+        <p><mark>Current timezone:</mark> {{ client_info.name }}</p>
+        <p><strong>Current date:</strong> <time>{{ client_info.current_date|date:"d/m/Y" }}</time></p>
+        <p><strong>Timezone last updated:</strong> {{ client_info.timezone_updated|date:"d/m/Y H:i" }}</p>
+        <h3>📅 Calendar for {{ client_info.current_date|date:"F Y" }}</h3>
+        {{ client_info.calendar|safe }}
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="timezone">Change timezone:</label>
+            <select name="timezone" id="timezone">
+                {% for tz in timezones %}
+                    <option value="{{ tz }}" {% if tz == client_info.name %}selected{% endif %}>{{ tz }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+{% endif %}
+
+    <!-- <hr>
+    <p>Here random text</p>
+    <div id="fish-text-container"></div>
+    <script>
+        fetch('https://fish-text.ru/get?format=html&number=5&type=sentence')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('fish-text-container').innerHTML = html;
+            })
+            .catch(error => console.error('Ошибка:', error));
+    </script>
+
+    <hr>
+    <p>Random picture her</p>
+    <img src="https://picsum.photos/200/300" alt="Random picture" />
+     -->
+    <h2>Our Partners</h2>
+    <table border="1" cellpadding="15" cellspacing="5" width="100%">
+        <tr>
+            {% for partner in partners %}
+            <td align="center" valign="middle" width="200">
+                <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ partner.logo.url }}"
+                        alt="{{ partner.name }}"
+                        width="150"
+                        height="80">
+                </a>
+                <br>
+                <strong>{{ partner.name }}</strong>
+                <br>
+                <small>
+                    <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
+                        Visit site →
+                    </a>
+                </small>
+            </td>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </tr><tr>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+
+{% if weather_info %}
+    <div class="weather-info">
+        <h3>Weather in {{ weather_info.city }}</h3>
+        <p>Temperature: {{ weather_info.temp }}°C</p>
+        <p>{{ weather_info.description }}</p>
+        <img src="http://openweathermap.org/img/w/{{ weather_info.icon }}.png" alt="weather icon">
+    </div>
+{% endif %}
+
+    <h1>Furniture Factory Dashboard</h1>
+    <h2>Clients List (Alphabetical Order)</h2>
+    <ol>
+        {% for client in clients %}
+        <li>{{ client.company_name }} - {{ client.city }}</li>
+        {% empty %}
+        <li>No clients</li>
+        {% endfor %}
+    </ol>
+
+    <h2>Total Sales</h2>
+    <p><strong>${{ total_sales|floatformat:2 }}</strong></p>
+    
+    <h2>Order Amount Statistics</h2>
+    <ul>
+        <li><strong>Mean:</strong> ${{ avg_sales|floatformat:2 }}</li>
+        <li><strong>Median:</strong> ${{ median_sales|floatformat:2 }}</li>
+        <li><strong>Mode:</strong> 
+            {% if mode_sales %}
+                ${{ mode_sales|floatformat:2 }}
+            {% else %}
+                No unique mode
+            {% endif %}
+        </li>
+    </ul>
+    
+    <h2>Client Age Statistics</h2>
+    <ul>
+        <li><strong>Mean Age:</strong> {{ avg_age|floatformat:1 }} years</li>
+        <li><strong>Median Age:</strong> {{ median_age|floatformat:1 }} years</li>
+    </ul>
+    
+    <h2>Furniture Type Analysis</h2>
+    
+    <h3>Most Popular Type</h3>
+    <p><strong>{{ most_popular_type.name|default:"No data" }}</strong> - {{ most_popular_type.order_count|default:0 }} orders</p>
+    
+    <h3>Most Profitable Type</h3>
+    <p><strong>{{ most_profitable_type.name|default:"No data" }}</strong> - ${{ most_profitable_type.total_revenue|default:0|floatformat:2 }}</p>
+    
+    <h3>Detailed Statistics by Type:</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Number of Orders</th>
+                <th>Total Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for type in all_types_stats %}
+            <tr>
+                <td>{{ type.name }}</td>
+                <td>{{ type.order_count }}</td>
+                <td>${{ type.revenue|floatformat:2 }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No data</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
