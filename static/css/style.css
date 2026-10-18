@@ -179,43 +179,45 @@ q::after  { content: close-quote; }
 
 
 
-main ul li:first-child {
+.furniture-list li:first-child {
     border-top: 2px solid #068b73;
 }
-main ul li:last-child {
+
+.furniture-list li:last-child {
     border-bottom: 2px solid #068b73;
 }
-main ul li:nth-child(5n) {
+
+.furniture-list li:nth-child(5n) {
     list-style-type: "⭐ ";
 }
 
 
 
-table {
+.furniture-table {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 20px;
 }
-th, td {
+.furniture-table th, .furniture-table td {
     padding: 8px 10px;
     border: 1px solid #ddd;
 }
-caption {
+.furniture-table caption {
     font-weight: bold;
     padding: 10px;
     text-align: left;
     color: #068b73;
 }
-thead th, tfoot td {
+.furniture-table thead th, .furniture-table tfoot td {
     background-color: #068b73;
     color: white;
     font-weight: bold;
     padding: 8px 10px;
 }
-table tbody tr:nth-child(odd) td {
+.furniture-table tbody tr:nth-child(odd) td {
     background-color: #99caf2;
 }
-table tbody tr:nth-child(even) td {
+.furniture-table tbody tr:nth-child(even) td {
     background-color: #e5e6aa;
 }
 

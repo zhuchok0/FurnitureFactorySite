@@ -83,7 +83,8 @@
         {% if latest_news.image %}
         <div>
             <img src="{{ latest_news.image.url }}" 
-                alt="{{ latest_news.title }}">
+                alt="{{ latest_news.title }}"
+                class="news-image">
         </div>
         {% endif %}
         
@@ -95,7 +96,7 @@
 
     <h2>Furniture List (Alphabetical Order)</h2>
     <a id="trap"></a>
-    <ul>
+    <ul class="furniture-list">
         {% for item in furniture_list %}
         <li>
             <a href="{{ item.get_absolute_url }}">
@@ -137,7 +138,7 @@
     </dl>
 
     <h2>Orders by Client</h2>
-    <table>
+    <table class="furniture-table">
         <caption>Furniture orders summary — September 2026</caption>
 
         <thead>
@@ -187,8 +188,6 @@
         </tfoot>
     </table>
 
-    <hr>
-    <pre>video_data = {{ video_data }}</pre>
 
     {% if video_data %}
         <h3>{{ video_data.title }}</h3>
