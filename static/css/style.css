@@ -5,8 +5,8 @@
 }
 
 body {
-    background-color: #aee9db;
-    /* background-image: url('../images/background_image.jpg'); */
+    background-color: #dbfff7;
+    background-image: url('../images/background_image.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -14,10 +14,12 @@ body {
 
     font-family: Arial, Helvetica, sans-serif;
     color: #333333;
+
+    margin: 0;
 }
 
 button:hover {
-    cursor: grab;
+    cursor: pointer;
 }
 
 a:link {
@@ -46,7 +48,8 @@ a:focus {
 /* --------------------------HEADER NAV--------------------------*/
 header {
     background-color: #e5e6aa;
-    padding: 10px 20px;
+    padding: 5px 20px;     
+    margin-bottom: 5px;
 
     position: sticky;
     top: 0;
@@ -55,33 +58,99 @@ header {
 
 .main-nav {
     background-color: #99caf2;
-    padding: 10px 20px;
-
+    padding: 5px 15px;    
     display: flex;
     align-items: center;
     gap: 20px;
+    border-radius: 8px;
+}
+
+.main-nav a, aside a{
+    display: block;
+    padding:2px 6px;
+    background-color: #ffffff;
+    border-radius: 7px;
+}
+
+.main-nav .logo {
+    background-color: transparent;
+    padding: 0;
+}
+
+.main-nav .logo img {
+    max-width: none;
+    height: 30px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.nav-auth {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-user {
+    font-size: 14px;
+    color: #004f35;
+    font-weight: 500;
+}
+
+.nav-auth button {
+    padding: 2px 8px;
+    background-color: #ffffff;
+    border: 1px solid #99caf2;
+    border-radius: 7px;
+    transition: background-color 0.2s;
+}
+
+.nav-auth button:hover {
+    background-color: #e5e6aa;
 }
 
 /* --------------------------SIDEBAR--------------------------*/
 aside {
-    background: linear-gradient(180deg, #fca1ca 0%, #ffc898 100%);
+    background: linear-gradient(180deg, #99caf2 0%, #e5e6aa 100%);
 
-    padding: 20px;
+    padding: 10px;
+    margin: 5px;
     border-radius: 8px;
-    color: #980268;
+
+    float: left;
+    width: 120px;
+
+    position: sticky;
+    top: 67px;
+    z-index: 100;
 }
 
 aside ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 15px 0;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+aside li {
+    margin-bottom: 3px;
 }
 
 
 /* --------------------------MAIN CONTENT--------------------------*/
-/* main { ... }
-h1, h2, h3 { ... }
-p { ... } */
+main {
+    margin-left: 130px;
+    margin-right: 5px;
+    margin-bottom: 5px; 
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 10px 10px;
+}
+/* p { ... } */
+
+h1 { font-size: 32px; }
+h2 { font-size: 26px; }
+h3 { font-size: 20px; }
 
 /* --------------------------TABLES--------------------------*/
 /* table { ... }
@@ -93,8 +162,15 @@ th, td { ... } */
 /* --------------------------FOOTER--------------------------*/
 footer {
     background-color: #fdffb6;
-    padding: 10px 20px;
+    margin-top: 5px;
+    padding: 10px;   
     font-size: 14px;
+
+    clear: both;
+}
+
+footer p {
+    margin: 0;
 }
 
 /* --------------------------LINKS--------------------------*/
@@ -104,3 +180,97 @@ a:hover { ... } */
 /* -------------------------- UTILITY CLASSES--------------------------*/
 /* .hidden { display: none; }
 .text-center { text-align: center; } */
+
+/* -------------------------- RESPONSIVE -------------------------- */
+
+/* Картинки и медиа — всегда */
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+p, li, a {
+    overflow-wrap: break-word;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 1000px) {
+    .main-nav {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .main-nav a { font-size: 14px; padding: 2px 4px; }
+    aside { width: 100px; top: 60px; }
+    main { margin-left: 110px; }
+}
+
+@media (max-width: 768px) {
+     body {
+        background-attachment: scroll;
+    }
+
+    aside {
+        float: none;
+        width: auto;
+        position: static;
+    }
+    aside ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    aside li { margin-bottom: 0; }
+
+    main { margin-left: 5px; }
+
+    h1 { font-size: 24px; }
+    h2 { font-size: 20px; }
+    h3 { font-size: 17px; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="number"],
+    input[type="search"],
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="time"],
+    input[type="month"],
+    textarea,
+    select {
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        position: static;
+    }
+
+    .main-nav { gap: 4px; padding: 4px 6px; }
+    .main-nav a { font-size: 12px; padding: 1px 4px; }
+
+    .nav-user { display: none; }
+    .nav-auth button { font-size: 12px; padding: 1px 6px; }
+
+    h1 { font-size: 20px; }
+    h2 { font-size: 18px; }
+
+    main, aside { margin: 3px; padding: 8px; }
+
+    aside ul { display: block; }
+    aside li { margin-bottom: 3px; }
+
+    button, .main-nav a, aside a {
+        min-height: 32px;
+        line-height: 32px;
+        padding: 0 8px;
+    }
+}
