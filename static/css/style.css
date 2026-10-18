@@ -22,6 +22,8 @@ button {
     cursor: pointer;
 }
 
+/* --------------------------LINKS--------------------------*/
+
 a:link {
     color: #068b73;
     text-decoration: none;
@@ -150,6 +152,8 @@ h1 { font-size: 32px; }
 h2 { font-size: 26px; }
 h3 { font-size: 20px; }
 
+
+
 q {
     quotes: "\201C" "\201D" "\2018" "\2019";
 }
@@ -173,9 +177,47 @@ q::after  { content: close-quote; }
     quotes: "「" "」" "『" "』";
 }
 
-/* --------------------------TABLES--------------------------*/
-/* table { ... }
-th, td { ... } */
+
+
+main ul li:first-child {
+    border-top: 2px solid #068b73;
+}
+main ul li:last-child {
+    border-bottom: 2px solid #068b73;
+}
+main ul li:nth-child(5n) {
+    list-style-type: "⭐ ";
+}
+
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+th, td {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+}
+caption {
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+    color: #068b73;
+}
+thead th, tfoot td {
+    background-color: #068b73;
+    color: white;
+    font-weight: bold;
+    padding: 8px 10px;
+}
+table tbody tr:nth-child(odd) td {
+    background-color: #99caf2;
+}
+table tbody tr:nth-child(even) td {
+    background-color: #e5e6aa;
+}
 
 /* --------------------------FORMS--------------------------*/
 /* input, select, textarea, button { ... } */
@@ -193,10 +235,6 @@ footer {
 footer > p {
     margin: 0;
 }
-
-/* --------------------------LINKS--------------------------*/
-/* a { ... }
-a:hover { ... } */
 
 /* -------------------------- UTILITY CLASSES--------------------------*/
 /* .hidden { display: none; }
@@ -293,4 +331,27 @@ p, li, a {
         line-height: 32px;
         padding: 0 8px;
     }
+}
+
+/* -------------------------- NEWS -------------------------- */
+
+.news {
+    background-color: #f0f8ff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid #4CAF50;
+}
+
+.news-image {
+    max-width: 200px;
+    max-height: 150px;
+}
+
+/* -------------------------- TIMEZONE -------------------------- */
+
+.timezone-info {
+    background-color: #e8f5e9;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid #4CAF50;
 }
