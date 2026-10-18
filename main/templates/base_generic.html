@@ -29,7 +29,7 @@
         <div class="nav-auth">
             {% if user.is_authenticated %}
                 <span class="nav-user">{{ user.get_username }}</span>
-                <form action="{% url 'logout' %}" method="post" class="nav-logout-form">
+                <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Logout</button>
                 </form>
@@ -42,7 +42,6 @@
     </header>
     <aside>
         <ul>
-            <!-- <li><br></li> -->
             <li><a href="{% url 'promocodes_list' %}">Promo Codes</a></li>
             <li><a href="{% url 'catalog' %}">Catalog</a></li>
             <li><a href="{%url 'form_demo' %}">Demo form</a></li>

@@ -18,7 +18,7 @@ body {
     margin: 0;
 }
 
-button:hover {
+button {
     cursor: pointer;
 }
 
@@ -125,11 +125,10 @@ aside {
     z-index: 100;
 }
 
-aside ul {
+aside > ul {
     list-style: none;
     padding: 0;
-    margin-bottom: 3px;
-    margin-top: 3px;
+    margin: 3px 0;
 }
 
 aside li {
@@ -146,11 +145,33 @@ main {
     border-radius: 15px;
     padding: 10px 10px;
 }
-/* p { ... } */
 
 h1 { font-size: 32px; }
 h2 { font-size: 26px; }
 h3 { font-size: 20px; }
+
+q {
+    quotes: "\201C" "\201D" "\2018" "\2019";
+}
+q::before { content: open-quote; }
+q::after  { content: close-quote; }
+
+:lang(ru) q,
+:lang(uk) q {
+    quotes: "«" "»" "„" "“";
+}
+
+:lang(pl) q {
+    quotes: "„" "“" "«" "»";
+}
+
+:lang(it) q {
+    quotes: "«" "»" "\201C" "\201D";
+}
+
+:lang(zh) q {
+    quotes: "「" "」" "『" "』";
+}
 
 /* --------------------------TABLES--------------------------*/
 /* table { ... }
@@ -169,7 +190,7 @@ footer {
     clear: both;
 }
 
-footer p {
+footer > p {
     margin: 0;
 }
 
@@ -238,9 +259,8 @@ p, li, a {
     input[type="url"],
     input[type="number"],
     input[type="search"],
-    input[type="date"],
-    input[type="datetime-local"],
-    input[type="time"],
+    input[type^="date"],
+    input[type$="time"],
     input[type="month"],
     textarea,
     select {
