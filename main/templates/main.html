@@ -2,7 +2,7 @@
 
 {% block title %}Home - Statistics{% endblock %}
 
-<div
+<!-- <div
     class="content-box"
     id="main-content"
 
@@ -34,13 +34,13 @@
     onclick="console.log('clicked')"
     onfocus="console.log('focused')"
     onload="console.log('loaded')"
-></div>
+></div> -->
 
 <!-- FIGURE FIGCAPTION here -->
 <!-- A REL TARGET DOWNLOAD here -->
 {% block content %}
     <figure>
-        <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
+        <a href="#trap" target="_blank" rel="noopener noreferrer">
             <picture>
                 <source media="(max-width: 60em)"
                         sizes="(max-width: 30em) 100vw, 30vw"
@@ -52,7 +52,7 @@
                     alt="Love kitties!">
             </picture>
         </a>
-        <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
+        <a href="#trap" target="_blank" rel="noopener noreferrer">
             <picture>
                 <source media="(max-width: 60em)"
                         sizes="(max-width: 30em) 100vw, 30vw"
@@ -64,7 +64,7 @@
                     alt="Love kitties!">
             </picture>
         </a>
-        <a href="https://cats.com/" target="_blank" rel="noopener noreferrer">
+        <a href="#trap" target="_blank" rel="noopener noreferrer">
             <picture>
                 <source media="(max-width: 60em)"
                         sizes="(max-width: 30em) 100vw, 30vw"
@@ -76,18 +76,17 @@
                     alt="Love kitties!">
             </picture>
         </a>
-<!-- A href="#" and download type hreflang here -->
         <figcaption>
             To see our furniture tap here: <a href="#trap">open</a>
-            <br>
+            <!-- <br>
             <a href="/media/add/cat1.gif" download hreflang="eng" type="gif">
                 Download gif with cat tap here
-            </a>
+            </a> -->
         </figcaption>
     </figure>
 
     <!-- HIDDEN here -->
-    <p hidden>Nobody can write their banes to kitties here!</p>
+    <!-- <p hidden>Nobody can write their banes to kitties here!</p> -->
 
     <!-- CONTENTEDITABLE and  
      TABINDEX and
@@ -98,7 +97,7 @@
      here 
      -->
      <!-- B EM I S U STRONG SMALL SUB FONT MARK SPAN TIME here-->
-    <hr>
+    <!-- <hr>
     <p contenteditable="true" 
         tabindex="1" dir="rtl" 
         lang="en" 
@@ -110,20 +109,20 @@
         <span class="letter">F</span>or example at <time datetime="15:00">3 o'clock</time>
         <font color="red" size="5" face="Arial">OR NOW</font>
     </p>
-    <hr>
+    <hr> -->
 
     <!--   DFN ABBR here  -->
-    <p>
+    <!-- <p>
         <dfn title="Cascading Style Sheets">CSS</dfn>
         is used to style web pages.
     </p>
         <p>
         We use <abbr title="HyperText Markup Language">HTML</abbr>
         to structure our pages.
-    </p>
+    </p> -->
 
     <!-- PRE CODE VAR SAMP KBD here -->
-     <pre>
+     <!-- <pre>
         <code>
             void SayHI(){
                 std::cout << "hiiii";
@@ -137,11 +136,11 @@
         <samp>The program just print greeting</samp>
         <kbd>User don't nees to input anything</kbd>
     </pre>
-    <hr>
+    <hr> -->
 
     <!-- PRE Q BLOCKQUOTE HR CITE here -->
     <!-- BR WBR HR here -->
-    <hr>
+    <!-- <hr>
     <pre>
         Are 
             you 
@@ -155,9 +154,9 @@
         A<wbr> table,<wbr> chair,<wbr> or<wbr> cabinet<wbr> tall,<br>
         We<wbr> craft<wbr> with<wbr> love<wbr> from<wbr> start<wbr> to<wbr> end,<br>
         To<wbr> fill<wbr> with<wbr> warmth<wbr> your<wbr> every<wbr> hall.
-    </blockquote>
+    </blockquote> -->
 
-    <hr>
+    <!-- <hr>
     <cite>wuahahah</cite>
 
     <hr>
@@ -166,10 +165,9 @@
     <p>This is word of <cite>Arthur Miller</cite></p>
     <hr>
     
-    <!-- ONCLICK here -->
     <button onclick="alert('hello!');">Tap me!!!</button>
     <br><br>
-    <hr>
+    <hr> -->
 
     {% if latest_news %}
     <!-- 
@@ -221,11 +219,11 @@
     </ul>
 
     <!-- OL VALUE REVERSED here -->
-    <ol reversed>
+    <!-- <ol reversed>
         <li value="1">Cat</li>
         <li>Kitty</li>
         <li>Hello Kitty!!!</li>
-    </ol>
+    </ol> -->
 
     <!-- DL DT DD here -->
     <h2>Furniture Glossary</h2>
@@ -257,7 +255,7 @@
     </dl>
 
     <!-- ITEMSCOPE ITEMTYPE ITEMID ITEMPROP ITEMREF-->
-    <hr>
+    <!-- <hr>
     <div itemscope
         itemtype="https://schema.org/Product"
         itemid="https://furniturefactory.com/products/loft-table">
@@ -316,11 +314,11 @@
 
     <p id="warranty-info">
         Warranty: <span itemprop="warranty">3 years</span>
-    </p>
+    </p> -->
 
     <!-- ARTICLE SECTION ADDRESS DIV
      HGROUP -->
-    <hr>
+    <!-- <hr>
     <article>
         <hgroup>
             <h2>Loft Dining Table</h2>
@@ -344,7 +342,7 @@
                 Phone: <a href="tel:+375291234567">+375 (29) 123-45-67</a>
             </address>
         </section>
-    </article>
+    </article> -->
 
     <!-- TABLE TR TH TD COLUMNSPAN ROWSPAN THEAD TBODY TFOOT CAPTION here -->
     <h2>Orders by Client</h2>
@@ -436,7 +434,7 @@
     </div>
 {% endif %}
 
-    <hr>
+    <!-- <hr>
     <p>Here random text</p>
     <div id="fish-text-container"></div>
     <script>
@@ -451,7 +449,7 @@
     <hr>
     <p>Random picture her</p>
     <img src="https://picsum.photos/200/300" alt="Random picture" />
-    
+     -->
     <h2>Our Partners</h2>
     <table border="1" cellpadding="15" cellspacing="5" width="100%">
         <tr>
