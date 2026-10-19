@@ -12,7 +12,7 @@ body {
     background-attachment: fixed;
     background-position: center;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
     color: #333333;
 
     margin: 0;
@@ -148,17 +148,21 @@ main {
     padding: 10px 10px;
 }
 
+/* --- text --- */
+
 h1 { font-size: 32px; }
 h2 { font-size: 26px; }
 h3 { font-size: 20px; }
 
-
-
 q {
     quotes: "\201C" "\201D" "\2018" "\2019";
 }
-q::before { content: open-quote; }
-q::after  { content: close-quote; }
+q::before { 
+    content: open-quote; 
+}
+q::after  { 
+    content: close-quote; 
+}
 
 :lang(ru) q,
 :lang(uk) q {
@@ -179,6 +183,215 @@ q::after  { content: close-quote; }
 
 
 
+p.quote-fragment1::first-line {
+    font-weight: bold;
+    color: #044f35;
+}
+
+p.quote-fragment1::before {
+    content: " ✓";
+    color: #068b73;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+p.quote-fragment1::after {
+    content: " ✓";
+    color: #068b73;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+p.quote-fragment2::first-letter {
+    font-size: 3em;
+    font-weight: bold;
+    color: #068b73;
+}
+
+p.quote-fragment2::selection {
+    background-color: #05ffb8;
+    color: #e21bc7;
+}
+
+/* --- image gallery (figure) --- */
+
+figure {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+    padding: 0;
+}
+
+/* Каждая картинка — одинаковая плитка */
+figure > a {
+    display: block;
+    aspect-ratio: 4 / 3;              /* ← одинаковая пропорция */
+    overflow: hidden;                 /* ← обрезает лишнее */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+figure > a:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+figure > a picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+figure > a img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;                /* ← вписать, обрезая лишнее */
+    object-position: center;
+}
+
+/* Подпись — под всеми картинками */
+figure figcaption {
+    grid-column: 1 / -1;              /* ← на всю ширину */
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* --- typography demo --- */
+
+.typography-demo {
+    max-width: 800px;
+    margin: 30px auto 40px;
+    padding: 30px 40px;
+    border-radius: 12px;
+
+    position: relative;    /* ← включает position */
+    top: 5px;
+    left: 5px;
+}
+
+/* Контейнер — очищает float */
+.cards {
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+/* Карточки — float: left */
+.card {
+    float: left;
+    width: 48%;
+    margin-right: 4%;
+    position: relative;
+    padding: 15px 15px 45px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    line-height: 1.7;
+}
+
+/* Вторая карточка — без правого отступа */
+.card:last-child {
+    margin-right: 0;
+}
+
+.badge {
+    position: absolute;
+    bottom: 12px;
+    left: 15px;
+    padding: 3px 12px;
+    background-color: #068b73;
+    color: #ffffff;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Заголовки --- */
+.typography-demo h2,
+.typography-demo h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #003322;
+    margin-top: 25px;
+    margin-bottom: 12px;
+}
+
+/* text-transform — ЗАГЛАВНЫЕ */
+.text-uppercase {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #068b73;
+}
+
+/* text-transform — Капитель для заголовков */
+.text-smallcaps {
+    text-transform: capitalize;
+    font-variant: small-caps;
+    letter-spacing: 2px;
+}
+
+.typography-demo p {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;                 /* межстрочный интервал */
+    color: #333333;
+    margin-bottom: 15px;              /* отступ между абзацами */
+}
+
+/* Красная строка — отступ первой строки */
+.body-text {
+    text-indent: 2em;
+}
+
+/* Вводный абзац — крупнее, без отступа */
+.lead-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #004f35;
+    font-style: italic;
+    text-indent: 0;
+    padding: 12px 16px;
+    border-left: 4px solid #068b73;
+    background-color: #f0f8ff;
+}
+
+/* Выравнивание по ширине */
+.aligned-justify {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;                    /* перенос слов */
+}
+
+/* --- Интервалы между словами и символами --- */
+.typography-demo h2 {
+    word-spacing: 4px;
+}
+
+.typography-demo h3 {
+    word-spacing: 2px;
+}
+
+/* --- Перенос и разрыв слов --- */
+.long-word-demo {
+    overflow-wrap: break-word;        /* разрыв длинных слов */
+    word-break: break-word;           /* старые браузеры */
+    hyphens: auto;                    /* автоматические переносы */
+}
+
+/* --- list --- */
+
+main ul.furniture-list {
+    list-style-type: "★ ";
+    padding-left: 30px;
+}
+
 .furniture-list li:first-child {
     border-top: 2px solid #068b73;
 }
@@ -191,7 +404,7 @@ q::after  { content: close-quote; }
     list-style-type: "⭐ ";
 }
 
-
+/* --- table --- */
 
 .furniture-table {
     border-collapse: collapse;
@@ -221,6 +434,76 @@ q::after  { content: close-quote; }
     background-color: #e5e6aa;
 }
 
+/* -------------------------- PARTNERS -------------------------- */
+
+.partners {
+    margin: 20px 0;
+    display: flow-root;
+}
+
+.partner {
+    float: left;
+    width: 180px;
+    height: 180px;                   /* ← равные → круг */
+    margin: 10px;
+    padding: 15px;
+
+    background-color: #f0f8ff;
+    border: 2px solid #068b73;       /* тип границы — solid */
+    border-radius: 50%;              /* ← круг */
+
+    box-shadow: 0 6px 16px rgba(6, 139, 115, 0.25);
+
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.partner:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(6, 139, 115, 0.4);
+}
+
+.partner img {
+    max-width: 80px;
+    max-height: 50px;
+    object-fit: contain;
+}
+
+.partner-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px;
+    letter-spacing: 1.2px;           /* кернинг */
+    color: #003322;
+    line-height: 1.2;
+}
+
+.partner-link {
+    font-size: 11px;
+    color: #068b73;
+}
+
+/* Сброс для мобильных — карточки друг под другом */
+@media (max-width: 480px) {
+    .partner {
+        float: none;
+        margin: 10px auto;
+    }
+
+    .card {
+        float: none;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
 /* --------------------------FORMS--------------------------*/
 /* input, select, textarea, button { ... } */
 
@@ -241,6 +524,45 @@ footer > p {
 /* -------------------------- UTILITY CLASSES--------------------------*/
 /* .hidden { display: none; }
 .text-center { text-align: center; } */
+
+/* -------------------------- NEWS -------------------------- */
+
+.news {
+    background-color: #f0f8ff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid #4CAF50;
+    position: relative;   
+}
+
+.news-badge {
+    position: absolute;          /* ← вырывается из потока */
+    top: 10px;
+    right: 10px;
+    padding: 4px 12px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.news-image {
+    max-width: 200px;
+    max-height: 150px;
+}
+
+/* -------------------------- TIMEZONE -------------------------- */
+
+.timezone-info {
+    background-color: #e8f5e9;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid #4CAF50;
+}
 
 /* -------------------------- RESPONSIVE -------------------------- */
 
@@ -292,6 +614,24 @@ p, li, a {
     h2 { font-size: 20px; }
     h3 { font-size: 17px; }
 
+    .typography-demo {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .typography-demo h2 {
+        font-size: 24px;
+        letter-spacing: 1px;
+    }
+
+    .typography-demo h3 {
+        font-size: 18px;
+    }
+
+    .body-text {
+        text-indent: 1em;
+    }
+
     input[type="text"],
     input[type="email"],
     input[type="password"],
@@ -333,27 +673,4 @@ p, li, a {
         line-height: 32px;
         padding: 0 8px;
     }
-}
-
-/* -------------------------- NEWS -------------------------- */
-
-.news {
-    background-color: #f0f8ff;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-left: 4px solid #4CAF50;
-}
-
-.news-image {
-    max-width: 200px;
-    max-height: 150px;
-}
-
-/* -------------------------- TIMEZONE -------------------------- */
-
-.timezone-info {
-    background-color: #e8f5e9;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-left: 4px solid #4CAF50;
 }

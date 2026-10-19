@@ -29,16 +29,82 @@
         正如俗话所说，<q>质量不是一种行为，而是一种习惯。</q>
     </p>
 
+    <p class="quote-fragment1">
+        Professional designers and local craftsmen turn selected timber into elegant home furniture. Seamless combination of modern machinery and traditional carpentry delivers lasting comfort for every living space.
+    </p>
+
+    <p class="quote-fragment2">
+        Professional designers and local craftsmen turn selected timber into elegant home furniture. Seamless combination of modern machinery and traditional carpentry delivers lasting comfort for every living space.
+    </p>
+
+    <article class="typography-demo">
+        <h2 class="text-uppercase">The Art of Furniture</h2>
+
+        <p class="lead-text">
+            Furniture is more than wood and fabric. It is the silent architect
+            of our daily life — the table where families gather, the chair
+            that holds a reader for hours, the wardrobe that keeps memories
+            safe.
+        </p>
+
+        <h3 class="text-smallcaps">A Brief History</h3>
+
+        <p class="body-text">
+            For centuries, craftsmen have shaped timber, metal, and glass into
+            objects of comfort. From ancient Egyptian stools to Scandinavian
+            minimalism, every era brought its own philosophy of form and
+            function. Modern workshops combine traditional joinery with
+            precision machinery.
+        </p>
+
+        <h3 class="text-smallcaps">Materials We Use</h3>
+
+        <p class="body-text">
+            Oak, walnut, ash, and pine form the backbone of our collection.
+            Each species brings a unique grain, density, and color. We finish
+            every surface with natural oils that protect the wood while
+            letting it breathe.
+        </p>
+
+        <p class="long-word-demo">
+            Our catalogue includes a supercalifragilisticexpialidocious
+            selection of modular shelving systems and extra-long-named
+            designer collections that deserve careful reading.
+        </p>
+
+        <h3 class="text-smallcaps">Our Promise</h3>
+
+        <p class="body-text aligned-justify">
+            Every piece leaves our workshop after thirty quality checks.
+            We measure, sand, oil, and inspect each joint by hand. If it
+            does not feel right in our hands, it will not feel right in
+            your home.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Oak</h3>
+                <p>Dense, durable, perfect for tables.</p>
+                <span class="badge">Popular</span>
+            </div>
+            <div class="card">
+                <h3>Pine</h3>
+                <p>Light, affordable, good for bedrooms.</p>
+                <span class="badge">New</span>
+            </div>
+        </div>
+    </article>
+
     <figure>
         <a href="#trap" target="_blank" rel="noopener noreferrer">
             <picture>
                 <source media="(max-width: 60em)"
                         sizes="(max-width: 30em) 100vw, 30vw"
-                        srcset="/media/add/cat2.gif 600w">
+                        srcset="/media/add/design2.jpeg 600w">
                 <source media="(max-width: 80em)"
                         sizes="(max-width: 60em) 100vw, 50vw"
-                        srcset="/media/add/cat3.gif 1600w">
-                <img src="/media/add/cat1.gif"
+                        srcset="/media/add/design1.jpg 1600w">
+                <img src="/media/add/design4.webp"
                     alt="Love kitties!">
             </picture>
         </a>
@@ -46,11 +112,11 @@
             <picture>
                 <source media="(max-width: 60em)"
                         sizes="(max-width: 30em) 100vw, 30vw"
-                        srcset="/media/add/cat8.gif 600w">
+                        srcset="/media/add/design3.jpg 600w">
                 <source media="(max-width: 80em)"
                         sizes="(max-width: 60em) 100vw, 50vw"
-                        srcset="/media/add/cat5.gif 1600w">
-                <img src="/media/add/cat1.gif"
+                        srcset="/media/add/design9.jpg 1600w">
+                <img src="/media/add/design5.webp"
                     alt="Love kitties!">
             </picture>
         </a>
@@ -58,11 +124,11 @@
             <picture>
                 <source media="(max-width: 60em)"
                         sizes="(max-width: 30em) 100vw, 30vw"
-                        srcset="/media/add/cat6.gif 600w">
+                        srcset="/media/add/design7.jpg 600w">
                 <source media="(max-width: 80em)"
                         sizes="(max-width: 60em) 100vw, 50vw"
-                        srcset="/media/add/cat7.gif 1600w">
-                <img src="/media/add/cat1.gif"
+                        srcset="/media/add/design8.jpg 1600w">
+                <img src="/media/add/design6.jpg"
                     alt="Love kitties!">
             </picture>
         </a>
@@ -77,6 +143,7 @@
         draggable="true"
         dropzone="copy"
         title="LATEST NEWS">
+        <span class="news-badge">Latest</span>
         <h2>Latest News</h2>
         <h3>{{ latest_news.title }}</h3>
         
@@ -109,91 +176,64 @@
         {% endfor %}
     </ul>
 
-    <h2>Furniture Glossary</h2>
-    <dl>
-        <dt>Cabinet</dt>
-        <dd>
-            A piece of furniture with shelves, drawers, or doors,
-            used for storage. Usually placed in kitchens, bathrooms,
-            or living rooms.
-        </dd>
-
-        <dt>Sideboard</dt>
-        <dd>
-            A flat-topped piece of furniture used for storing
-            tableware and linens. Traditionally placed in dining rooms.
-        </dd>
-
-        <dt>Wardrobe</dt>
-        <dd>
-            A tall cabinet used for hanging clothes and storing
-            personal items. Can be freestanding or built-in.
-        </dd>
-
-        <dt>Ottoman</dt>
-        <dd>
-            A low, padded stool without a back or arms. Used as
-            a footrest, seat, or small table.
-        </dd>
-    </dl>
-
     <h2>Orders by Client</h2>
-    <table class="furniture-table">
-        <caption>Furniture orders summary — September 2026</caption>
+    <div class="table-wrapper">
+        <table class="furniture-table">
+            <caption>Furniture orders summary — September 2026</caption>
 
-        <thead>
-            <tr>
-                <th id="client" rowspan="2">Client</th>
-                <th id="orders" colspan="3">Orders</th>
-                <th id="total" rowspan="2">Total</th>
-            </tr>
-            <tr>
-                <th id="tables">Tables</th>
-                <th id="chairs">Chairs</th>
-                <th id="cabinets">Cabinets</th>
-            </tr>
-        </thead>
+            <thead>
+                <tr>
+                    <th id="client" rowspan="2">Client</th>
+                    <th id="orders" colspan="3">Orders</th>
+                    <th id="total" rowspan="2">Total</th>
+                </tr>
+                <tr>
+                    <th id="tables">Tables</th>
+                    <th id="chairs">Chairs</th>
+                    <th id="cabinets">Cabinets</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            <tr>
-                <td headers="client">Acme Corp</td>
-                <td headers="orders tables">5</td>
-                <td headers="orders chairs">12</td>
-                <td headers="orders cabinets">3</td>
-                <td headers="total">$4,250</td>
-            </tr>
-            <tr>
-                <td headers="client">Nordic Home</td>
-                <td headers="orders tables">2</td>
-                <td headers="orders chairs">8</td>
-                <td headers="orders cabinets">1</td>
-                <td headers="total">$1,980</td>
-            </tr>
-            <tr>
-                <td headers="client">City Office</td>
-                <td headers="orders tables">0</td>
-                <td headers="orders chairs">20</td>
-                <td headers="orders cabinets">7</td>
-                <td headers="total">$3,140</td>
-            </tr>
-        </tbody>
+            <tbody>
+                <tr>
+                    <td headers="client">Acme Corp</td>
+                    <td headers="orders tables">5</td>
+                    <td headers="orders chairs">12</td>
+                    <td headers="orders cabinets">3</td>
+                    <td headers="total">$4,250</td>
+                </tr>
+                <tr>
+                    <td headers="client">Nordic Home</td>
+                    <td headers="orders tables">2</td>
+                    <td headers="orders chairs">8</td>
+                    <td headers="orders cabinets">1</td>
+                    <td headers="total">$1,980</td>
+                </tr>
+                <tr>
+                    <td headers="client">City Office</td>
+                    <td headers="orders tables">0</td>
+                    <td headers="orders chairs">20</td>
+                    <td headers="orders cabinets">7</td>
+                    <td headers="total">$3,140</td>
+                </tr>
+            </tbody>
 
-        <tfoot>
-            <tr>
-                <td colspan="4" headers="client orders tables chairs cabinets">
-                    <strong>Grand Total</strong>
-                </td>
-                <td headers="total"><strong>$9,370</strong></td>
-            </tr>
-        </tfoot>
-    </table>
+            <tfoot>
+                <tr>
+                    <td colspan="4" headers="client orders tables chairs cabinets">
+                        <strong>Grand Total</strong>
+                    </td>
+                    <td headers="total"><strong>$9,370</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 
 
     {% if video_data %}
         <h3>{{ video_data.title }}</h3>
         <iframe width="560" height="315" 
-                src="https://www.youtube-nocookie.com/embed/{{ video_data.id }}" 
-                frameborder="0" 
+                src="https://www.youtube-nocookie.com/embed/{{ video_data.id }}"
                 referrerpolicy="strict-origin-when-cross-origin" 
                 allowfullscreen>
         </iframe>
@@ -223,31 +263,26 @@
     {% endif %}
 
     <h2>Our Partners</h2>
-    <table>
-        <tr>
-            {% for partner in partners %}
-            <td>
-                <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
-                    <img src="{{ partner.logo.url }}"
-                        alt="{{ partner.name }}"
-                        width="150"
-                        height="80">
-                </a>
-                <br>
-                <strong>{{ partner.name }}</strong>
-                <br>
-                <small>
-                    <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
-                        Visit site →
-                    </a>
-                </small>
-            </td>
-            {% if forloop.counter|divisibleby:3 and not forloop.last %}
-        </tr><tr>
-            {% endif %}
-            {% endfor %}
-        </tr>
-    </table>
+
+    <div class="partners">
+        {% for partner in partners %}
+        <div class="partner">
+            <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
+                <img src="{{ partner.logo.url }}"
+                    alt="{{ partner.name }}">
+            </a>
+            <strong class="partner-name">{{ partner.name }}</strong>
+            <a class="partner-link"
+            href="{{ partner.website }}"
+            target="_blank"
+            rel="noopener noreferrer">
+                Visit site →
+            </a>
+        </div>
+        {% empty %}
+        <p>No partners yet.</p>
+        {% endfor %}
+    </div>
 
     {% if weather_info %}
         <div class="weather-info">
@@ -258,7 +293,7 @@
         </div>
     {% endif %}
 
-    <h1>Furniture Factory Dashboard</h1>
+    <h2>Furniture Factory Dashboard</h2>
     <h2>Clients List (Alphabetical Order)</h2>
     <ol>
         {% for client in clients %}
@@ -299,26 +334,28 @@
     <p><strong>{{ most_profitable_type.name|default:"No data" }}</strong> - ${{ most_profitable_type.total_revenue|default:0|floatformat:2 }}</p>
     
     <h3>Detailed Statistics by Type:</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Type</th>
-                <th>Number of Orders</th>
-                <th>Total Revenue</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for type in all_types_stats %}
-            <tr>
-                <td>{{ type.name }}</td>
-                <td>{{ type.order_count }}</td>
-                <td>${{ type.revenue|floatformat:2 }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">No data</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Number of Orders</th>
+                    <th>Total Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for type in all_types_stats %}
+                <tr>
+                    <td>{{ type.name }}</td>
+                    <td>{{ type.order_count }}</td>
+                    <td>${{ type.revenue|floatformat:2 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No data</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
