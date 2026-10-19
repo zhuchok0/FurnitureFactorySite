@@ -406,32 +406,65 @@ main ul.furniture-list {
 
 /* --- table --- */
 
+/* --- table --- */
+
 .furniture-table {
-    border-collapse: collapse;
+    border-collapse: collapse;         /* ✅ убраны двойные линии */
     width: 100%;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;               /* ← таблица по центру + отступ снизу */
+    table-layout: fixed;               /* ← ровные столбцы */
 }
-.furniture-table th, .furniture-table td {
+
+/* Ячейки: границы + отступы + выравнивание */
+.furniture-table th,
+.furniture-table td {
     padding: 8px 10px;
     border: 1px solid #ddd;
+    text-align: center;                /* ← горизонтальное выравнивание */
+    vertical-align: middle;            /* ← вертикальное выравнивание */
 }
+
+/* Заголовок над таблицей */
 .furniture-table caption {
+    caption-side: top;                 /* ← явно над таблицей */
     font-weight: bold;
     padding: 10px;
-    text-align: left;
+    text-align: center;                /* ← по центру */
     color: #068b73;
+    font-size: 18px;
 }
-.furniture-table thead th, .furniture-table tfoot td {
-    background-color: #068b73;
-    color: white;
-    font-weight: bold;
-    padding: 8px 10px;
-}
+
+/* Строки — зебра */
 .furniture-table tbody tr:nth-child(odd) td {
     background-color: #99caf2;
 }
 .furniture-table tbody tr:nth-child(even) td {
     background-color: #e5e6aa;
+}
+
+/* Шапка и подвал */
+.furniture-table thead th,
+.furniture-table tfoot td {
+    background-color: #068b73;
+    color: white;
+    font-weight: bold;
+}
+
+/* ← Столбцы: подсветка 2-го и 4-го */
+.furniture-table tbody td:first-child,
+.furniture-table tbody td:last-child {
+    color: #0f6b5a;
+}
+
+/* ← Пустые ячейки — свой фон */
+.furniture-table tbody tr td:empty {
+    background-color: #f0f0f0;
+}
+
+/* ← Показать «пусто» */
+.furniture-table tbody tr td:empty::after {
+    content: "—";
+    color: #999;
 }
 
 /* -------------------------- PARTNERS -------------------------- */
