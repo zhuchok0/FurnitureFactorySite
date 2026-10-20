@@ -1512,3 +1512,43 @@ a.news-card-btn:focus {
         min-width: auto;
     }
 }
+
+/* -------------------------- PRIVACY POLICY -------------------------- */
+
+.page-title {
+    color: #003322;
+    font-family: 'Playfair Display', Georgia, serif;
+    border-bottom: 3px solid #068b73;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
+
+.page-subtitle {
+    color: #888;
+    font-size: 14px;
+    margin-top: 0;
+}
+
+h2 {
+    color: #068b73;
+    margin-top: 28px;
+    border-left: 4px solid #99caf2;
+    padding-left: 12px;
+}
+
+main p {
+    line-height: 1.75;
+}
+
+.back-link {
+    margin-top: 35px;
+    text-align: center;
+}
+
+.back-link a {
+    display: inline-block;
+    padding: 8px 20px;
+    background: #068b73;
+    color: #fff;
+    border-radius: 6px;
+}
