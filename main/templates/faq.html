@@ -1,43 +1,49 @@
 {% extends "base_generic.html" %}
 
-<!-- SUMMARY DETAILS here-->
- <!-- ABBR here-->
-
 {% block title %}FAQ{% endblock %}
 
 {% block content %}
-    <h1><abbr title="Frequently Asked Questions">FAQ</abbr></h1>
+<h1><abbr title="Frequently Asked Questions">FAQ</abbr></h1>
 
-    <!-- Search form -->
-    <form method="get" action="{% url 'faq' %}" style="margin-bottom: 20px;">
-        <input type="text" name="q" placeholder="Search by question or answer..." value="{{ search_query }}" style="padding: 8px; width: 300px;">
-        <button type="submit" style="padding: 8px 16px;">Search</button>
-        {% if search_query %}
-            <a href="{% url 'faq' %}">Clear</a>
-        {% endif %}
-    </form>
-
-    <!-- Sorting controls -->
-    <div style="margin-bottom: 20px;">
-        <label>Sort by date:</label>
-        <a href="?{% if search_query %}q={{ search_query }}&{% endif %}sort=date_desc" {% if sort_by == 'date_desc' %}style="font-weight: bold;"{% endif %}>Newest first</a> |
-        <a href="?{% if search_query %}q={{ search_query }}&{% endif %}sort=date_asc" {% if sort_by == 'date_asc' %}style="font-weight: bold;"{% endif %}>Oldest first</a>
-        {% if not sort_by or sort_by == 'order' %}
-            <span>(default order)</span>
-        {% endif %}
-    </div>
-
-    {% if faqs %}
-        {% for faq in faqs %}
-            <details>
-                <summary>
-                    <strong>{{ faq.question }}</strong>
-                    <small>— Added: {{ faq.added_date|date:"F d, Y" }}</small>
-                </summary>
-                <p>{{ faq.answer|linebreaks }}</p>
-            </details>
-        {% endfor %}
-    {% else %}
-        <p>No FAQs match your criteria.</p>
+<!-- Search form -->
+<form class="faq-search" method="get" action="{% url 'faq' %}">
+    <input type="text"
+           name="q"
+           placeholder="Search by question or answer..."
+           value="{{ search_query }}">
+    <button type="submit">Search</button>
+    {% if search_query %}
+        <a href="{% url 'faq' %}">Clear</a>
     {% endif %}
+</form>
+
+<!-- Sorting controls -->
+<div class="faq-sort">
+    <label>Sort by date:</label>
+    <a href="?{% if search_query %}q={{ search_query }}&{% endif %}sort=date_desc"
+       class="{% if sort_by == 'date_desc' %}active{% endif %}">
+        Newest first
+    </a> |
+    <a href="?{% if search_query %}q={{ search_query }}&{% endif %}sort=date_asc"
+       class="{% if sort_by == 'date_asc' %}active{% endif %}">
+        Oldest first
+    </a>
+    {% if not sort_by or sort_by == 'order' %}
+        <span>(default order)</span>
+    {% endif %}
+</div>
+
+{% if faqs %}
+    {% for faq in faqs %}
+    <details class="faq-item">
+        <summary>
+            <strong>{{ faq.question }}</strong>
+            <small>— Added: {{ faq.added_date|date:"F d, Y" }}</small>
+        </summary>
+        <p>{{ faq.answer|linebreaks }}</p>
+    </details>
+    {% endfor %}
+{% else %}
+    <p>No FAQs match your criteria.</p>
+{% endif %}
 {% endblock %}
