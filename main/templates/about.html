@@ -5,85 +5,120 @@
 {% block content %}
 {% if company %}
 
-<h1>About {{ company.name }}</h1>
+<header class="about-header">
+    <h1>About {{ company.name }}</h1>
 
-{% if company.logo %}
-    <p>
-        <img src="{{ company.logo.url }}"
+    {% if company.logo %}
+        <img class="company-logo"
+             src="{{ company.logo.url }}"
              alt="{{ company.name }} logo"
              width="200">
+    {% endif %}
+
+    <p class="founded">
+        <strong>Founded:</strong> {{ company.founded_year }}
     </p>
-{% endif %}
+</header>
 
-<p><strong>Founded:</strong> {{ company.founded_year }}</p>
+<section>
+    <h2>About the Company</h2>
+    <p>{{ company.description|linebreaks }}</p>
+</section>
 
-<h2>About the Company</h2>
-<p>{{ company.description|linebreaks }}</p>
-
-<h2>Our Mission</h2>
-<p>{{ company.mission|linebreaks }}</p>
+<section>
+    <h2>Our Mission</h2>
+    <p>{{ company.mission|linebreaks }}</p>
+</section>
 
 {% if company.values %}
-<h2>Our Values</h2>
-<ul>
-    {% for value in company.values %}
-    <li>
-        <strong>{{ value.title }}</strong> — {{ value.description }}
-    </li>
-    {% endfor %}
-</ul>
+<section>
+    <h2>Our Values</h2>
+    <ul class="values-list">
+        {% for value in company.values %}
+        <li>
+            <strong>{{ value.title }}</strong> — {{ value.description }}
+        </li>
+        {% endfor %}
+    </ul>
+</section>
 {% endif %}
 
-<h2>History</h2>
-<p>{{ company.history|linebreaks }}</p>
+<section>
+    <h2>History</h2>
+    <ul class="history-list">
+        {% for line in company.history.splitlines %}
+            {% if line %}
+            <li>{{ line }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</section>
 
-<h2>Our Products</h2>
-<p>{{ company.products_info|linebreaks }}</p>
+<section>
+    <h2>Our Products</h2>
+    <p>{{ company.products_info|linebreaks }}</p>
+</section>
 
-<h2>Requisites</h2>
-<p>{{ company.requisites|linebreaks }}</p>
+<section class="requisites-block">
+    <h2>Requisites</h2>
+    <div class="requisites">{{ company.requisites|linebreaks }}</div>
+</section>
 
-<h2>Certificates</h2>
-<p>{{ company.certificates|linebreaks }}</p>
-{% if company.certificate_image %}
-    <a href="{{ company.certificate_image.url }}" target="_blank">
-        <img src="{{ company.certificate_image.url }}"
-             alt="Certificate"
-             width="300">
-    </a>
-{% endif %}
+<section class="certificate-section">
+    <h2>Certificates</h2>
+    <div class="certificate-block">
+        <p class="certificate-text">{{ company.certificates|linebreaks }}</p>
+
+        <!-- {% if company.certificate_image %}
+            <a href="{{ company.certificate_image.url }}" target="_blank">
+                <img class="certificate-image"
+                     src="{{ company.certificate_image.url }}"
+                     alt="Certificate"
+                     width="300">
+            </a>
+        {% endif %} -->
+
+        <div class="certificate-seal">★</div>
+
+        <div class="certificate-signature">
+            <span>Furniture Factory</span>
+            <small>Authorized signature</small>
+        </div>
+    </div>
+</section>
 
 {% if company.video_file %}
-<h2>{{ company.video_title|default:"Watch Our Video" }}</h2>
-<video width="560"
-       height="315"
-       controls
-       autoplay
-       muted
-       loop
-       preload="metadata"
-       poster="{{ company.logo.url }}"
-       src="{{ company.video_file.url }}">
-    <source src="{{ company.video_file.url }}" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+<section class="video-section">
+    <h2>{{ company.video_title|default:"Watch Our Video" }}</h2>
+    <video class="company-video"
+           width="560"
+           height="315"
+           controls
+           preload="metadata"
+           poster="{{ company.logo.url }}">
+        <source src="{{ company.video_file.url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</section>
 {% endif %}
 
-<h2>Contact Us</h2>
-<ul>
-    {% if company.address %}<li><strong>Address:</strong> {{ company.address }}</li>{% endif %}
-    {% if company.phone %}<li><strong>Phone:</strong> {{ company.phone }}</li>{% endif %}
-    {% if company.email %}<li><strong>Email:</strong> {{ company.email }}</li>{% endif %}
-</ul>
+<section>
+    <h2>Contact Us</h2>
+    <ul class="contacts-list">
+        {% if company.address %}<li><strong>Address:</strong> {{ company.address }}</li>{% endif %}
+        {% if company.phone %}<li><strong>Phone:</strong> {{ company.phone }}</li>{% endif %}
+        {% if company.email %}<li><strong>Email:</strong> {{ company.email }}</li>{% endif %}
+    </ul>
 
-{% if company.working_hours %}
-<h3>Working Hours</h3>
-<p>{{ company.working_hours|linebreaks }}</p>
-{% endif %}
+    {% if company.working_hours %}
+    <h3>Working Hours</h3>
+    <p>{{ company.working_hours|linebreaks }}</p>
+    {% endif %}
+</section>
 
 {% else %}
     <p>Company information is not available.</p>
 {% endif %}
 
-<p><a href="{% url 'main' %}">← Back to Main</a></p>
+<p class="back-link"><a href="{% url 'main' %}">← Back to Main</a></p>
 {% endblock %}
