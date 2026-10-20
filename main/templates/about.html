@@ -5,7 +5,7 @@
 {% block content %}
 {% if company %}
 
-<header class="about-header">
+<div class="about-header">
     <h1>About {{ company.name }}</h1>
 
     {% if company.logo %}
@@ -18,7 +18,7 @@
     <p class="founded">
         <strong>Founded:</strong> {{ company.founded_year }}
     </p>
-</header>
+</div>
 
 <section>
     <h2>About the Company</h2>
@@ -69,15 +69,6 @@
     <div class="certificate-block">
         <p class="certificate-text">{{ company.certificates|linebreaks }}</p>
 
-        <!-- {% if company.certificate_image %}
-            <a href="{{ company.certificate_image.url }}" target="_blank">
-                <img class="certificate-image"
-                     src="{{ company.certificate_image.url }}"
-                     alt="Certificate"
-                     width="300">
-            </a>
-        {% endif %} -->
-
         <div class="certificate-seal">★</div>
 
         <div class="certificate-signature">
@@ -94,6 +85,10 @@
            width="560"
            height="315"
            controls
+           autoplay
+           muted
+           loop
+           playsinline
            preload="metadata"
            poster="{{ company.logo.url }}">
         <source src="{{ company.video_file.url }}" type="video/mp4">

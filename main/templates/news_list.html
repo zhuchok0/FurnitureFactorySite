@@ -3,28 +3,40 @@
 {% block title %}News{% endblock %}
 
 {% block content %}
-<h1>News</h1>
+<h1>Latest News</h1>
 
-{% for news in news_items %}
-<div class="news-item">
-    <h2>
-        <a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a>
-    </h2>
+<div class="news-grid">
+    {% for news in news_items %}
+    <article class="news-card">
 
-    {% if news.image %}
-    <div>
-        <a href="{% url 'news_detail' news.pk %}">
-            <img src="{{ news.image.url }}" alt="{{ news.title }}" style="max-width: 300px;">
+        {% if news.image %}
+        <a href="{% url 'news_detail' news.pk %}" class="news-card-image-link">
+            <img class="news-card-image"
+                 src="{{ news.image.url }}"
+                 alt="{{ news.title }}">
         </a>
-    </div>
-    {% endif %}
+        {% endif %}
 
-    <p>{{ news.short_content }}</p>
-    <p><small>Published: {{ news.created_date }}</small></p>
-    <p><a href="{% url 'news_detail' news.pk %}">Read more →</a></p>
-    <hr>
+        <div class="news-card-body">
+            <h2 class="news-card-title">
+                <a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a>
+            </h2>
+
+            <p class="news-card-excerpt">
+                {{ news.short_content }}
+            </p>
+
+            <p class="news-card-date">
+                <small>Published: {{ news.created_date|date:"d/m/Y" }}</small>
+            </p>
+
+            <a href="{% url 'news_detail' news.pk %}" class="news-card-btn">
+                Read more →
+            </a>
+        </div>
+    </article>
+    {% empty %}
+    <p>No news available.</p>
+    {% endfor %}
 </div>
-{% empty %}
-<p>No news available.</p>
-{% endfor %}
 {% endblock %}

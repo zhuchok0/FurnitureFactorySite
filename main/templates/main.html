@@ -228,16 +228,6 @@
         </table>
     </div>
 
-
-    {% if video_data %}
-        <h3>{{ video_data.title }}</h3>
-        <iframe width="560" height="315" 
-                src="https://www.youtube-nocookie.com/embed/{{ video_data.id }}"
-                referrerpolicy="strict-origin-when-cross-origin" 
-                allowfullscreen>
-        </iframe>
-    {% endif %}
-
     <hr>
     {% if client_info %}
         <div class="timezone-info">

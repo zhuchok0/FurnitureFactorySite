@@ -3,27 +3,34 @@
 {% block title %}{{ news.title }}{% endblock %}
 
 {% block content %}
-<h1>{{ news.title }}</h1>
+<article class="news-article">
 
-<p><small>Published: {{ news.created_date }}</small></p>
+    <header class="news-article-header">
+        <h1>{{ news.title }}</h1>
+        <p class="news-article-date">
+            <small>Published: {{ news.created_date|date:"d F Y" }}</small>
+        </p>
+    </header>
 
-{% if news.image %}
-    <p>
-        <img src="{{ news.image.url }}"
-             alt="{{ news.title }}"
-             style="max-width: 100%; height: auto;">
-    </p>
-{% endif %}
+    {% if news.image %}
+        <img class="news-article-image"
+             src="{{ news.image.url }}"
+             alt="{{ news.title }}">
+    {% endif %}
 
-<p>{{ news.short_content }}</p>
+    <p class="news-article-lead">{{ news.short_content }}</p>
 
-{% if news.full_content %}
-    <div>
-        {{ news.full_content|linebreaks }}
-    </div>
-{% else %}
-    <p><em>Full content is not available yet.</em></p>
-{% endif %}
+    {% if news.full_content %}
+        <div class="news-article-body">
+            {{ news.full_content|linebreaks }}
+        </div>
+    {% else %}
+        <p><em>Full content is not available yet.</em></p>
+    {% endif %}
 
-<p><a href="{% url 'news_list' %}">← Back to News</a></p>
+    <footer class="news-article-footer">
+        <a href="{% url 'news_list' %}">← Back to News</a>
+    </footer>
+
+</article>
 {% endblock %}
