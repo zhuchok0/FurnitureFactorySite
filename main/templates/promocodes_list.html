@@ -3,40 +3,38 @@
 {% block title %}Promo Codes & Coupons{% endblock %}
 
 {% block content %}
-    <h1>Promo Codes & Coupons</h1>
-    
-    <h2>Active Promo Codes</h2>
-    {% if active_promocodes %}
-        <div class="promo-codes">
-            {% for promo in active_promocodes %}
-            <div class="promo-card" style="border: 2px solid #4CAF50; margin-bottom: 20px; padding: 15px; border-radius: 8px; background-color: #f9fff9;">
-                <h3>{{ promo.code }}</h3>
-                <p><strong>Discount:</strong> {{ promo.discount }}%</p>
-                <p><strong>Description:</strong> {{ promo.description }}</p>
-                <p><strong>Valid until:</strong> {{ promo.valid_to }}</p>
-            </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>No active promo codes at the moment.</p>
-    {% endif %}
-    
-    <h2>Archive</h2>
-    {% if archive_promocodes %}
-        <div class="archive-codes">
-            {% for promo in archive_promocodes %}
-            <div class="promo-card" style="border: 1px solid #ddd; margin-bottom: 15px; padding: 12px; border-radius: 8px; background-color: #f5f5f5;">
-                <h3>{{ promo.code }}</h3>
-                <p><strong>Discount:</strong> {{ promo.discount }}%</p>
-                <p><strong>Description:</strong> {{ promo.description }}</p>
-                <p><strong>Valid:</strong> {{ promo.valid_from }} — {{ promo.valid_to }}</p>
-                {% if promo.is_expired %}
-                    <p><em>Expired</em></p>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>No archived promo codes.</p>
-    {% endif %}
+<h1>Promo Codes & Coupons</h1>
+
+<h2>Active Promo Codes</h2>
+{% if active_promocodes %}
+<ul class="promo-list">
+    {% for promo in active_promocodes %}
+    <li class="promo-card promo-active">
+        <strong class="promo-code">{{ promo.code }}</strong>
+        <span class="promo-discount">{{ promo.discount }}% off</span>
+        <p>{{ promo.description }}</p>
+        <small>Valid until: {{ promo.valid_to }}</small>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No active promo codes at the moment.</p>
+{% endif %}
+
+<h2>Archive</h2>
+{% if archive_promocodes %}
+<ul class="promo-list">
+    {% for promo in archive_promocodes %}
+    <li class="promo-card">
+        <strong class="promo-code">{{ promo.code }}</strong>
+        <span class="promo-discount">{{ promo.discount }}% off</span>
+        <p>{{ promo.description }}</p>
+        <small>Valid: {{ promo.valid_from }} — {{ promo.valid_to }}</small>
+        {% if promo.is_expired %}<em>Expired</em>{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No archived promo codes.</p>
+{% endif %}
 {% endblock %}
