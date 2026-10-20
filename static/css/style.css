@@ -1415,3 +1415,100 @@ a.news-card-btn:focus {
     line-height: 1.7;
     font-size: 15px;
 }
+
+/* -------------------------- EMPLOYEES -------------------------- */
+
+.employees-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.employee-card {
+    display: flex;
+    gap: 25px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left: 4px solid #068b73;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    transition: .2s;
+}
+
+.employee-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+
+.employee-photo img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #99caf2;
+}
+
+.employee-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.employee-name {
+    margin: 0 0 10px;
+    color: #003322;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+}
+
+.employee-position {
+    margin: 0 0 10px;
+    color: #068b73;
+}
+
+.employee-duties {
+    margin: 10px 0;
+    padding: 10px 15px;
+    background: #f0f8ff;
+    border-left: 3px solid #99caf2;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.employee-contacts {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.employee-contacts li {
+    border-bottom: 1px dotted #e0e0e0;
+    padding: 3px 0;
+}
+
+.employee-contacts li:last-child {
+    border-bottom: none;
+}
+
+.employee-contacts strong {
+    color: #068b73;
+    display: inline-block;
+    min-width: 70px;
+}
+
+@media (max-width: 600px) {
+    .employee-card {
+        flex-direction: column;
+        align-items: center;
+    }
+    .employee-info {
+        width: 100%;
+    }
+    .employee-contacts strong {
+        min-width: auto;
+    }
+}
