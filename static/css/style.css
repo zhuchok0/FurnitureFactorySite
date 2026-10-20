@@ -1552,3 +1552,97 @@ main p {
     color: #fff;
     border-radius: 6px;
 }
+
+/* -------------------------- VACANCIES -------------------------- */
+
+/* Контейнер — очистка float */
+.vacancies::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Карточка — начинается с новой строки (clear: both) */
+.vacancy-card {
+    clear: both;
+    margin-bottom: 20px;
+    padding: 20px 24px;
+    background: #fff;
+    border-radius: 12px;
+    border-top: 3px solid #068b73;
+    box-shadow: 0 3px 14px rgba(6, 139, 115, .1);
+}
+
+/* Очистка float внутри карточки */
+.vacancy-card::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Левая колонка — метаданные */
+.vacancy-meta {
+    float: left;
+    width: 240px;
+    padding-right: 20px;
+    border-right: 1px solid #e0e0e0;
+}
+
+.vacancy-meta h2 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    color: #003322;
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+.vacancy-meta p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.vacancy-meta strong {
+    color: #068b73;
+}
+
+/* Правая колонка — описание */
+.vacancy-description {
+    float: left;
+    width: calc(100% - 260px);
+    margin-left: 20px;
+}
+
+.vacancy-description h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #068b73;
+    font-weight: 600;
+}
+
+.vacancy-description p {
+    margin: 0 0 8px;
+    line-height: 1.7;
+    color: #444;
+    font-size: 15px;
+}
+
+/* Мобильные — одна колонка */
+@media (max-width: 700px) {
+    .vacancy-meta,
+    .vacancy-description {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        padding-right: 0;
+        border-right: none;
+    }
+
+    .vacancy-meta {
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 15px;
+    }
+}
