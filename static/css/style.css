@@ -1833,3 +1833,428 @@ button:disabled      {
     color: #888;
     font-size: 13px;
 }
+
+
+/* -------------------------- ANIMATION SCENE -------------------------- */
+
+/* --- Hero: центр страницы --- */
+.furn-hero {
+    max-width: 900px;         /* ← не растягивается на всю ширину */
+    margin: 0 auto;           /* ← центрируется по странице */
+    min-height: 520px; 
+    text-align: center;     /* ← больше места под крупную анимацию */
+    /* остальное — как было */
+}
+
+/* --- Сцена: выше и шире --- */
+.furn-hero__scene {
+    position: relative;
+    width: min(100%, 720px);
+    height: 260px;            /* было 180 — крупнее эмодзи */
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Инструменты: крупные --- */
+.furn-hero__item {
+    position: absolute;
+    top: 25px;
+    font-size: clamp(48px, 7vw, 72px);   /* было 28-44 */
+    animation: 4.8s ease-in-out infinite;
+    will-change: transform, opacity, left, top;
+}
+
+.furn-hero__item--hammer { left: 22%; animation-name: furn-gather; }
+.furn-hero__item--wood   { left: 50%; animation-name: furn-gather-wood; }
+.furn-hero__item--screw  { left: 78%; animation-name: furn-gather-screw; }
+
+@keyframes furn-gather {
+    0%, 8% {
+        left: 22%; top: 25px; opacity: 1;
+        transform: translateX(0) scale(1) rotate(0deg);
+    }
+    35% {
+        left: 50%; top: 50%; opacity: 1;
+        transform: translateX(-50%) translateY(-50%) scale(.7) rotate(180deg);
+    }
+    43%, 100% {
+        left: 50%; top: 50%; opacity: 0;
+        transform: translateX(-50%) translateY(-50%) scale(.1) rotate(260deg);
+    }
+}
+
+@keyframes furn-gather-wood {
+    0%, 8% {
+        left: 50%; top: 25px; opacity: 1;
+        transform: translateX(0) scale(1) rotate(0deg);
+    }
+    35% {
+        left: 50%; top: 50%; opacity: 1;
+        transform: translateX(-50%) translateY(-50%) scale(.7) rotate(-180deg);
+    }
+    43%, 100% {
+        left: 50%; top: 50%; opacity: 0;
+        transform: translateX(-50%) translateY(-50%) scale(.1) rotate(-260deg);
+    }
+}
+
+@keyframes furn-gather-screw {
+    0%, 8% {
+        left: 78%; top: 25px; opacity: 1;
+        transform: translateX(0) scale(1) rotate(0deg);
+    }
+    35% {
+        left: 50%; top: 50%; opacity: 1;
+        transform: translateX(-50%) translateY(-50%) scale(.7) rotate(180deg);
+    }
+    43%, 100% {
+        left: 50%; top: 50%; opacity: 0;
+        transform: translateX(-50%) translateY(-50%) scale(.1) rotate(260deg);
+    }
+}
+
+/* --- Вспышка: огромная, бело-золотая, с кольцом --- */
+.furn-hero__spark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        #ffffff 0%,
+        #fffacd 30%,
+        #ffe3a0 60%,
+        #ffb649 100%);
+    box-shadow:
+        0 0 20px 10px #fffacd,
+        0 0 60px 25px #ffd966,
+        0 0 120px 50px rgba(255, 190, 90, .7),
+        0 0 200px 80px rgba(255, 140, 40, .35);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.2);
+    animation: furn-spark 4.8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Кольцо-волна от вспышки */
+.furn-hero__spark::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 3px solid #ffe3a0;
+    opacity: 0;
+    animation: furn-spark-ring 4.8s ease-out infinite;
+}
+
+@keyframes furn-spark {
+    0%, 30% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.2);
+    }
+    36% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.8);
+    }
+    44% {
+        opacity: .9;
+        transform: translate(-50%, -50%) scale(3);
+    }
+    52%, 100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.3);
+    }
+}
+
+@keyframes furn-spark-ring {
+    0%, 34% {
+        opacity: 0;
+        transform: scale(.5);
+    }
+    42% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+    56%, 100% {
+        opacity: 0;
+        transform: scale(4.5);
+    }
+}
+
+/* --- Мебель: крупная, симметричный разлёт --- */
+.furn-hero__furniture {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    font-size: clamp(52px, 7vw, 84px);   /* было 32-48 */
+    opacity: 0;
+    transform-origin: center bottom;
+    animation: 4.8s ease-out infinite;
+    will-change: transform, opacity, left;
+}
+
+/* Симметрично относительно центра:
+   стул ← влево, диван — по центру, шкаф → вправо */
+.furn-hero__furniture--chair   { --end-x: -22%; animation-name: furn-create-chair; }
+.furn-hero__furniture--sofa    { --end-x:   0%; animation-name: furn-create-sofa; }
+.furn-hero__furniture--cabinet { --end-x: +22%; animation-name: furn-create-cabinet; }
+
+@keyframes furn-create-chair {
+    0%, 48% {
+        left: 50%; opacity: 0;
+        transform: translateX(-50%) translateY(-65px) scale(.2);
+    }
+    55% {
+        left: 50%; opacity: 1;
+        transform: translateX(-50%) translateY(-65px) scale(1.2);
+    }
+    63% {
+        left: 50%; opacity: 1;
+        transform: translateX(-50%) translateY(-40px) scale(1);
+    }
+    80%, 100% {
+        left: calc(50% + var(--end-x));
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+@keyframes furn-create-sofa {
+    0%, 48% {
+        left: 50%; opacity: 0;
+        transform: translateX(-50%) translateY(-65px) scale(.2);
+    }
+    55% {
+        left: 50%; opacity: 1;
+        transform: translateX(-50%) translateY(-65px) scale(1.2);
+    }
+    63% {
+        left: 50%; opacity: 1;
+        transform: translateX(-50%) translateY(-40px) scale(1);
+    }
+    80%, 100% {
+        left: calc(50% + var(--end-x));
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+@keyframes furn-create-cabinet {
+    0%, 48% {
+        left: 50%; opacity: 0;
+        transform: translateX(-50%) translateY(-65px) scale(.2);
+    }
+    55% {
+        left: 50%; opacity: 1;
+        transform: translateX(-50%) translateY(-65px) scale(1.2);
+    }
+    63% {
+        left: 50%; opacity: 1;
+        transform: translateX(-50%) translateY(-40px) scale(1);
+    }
+    80%, 100% {
+        left: calc(50% + var(--end-x));
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+/* -------------------------- HERO BRANDING -------------------------- */
+
+.furn-hero__branding {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    animation: furn-hero-appear 1.5s ease-out both;
+}
+
+/* Надзаголовок — с декоративными линиями */
+.furn-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    font: 500 12px 'Inter', Arial, sans-serif;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #d7b58a;
+}
+
+.furn-hero__eyebrow::before,
+.furn-hero__eyebrow::after {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d7b58a, transparent);
+}
+
+.furn-hero__title {
+    margin: 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(42px, 8vw, 88px);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: 4px;
+
+    /* Градиент на всё слово */
+    background: linear-gradient(135deg, #ffe3a0 0%, #d7b58a 50%, #ffb649 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    /* Лёгкое свечение — на всю строку */
+    filter: drop-shadow(0 4px 24px rgba(255, 190, 90, .35));
+}
+
+/* Убираем отдельный стиль для акцента */
+.furn-hero__title-accent {
+    display: inline;
+    margin-left: 8px;
+    font-style: inherit;
+    font-weight: inherit;
+    background: none;
+    color: inherit;
+    text-shadow: none;
+}
+
+/* Подзаголовок */
+.furn-hero__subtitle {
+    margin: 18px 0 0;
+    font: 400 15px 'Inter', Arial, sans-serif;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #e5d5c1;
+    opacity: .9;
+}
+
+/* Анимация появления */
+@keyframes furn-hero-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* Уважение к prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .furn-hero__branding {
+        animation: none;
+    }
+}
+
+/* Уважаем настройку «уменьшить анимацию» */
+@media (prefers-reduced-motion: reduce) {
+    .furn-hero__item,
+    .furn-hero__spark,
+    .furn-hero__furniture {
+        animation: none;
+    }
+    .furn-hero__parts,
+    .furn-hero__spark { display: none; }
+
+    .furn-hero__furniture {
+        opacity: 1;
+        left: calc(50% + var(--end-x));
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+/* Прелоадер внизу страницы */
+.furn-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    width: 100%;
+    min-height: 150px;
+    margin-top: 35px;
+    padding: 28px 16px;
+    background: #f5f1eb;
+    border: 1px solid #e5d9c9;
+    border-radius: 12px;
+    color: #594332;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.furn-loader__blocks {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 48px;
+}
+
+.furn-loader__block {
+    position: relative;
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    animation: furn-loader-bounce .8s ease-in-out infinite alternate;
+}
+
+/* Круглые выступы LEGO */
+.furn-loader__block::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 7px;
+    width: 14px;
+    height: 8px;
+    border-radius: 4px 4px 2px 2px;
+    background: inherit;
+    filter: brightness(1.12);
+}
+
+.furn-loader__block--red {
+    background: #e5483f;
+    animation-delay: 0s;
+}
+
+.furn-loader__block--yellow {
+    background: #f4c542;
+    animation-delay: .15s;
+}
+
+.furn-loader__block--blue {
+    background: #3987d7;
+    animation-delay: .3s;
+}
+
+.furn-loader__block--green {
+    background: #45a86b;
+    animation-delay: .45s;
+}
+
+.furn-loader__text {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #594332;
+}
+
+@keyframes furn-loader-bounce {
+    from {
+        transform: translateY(8px) rotate(-5deg);
+    }
+    to {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .furn-loader__block {
+        animation: none;
+    }
+}

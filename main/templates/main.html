@@ -2,7 +2,33 @@
 
 {% block title %}Home - Statistics{% endblock %}
 
-{% block content %}
+{% block content %} 
+    <div class="furn-hero__branding">
+        <span class="furn-hero__eyebrow">Since 2010</span>
+        <h1 class="furn-hero__title">
+            Furniture<span class="furn-hero__title-accent">Factory</span>
+        </h1>
+        <p class="furn-hero__subtitle">
+            Handcrafted furniture for every home
+        </p>
+    </div>
+
+   <div class="furn-hero__scene">
+
+        <div class="furn-hero__parts">
+            <span class="furn-hero__item furn-hero__item--hammer">🔨</span>
+            <span class="furn-hero__item furn-hero__item--wood">🪵</span>
+            <span class="furn-hero__item furn-hero__item--screw">🔩</span>
+        </div>
+
+        <span class="furn-hero__spark" aria-hidden="true"></span>
+
+        <div class="furn-hero__furniture furn-hero__furniture--chair">🪑</div>
+        <div class="furn-hero__furniture furn-hero__furniture--sofa">🛋️</div>
+        <div class="furn-hero__furniture furn-hero__furniture--cabinet">🗄️</div>
+
+    </div>
+
     <h2>What people say about us</h2>
 
     <p lang="en">
@@ -347,4 +373,15 @@
             </tbody>
         </table>
     </div>
+
+    <div class="furn-loader" aria-label="Loading" role="status">
+        <div class="furn-loader__blocks" aria-hidden="true">
+            <span class="furn-loader__block furn-loader__block--red"></span>
+            <span class="furn-loader__block furn-loader__block--yellow"></span>
+            <span class="furn-loader__block furn-loader__block--blue"></span>
+            <span class="furn-loader__block furn-loader__block--green"></span>
+        </div>
+        <p class="furn-loader__text">Building something beautiful...</p>
+    </div>
+
 {% endblock %}
