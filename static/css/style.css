@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+/* site background */
 body {
     background-color: #dbfff7;
     background-image: url('../images/background_image.jpg');
@@ -19,7 +20,7 @@ body {
 
     position: relative;
     min-height: 100vh;
-    padding-bottom: 70px;    /* ← равно/больше высоты footer */
+    padding-bottom: 70px;
     box-sizing: border-box;
 }
 
@@ -109,7 +110,11 @@ header {
     background-color: #ffffff;
     border: 1px solid #99caf2;
     border-radius: 7px;
-    transition: background-color 0.2s;
+    /* transition */
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 1ms;
 }
 
 .nav-auth button:hover {
@@ -117,6 +122,8 @@ header {
 }
 
 /* --------------------------SIDEBAR--------------------------*/
+
+/* gradient */
 aside {
     background: linear-gradient(180deg, #99caf2 0%, #e5e6aa 100%);
 
@@ -162,6 +169,7 @@ h3 { font-size: 20px; }
 q {
     quotes: "\201C" "\201D" "\2018" "\2019";
 }
+/* before after quotes */
 q::before { 
     content: open-quote; 
 }
@@ -169,6 +177,7 @@ q::after  {
     content: close-quote; 
 }
 
+/* lang */
 :lang(ru) q,
 :lang(uk) q {
     quotes: "«" "»" "„" "“";
@@ -207,12 +216,14 @@ p.quote-fragment1::after {
     font-weight: bold;
 }
 
+/* first letter */
 p.quote-fragment2::first-letter {
     font-size: 3em;
     font-weight: bold;
     color: #068b73;
 }
 
+/* selection */
 p.quote-fragment2::selection {
     background-color: #05ffb8;
     color: #e21bc7;
@@ -228,11 +239,10 @@ figure {
     padding: 0;
 }
 
-/* Каждая картинка — одинаковая плитка */
 figure > a {
     display: block;
-    aspect-ratio: 4 / 3;              /* ← одинаковая пропорция */
-    overflow: hidden;                 /* ← обрезает лишнее */
+    aspect-ratio: 4 / 3; 
+    overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: transform 0.25s, box-shadow 0.25s;
@@ -253,13 +263,12 @@ figure > a img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;                /* ← вписать, обрезая лишнее */
+    object-fit: cover;
     object-position: center;
 }
 
-/* Подпись — под всеми картинками */
 figure figcaption {
-    grid-column: 1 / -1;              /* ← на всю ширину */
+    grid-column: 1 / -1; 
     text-align: center;
     font-style: italic;
     color: #666;
@@ -274,18 +283,16 @@ figure figcaption {
     padding: 30px 40px;
     border-radius: 12px;
 
-    position: relative;    /* ← включает position */
+    position: relative;
     top: 5px;
     left: 5px;
 }
 
-/* Контейнер — очищает float */
 .cards {
     margin-top: 20px;
     overflow: hidden;
 }
 
-/* Карточки — float: left */
 .card {
     float: left;
     width: 48%;
@@ -298,7 +305,6 @@ figure figcaption {
     line-height: 1.7;
 }
 
-/* Вторая карточка — без правого отступа */
 .card:last-child {
     margin-right: 0;
 }
@@ -317,16 +323,15 @@ figure figcaption {
     letter-spacing: 1px;
 }
 
-/* --- Заголовки --- */
 .typography-demo h2,
 .typography-demo h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+   font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     color: #003322;
     margin-top: 25px;
     margin-bottom: 12px;
 }
 
-/* text-transform — ЗАГЛАВНЫЕ */
+/* uppercase */
 .text-uppercase {
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -335,7 +340,7 @@ figure figcaption {
     border-bottom: 2px solid #068b73;
 }
 
-/* text-transform — Капитель для заголовков */
+/* capitalize small-caps letter-spacing */
 .text-smallcaps {
     text-transform: capitalize;
     font-variant: small-caps;
@@ -345,17 +350,17 @@ figure figcaption {
 .typography-demo p {
     font-family: 'Inter', Arial, sans-serif;
     font-size: 16px;
-    line-height: 1.7;                 /* межстрочный интервал */
+    /* line-height */
+    line-height: 1.7;
     color: #333333;
-    margin-bottom: 15px;              /* отступ между абзацами */
+    margin-bottom: 15px;
 }
 
-/* Красная строка — отступ первой строки */
+/* indent */
 .body-text {
     text-indent: 2em;
 }
 
-/* Вводный абзац — крупнее, без отступа */
 .lead-text {
     font-size: 18px;
     line-height: 1.8;
@@ -367,14 +372,14 @@ figure figcaption {
     background-color: #f0f8ff;
 }
 
-/* Выравнивание по ширине */
+/* align justify hyphens */
 .aligned-justify {
     text-align: justify;
     text-justify: inter-word;
-    hyphens: auto;                    /* перенос слов */
+    hyphens: auto;
 }
 
-/* --- Интервалы между словами и символами --- */
+/* word-spacing */
 .typography-demo h2 {
     word-spacing: 4px;
 }
@@ -383,11 +388,10 @@ figure figcaption {
     word-spacing: 2px;
 }
 
-/* --- Перенос и разрыв слов --- */
 .long-word-demo {
-    overflow-wrap: break-word;        /* разрыв длинных слов */
-    word-break: break-word;           /* старые браузеры */
-    hyphens: auto;                    /* автоматические переносы */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 /* --- list --- */
@@ -412,32 +416,30 @@ main ul.furniture-list {
 /* --- table --- */
 
 .furniture-table {
-    border-collapse: collapse;         /* ✅ убраны двойные линии */
+    /* collapse */
+    border-collapse: collapse;
     width: 100%;
-    margin: 0 auto 20px;               /* ← таблица по центру + отступ снизу */
-    table-layout: fixed;               /* ← ровные столбцы */
+    margin: 0 auto 20px;
+    table-layout: fixed;
 }
 
-/* Ячейки: границы + отступы + выравнивание */
 .furniture-table th,
 .furniture-table td {
     padding: 8px 10px;
     border: 1px solid #ddd;
-    text-align: center;                /* ← горизонтальное выравнивание */
-    vertical-align: middle;            /* ← вертикальное выравнивание */
+    text-align: center;
+    vertical-align: middle;
 }
 
-/* Заголовок над таблицей */
 .furniture-table caption {
-    caption-side: top;                 /* ← явно над таблицей */
+    caption-side: top;
     font-weight: bold;
     padding: 10px;
-    text-align: center;                /* ← по центру */
+    text-align: center;
     color: #068b73;
     font-size: 18px;
 }
 
-/* Строки — зебра */
 .furniture-table tbody tr:nth-child(odd) td {
     background-color: #99caf2;
 }
@@ -445,7 +447,6 @@ main ul.furniture-list {
     background-color: #e5e6aa;
 }
 
-/* Шапка и подвал */
 .furniture-table thead th,
 .furniture-table tfoot td {
     background-color: #068b73;
@@ -453,18 +454,15 @@ main ul.furniture-list {
     font-weight: bold;
 }
 
-/* ← Столбцы: подсветка 2-го и 4-го */
 .furniture-table tbody td:first-child,
 .furniture-table tbody td:last-child {
     color: #0f6b5a;
 }
 
-/* ← Пустые ячейки — свой фон */
 .furniture-table tbody tr td:empty {
     background-color: #f0f0f0;
 }
 
-/* ← Показать «пусто» */
 .furniture-table tbody tr td:empty::after {
     content: "—";
     color: #999;
@@ -480,13 +478,13 @@ main ul.furniture-list {
 .partner {
     float: left;
     width: 180px;
-    height: 180px;                   /* ← равные → круг */
+    height: 180px; 
     margin: 10px;
     padding: 15px;
 
     background-color: #f0f8ff;
-    border: 2px solid #068b73;       /* тип границы — solid */
-    border-radius: 50%;              /* ← круг */
+    border: 2px solid #068b73;
+    border-radius: 50%;
 
     box-shadow: 0 6px 16px rgba(6, 139, 115, 0.25);
 
@@ -515,7 +513,8 @@ main ul.furniture-list {
 .partner-name {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 14px;
-    letter-spacing: 1.2px;           /* кернинг */
+    /* kerning */
+    letter-spacing: 1.2px;
     color: #003322;
     line-height: 1.2;
 }
@@ -525,7 +524,6 @@ main ul.furniture-list {
     color: #068b73;
 }
 
-/* Сброс для мобильных — карточки друг под другом */
 @media (max-width: 480px) {
     .partner {
         float: none;
@@ -557,10 +555,6 @@ footer > p {
     margin: 0;
 }
 
-/* -------------------------- UTILITY CLASSES--------------------------*/
-/* .hidden { display: none; }
-.text-center { text-align: center; } */
-
 /* -------------------------- NEWS -------------------------- */
 
 .news {
@@ -572,7 +566,7 @@ footer > p {
 }
 
 .news-badge {
-    position: absolute;          /* ← вырывается из потока */
+    position: absolute;
     top: 10px;
     right: 10px;
     padding: 4px 12px;
@@ -602,7 +596,6 @@ footer > p {
 
 /* -------------------------- RESPONSIVE -------------------------- */
 
-/* Картинки и медиа — всегда */
 img, video, iframe {
     max-width: 100%;
     height: auto;
@@ -714,7 +707,6 @@ p, li, a {
 
 /* -------------------------- FORMS -------------------------- */
 
-/* --- ДОСТУПНЫЕ (enabled) — базовый вид --- */
 input:enabled,
 textarea:enabled,
 select:enabled {
@@ -722,7 +714,6 @@ select:enabled {
     background-color: #e7fff8;
 }
 
-/* --- ОБЯЗАТЕЛЬНЫЕ (required): только когда НЕВАЛИДНЫ --- */
 input:required:invalid,
 textarea:required:invalid,
 select:required:invalid {
@@ -730,7 +721,6 @@ select:required:invalid {
     background-color: #f5f2f2;
 }
 
-/* --- ОБЯЗАТЕЛЬНЫЕ: когда ВАЛИДНЫ — обычный вид --- */
 input:required:valid,
 textarea:required:valid,
 select:required:valid {
@@ -738,7 +728,6 @@ select:required:valid {
     background-color: #ffffff;
 }
 
-/* --- ЗАБЛОКИРОВАННЫЕ (disabled) --- */
 input:disabled,
 textarea:disabled,
 select:disabled,
@@ -749,13 +738,11 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* --- ВНЕ ДИАПАЗОНА (out-of-range) --- */
 input:out-of-range {
     border: 2px solid #e05353;
     background-color: #ffd8d8;
 }
 
-/* --- ВКЛЮЧЁННЫЕ ФЛАЖКИ И ПЕРЕКЛЮЧАТЕЛИ (checked) --- */
 input[type="checkbox"]:checked,
 input[type="radio"]:checked {
     accent-color: #068b73;
@@ -763,10 +750,11 @@ input[type="radio"]:checked {
 
 /* -------------------------- CATALOG -------------------------- */
 
+/* grid grid-auto-flow */
 .catalog-page {
     display: grid;
     grid-auto-flow: row;
-    grid-template-columns: 1fr 1fr;   /* Types | Designs */
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
@@ -793,7 +781,6 @@ input[type="radio"]:checked {
     margin: 5px 0;
 }
 
-/* Секция Items — на всю ширину */
 .catalog-items-section {
     grid-column: 1 / -1;
 }
@@ -802,7 +789,8 @@ input[type="radio"]:checked {
     margin-bottom: 15px;
 }
 
-/* Сетка карточек товаров */
+/* grid */
+/* grid-auto-flow */
 .catalog-items-grid {
     display: grid;
     grid-auto-flow: row;
@@ -854,13 +842,12 @@ input[type="radio"]:checked {
 
 @media (max-width: 768px) {
     .catalog-page {
-        grid-template-columns: 1fr;   /* 2 секции друг под другом */
+        grid-template-columns: 1fr;
     }
 }
 
 /* -------------------------- ABOUT PAGE -------------------------- */
 
-/* --- Логотип с трансформацией --- */
 .company-logo {
     display: block;
     margin: 15px 0;
@@ -868,7 +855,7 @@ input[type="radio"]:checked {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
 
-    /* Трансформация: увеличение + лёгкий наклон */
+    /* transform logo */
     transform: scale(1) rotate(0deg);
 }
 
@@ -877,7 +864,6 @@ input[type="radio"]:checked {
     box-shadow: 0 12px 24px rgba(6, 139, 115, 0.35);
 }
 
-/* --- История по годам --- */
 .history-list {
     list-style: none;
     padding: 0;
@@ -914,7 +900,6 @@ input[type="radio"]:checked {
     font-weight: bold;
 }
 
-/* --- Реквизиты — особый шрифт --- */
 .requisites {
     font-family: 'Courier New', monospace;
     font-size: 14px;
@@ -942,7 +927,7 @@ input[type="radio"]:checked {
 
     background: linear-gradient(135deg, #fffbe6 0%, #e8f5e9 100%);
 
-    /* border-image из градиента */
+    /* border-image */
     border: 12px solid transparent;
     border-image: linear-gradient(
         45deg, #068b73, #99caf2, #068b73, #99caf2, #068b73
@@ -964,7 +949,6 @@ input[type="radio"]:checked {
     overflow: hidden;
 }
 
-/* Пунктирная рамка внутри */
 .certificate-block::after {
     content: "";
     position: absolute;
@@ -974,9 +958,9 @@ input[type="radio"]:checked {
     pointer-events: none;
 }
 
-/* Заголовок сертификата — плашка */
 .certificate-title {
     position: relative;
+    /* z-index */
     z-index: 1;
     font-size: 22px;
     font-weight: bold;
@@ -988,7 +972,6 @@ input[type="radio"]:checked {
     border-bottom: 2px solid #99caf2;
 }
 
-/* Текст */
 .certificate-text {
     position: relative;
     z-index: 1;
@@ -1000,7 +983,6 @@ input[type="radio"]:checked {
     font-family: 'Inter', Arial, sans-serif;
 }
 
-/* Печать */
 .certificate-seal {
     position: relative;
     z-index: 1;
@@ -1020,7 +1002,6 @@ input[type="radio"]:checked {
     border: 2px solid #b8912b;
 }
 
-/* Подпись */
 .certificate-signature {
     position: relative;
     z-index: 1;
@@ -1048,7 +1029,7 @@ input[type="radio"]:checked {
     font-family: 'Inter', Arial, sans-serif;
 }
 
-/* --- Видео --- */
+/* --- video --- */
 
 .video-section {
     margin: 25px 0;
@@ -1064,7 +1045,6 @@ input[type="radio"]:checked {
     background-color: #000;
 }
 
-/* --- Контакты и ценности --- */
 .values-list,
 .contacts-list {
     list-style: none;
@@ -1113,7 +1093,7 @@ input[type="radio"]:checked {
 .news-card-image-link {
     display: block;
     overflow: hidden;
-    aspect-ratio: 16 / 9;   /* одинаковая плитка */
+    aspect-ratio: 16 / 9;
 }
 
 .news-card-image {
@@ -1151,7 +1131,7 @@ input[type="radio"]:checked {
     text-decoration: none;
 }
 
-/* --- ОБРЕЗКА КРАТКОГО ТЕКСТА С МНОГОТОЧИЕМ --- */
+/* overflow ... */
 .news-card-excerpt {
     margin: 0 0 12px;
     font-size: 14px;
@@ -1164,7 +1144,7 @@ input[type="radio"]:checked {
     overflow: hidden;
     text-overflow: ellipsis;
 
-    line-clamp: 3;              /* ← добавили */
+    line-clamp: 3;
 }
 
 .news-card-date {
@@ -1172,7 +1152,7 @@ input[type="radio"]:checked {
     color: #888;
 }
 
-/* Кнопка "Read more" — прижата к низу */
+/* news button */
 a.news-card-btn,
 a.news-card-btn:link,
 a.news-card-btn:visited {
@@ -1243,11 +1223,11 @@ a.news-card-btn:focus {
     background-color: #f0f8ff;
 }
 
-/* --- МНОГОКОЛОНОЧНЫЙ МАКЕТ ТЕКСТА --- */
+/* column */
 .news-article-body {
-    column-count: 2;              /* ← 2 колонки */
-    column-gap: 35px;             /* отступ между колонками */
-    column-rule: 1px solid #d0d0d0; /* разделитель */
+    column-count: 2;
+    column-gap: 35px;
+    column-rule: 1px solid #d0d0d0;
     font-size: 16px;
     line-height: 1.75;
     color: #333;
@@ -1255,10 +1235,9 @@ a.news-card-btn:focus {
     hyphens: auto;
 }
 
-/* Заголовки и картинки внутри колонок — не разрывать */
 .news-article-body h2,
 .news-article-body h3 {
-    break-after: avoid;           /* заголовок не «висит» в конце колонки */
+    break-after: avoid; 
     color: #003322;
     font-family: 'Playfair Display', Georgia, serif;
     margin-top: 20px;
@@ -1268,13 +1247,13 @@ a.news-card-btn:focus {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    break-inside: avoid;          /* картинка не разрывается */
+    break-inside: avoid;
 }
 
 .news-article-body p {
     margin: 0 0 12px;
-    orphans: 3;                   /* не меньше 3 строк в конце страницы */
-    widows: 3;                    /* не меньше 3 строк в начале */
+    orphans: 3;
+    widows: 3;
 }
 
 .news-article-footer {
@@ -1284,15 +1263,14 @@ a.news-card-btn:focus {
     text-align: center;
 }
 
-/* --- На мобильных — 1 колонка --- */
 @media (max-width: 768px) {
     .news-article-body {
-        column-count: 1;          /* ← 1 колонка */
+        column-count: 1;
         column-rule: none;
     }
 
     .news-grid {
-        grid-template-columns: 1fr;   /* карточки в столбик */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1337,7 +1315,6 @@ a.news-card-btn:focus {
     background-color: #05a88a;
 }
 
-/* Сортировка */
 .faq-sort {
     margin-bottom: 20px;
     display: flex;
@@ -1352,7 +1329,6 @@ a.news-card-btn:focus {
     text-decoration: underline;
 }
 
-/* Элементы FAQ */
 .faq-item {
     background-color: #f0f8ff;
     border: 1px solid #d0e7f5;
@@ -1394,7 +1370,6 @@ a.news-card-btn:focus {
     margin-left: 6px;
 }
 
-/* Маркер раскрытия */
 .faq-item summary::before {
     content: "▸ ";
     color: #068b73;
@@ -1416,8 +1391,9 @@ a.news-card-btn:focus {
     font-size: 15px;
 }
 
-/* -------------------------- EMPLOYEES -------------------------- */
+/* -------------------------- CONTACTS -------------------------- */
 
+/* flex */
 .employees-list {
     display: flex;
     flex-direction: column;
@@ -1427,6 +1403,7 @@ a.news-card-btn:focus {
 
 .employee-card {
     display: flex;
+    flex-wrap: wrap;
     gap: 25px;
     padding: 20px;
     background: #fff;
@@ -1555,14 +1532,13 @@ main p {
 
 /* -------------------------- VACANCIES -------------------------- */
 
-/* Контейнер — очистка float */
+/* clear float */
 .vacancies::after {
     content: "";
     display: table;
     clear: both;
 }
 
-/* Карточка — начинается с новой строки (clear: both) */
 .vacancy-card {
     clear: both;
     margin-bottom: 20px;
@@ -1573,14 +1549,13 @@ main p {
     box-shadow: 0 3px 14px rgba(6, 139, 115, .1);
 }
 
-/* Очистка float внутри карточки */
 .vacancy-card::after {
     content: "";
     display: table;
     clear: both;
 }
 
-/* Левая колонка — метаданные */
+/* float */
 .vacancy-meta {
     float: left;
     width: 240px;
@@ -1606,7 +1581,6 @@ main p {
     color: #068b73;
 }
 
-/* Правая колонка — описание */
 .vacancy-description {
     float: left;
     width: calc(100% - 260px);
@@ -1629,7 +1603,6 @@ main p {
     font-size: 15px;
 }
 
-/* Мобильные — одна колонка */
 @media (max-width: 700px) {
     .vacancy-meta,
     .vacancy-description {
@@ -1649,7 +1622,6 @@ main p {
 
 /* -------------------------- FORMS: FONTS -------------------------- */
 
-/* Кнопки → menu */
 button,
 input[type="submit"],
 input[type="button"],
@@ -1658,7 +1630,6 @@ input[type="reset"] {
     cursor: pointer;
 }
 
-/* Поля → system-ui */
 input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]),
 select,
 textarea {
@@ -1670,13 +1641,11 @@ textarea {
 
 textarea { line-height: 1.5; }
 
-/* Чекбоксы и радио */
 input[type="checkbox"],
 input[type="radio"] {
     accent-color: #068b73;
 }
 
-/* Псевдоклассы полей */
 input:hover,
 select:hover,
 textarea:hover       { border-color: #068b73; }
@@ -1704,6 +1673,8 @@ button:disabled      {
 
 /* -------------------------- REVIEWS -------------------------- */
 
+/* flex */
+/* flex-wrap */
 .reviews-header {
     display: flex;
     justify-content: space-between;
@@ -1713,7 +1684,6 @@ button:disabled      {
     margin-bottom: 25px;
 }
 
-/* Кнопка */
 .btn {
     display: inline-block;
     padding: 10px 22px;
@@ -1738,7 +1708,6 @@ button:disabled      {
 
 .btn:active { background: #047a66; transform: none; }
 
-/* Карточка отзыва */
 .review-item {
     position: relative;
     padding: 18px 22px;
@@ -1751,7 +1720,6 @@ button:disabled      {
 
 .review-item:hover { box-shadow: 0 6px 16px rgba(6, 139, 115, .16); }
 
-/* Кнопки Edit / Delete */
 .review-actions {
     position: absolute;
     top: 15px;
@@ -1764,7 +1732,6 @@ button:disabled      {
 .review-edit:hover { color: #004a99; text-decoration: underline; }
 .review-delete:hover { color: #a00000; text-decoration: underline; }
 
-/* Шрифты по типу контента */
 .review-meta {
     font: 15px serif;
     margin: 0 0 10px;
@@ -1837,31 +1804,34 @@ button:disabled      {
 
 /* -------------------------- ANIMATION SCENE -------------------------- */
 
-/* --- Hero: центр страницы --- */
 .furn-hero {
-    max-width: 900px;         /* ← не растягивается на всю ширину */
-    margin: 0 auto;           /* ← центрируется по странице */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    max-width: 900px;
+    margin: 0 auto;
     min-height: 520px; 
-    text-align: center;     /* ← больше места под крупную анимацию */
-    /* остальное — как было */
+    text-align: center;
 }
 
-/* --- Сцена: выше и шире --- */
 .furn-hero__scene {
     position: relative;
     width: min(100%, 720px);
-    height: 260px;            /* было 180 — крупнее эмодзи */
+    height: 260px;
     flex-shrink: 0;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* --- Инструменты: крупные --- */
 .furn-hero__item {
     position: absolute;
     top: 25px;
-    font-size: clamp(48px, 7vw, 72px);   /* было 28-44 */
-    animation: 4.8s ease-in-out infinite;
+    font-size: clamp(48px, 7vw, 72px);
+    animation: 4.8s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
     will-change: transform, opacity, left, top;
 }
 
@@ -1880,6 +1850,7 @@ button:disabled      {
     }
     43%, 100% {
         left: 50%; top: 50%; opacity: 0;
+        /* transform */
         transform: translateX(-50%) translateY(-50%) scale(.1) rotate(260deg);
     }
 }
@@ -1914,7 +1885,6 @@ button:disabled      {
     }
 }
 
-/* --- Вспышка: огромная, бело-золотая, с кольцом --- */
 .furn-hero__spark {
     position: absolute;
     left: 50%;
@@ -1939,7 +1909,6 @@ button:disabled      {
     z-index: 2;
 }
 
-/* Кольцо-волна от вспышки */
 .furn-hero__spark::before {
     content: "";
     position: absolute;
@@ -1984,20 +1953,18 @@ button:disabled      {
     }
 }
 
-/* --- Мебель: крупная, симметричный разлёт --- */
 .furn-hero__furniture {
     position: absolute;
     bottom: 30px;
     left: 50%;
     font-size: clamp(52px, 7vw, 84px);   /* было 32-48 */
     opacity: 0;
+    /* transform */
     transform-origin: center bottom;
     animation: 4.8s ease-out infinite;
     will-change: transform, opacity, left;
 }
 
-/* Симметрично относительно центра:
-   стул ← влево, диван — по центру, шкаф → вправо */
 .furn-hero__furniture--chair   { --end-x: -22%; animation-name: furn-create-chair; }
 .furn-hero__furniture--sofa    { --end-x:   0%; animation-name: furn-create-sofa; }
 .furn-hero__furniture--cabinet { --end-x: +22%; animation-name: furn-create-cabinet; }
@@ -2071,7 +2038,6 @@ button:disabled      {
     animation: furn-hero-appear 1.5s ease-out both;
 }
 
-/* Надзаголовок — с декоративными линиями */
 .furn-hero__eyebrow {
     display: inline-flex;
     align-items: center;
@@ -2100,17 +2066,14 @@ button:disabled      {
     line-height: 1;
     letter-spacing: 4px;
 
-    /* Градиент на всё слово */
     background: linear-gradient(135deg, #ffe3a0 0%, #d7b58a 50%, #ffb649 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 
-    /* Лёгкое свечение — на всю строку */
     filter: drop-shadow(0 4px 24px rgba(255, 190, 90, .35));
 }
 
-/* Убираем отдельный стиль для акцента */
 .furn-hero__title-accent {
     display: inline;
     margin-left: 8px;
@@ -2121,7 +2084,6 @@ button:disabled      {
     text-shadow: none;
 }
 
-/* Подзаголовок */
 .furn-hero__subtitle {
     margin: 18px 0 0;
     font: 400 15px 'Inter', Arial, sans-serif;
@@ -2131,7 +2093,6 @@ button:disabled      {
     opacity: .9;
 }
 
-/* Анимация появления */
 @keyframes furn-hero-appear {
     0% {
         opacity: 0;
@@ -2145,14 +2106,12 @@ button:disabled      {
     }
 }
 
-/* Уважение к prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
     .furn-hero__branding {
         animation: none;
     }
 }
 
-/* Уважаем настройку «уменьшить анимацию» */
 @media (prefers-reduced-motion: reduce) {
     .furn-hero__item,
     .furn-hero__spark,
@@ -2169,7 +2128,6 @@ button:disabled      {
     }
 }
 
-/* Прелоадер внизу страницы */
 .furn-loader {
     display: flex;
     flex-direction: column;
@@ -2204,7 +2162,6 @@ button:disabled      {
     animation: furn-loader-bounce .8s ease-in-out infinite alternate;
 }
 
-/* Круглые выступы LEGO */
 .furn-loader__block::before {
     content: "";
     position: absolute;

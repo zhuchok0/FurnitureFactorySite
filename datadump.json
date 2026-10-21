@@ -325,6 +325,396 @@
     }
 },
 {
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2026-09-17T06:25:55.573Z",
+        "user": 1,
+        "content_type": 20,
+        "object_id": "2",
+        "object_repr": "Barbie",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+        "action_time": "2026-09-17T06:26:45.543Z",
+        "user": 1,
+        "content_type": 20,
+        "object_id": "3",
+        "object_repr": "Bratz",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+        "action_time": "2026-09-17T06:27:51.800Z",
+        "user": 1,
+        "content_type": 20,
+        "object_id": "4",
+        "object_repr": "Monster High",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+        "action_time": "2026-09-17T06:28:30.986Z",
+        "user": 1,
+        "content_type": 20,
+        "object_id": "5",
+        "object_repr": "Winx",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+        "action_time": "2026-09-30T19:46:34.781Z",
+        "user": 1,
+        "content_type": 4,
+        "object_id": "10",
+        "object_repr": "hailey_bieber",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Staff status\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+        "action_time": "2026-09-30T19:47:25.263Z",
+        "user": 1,
+        "content_type": 4,
+        "object_id": "9",
+        "object_repr": "emp",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Staff status\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+        "action_time": "2026-09-30T19:48:34.172Z",
+        "user": 1,
+        "content_type": 3,
+        "object_id": "2",
+        "object_repr": "Employee",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+        "action_time": "2026-09-30T19:49:02.345Z",
+        "user": 1,
+        "content_type": 4,
+        "object_id": "9",
+        "object_repr": "emp",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+        "action_time": "2026-09-30T19:53:28.384Z",
+        "user": 1,
+        "content_type": 3,
+        "object_id": "2",
+        "object_repr": "Employee",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Permissions\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+        "action_time": "2026-10-01T16:13:30.643Z",
+        "user": 1,
+        "content_type": 3,
+        "object_id": "2",
+        "object_repr": "Employee",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Permissions\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+        "action_time": "2026-10-01T16:25:40.409Z",
+        "user": 1,
+        "content_type": 3,
+        "object_id": "2",
+        "object_repr": "Employee",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Permissions\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+        "action_time": "2026-10-19T19:59:44.329Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "9",
+        "object_repr": "Bathroom Vanity",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"In production\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+        "action_time": "2026-10-19T19:59:53.562Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "10",
+        "object_repr": "Ergonomic Desk",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"In production\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+        "action_time": "2026-10-20T19:26:32.914Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "10",
+        "object_repr": "Workshop for DIY Enthusiasts",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Full content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 40,
+    "fields": {
+        "action_time": "2026-10-20T19:26:42.282Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "9",
+        "object_repr": "Free Delivery on Orders Over $500",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Full content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 41,
+    "fields": {
+        "action_time": "2026-10-20T19:26:51.294Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "8",
+        "object_repr": "Interview with Our Head Designer",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Full content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 42,
+    "fields": {
+        "action_time": "2026-10-20T19:27:00.750Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "7",
+        "object_repr": "We've Moved to a Larger Showroom",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Full content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 43,
+    "fields": {
+        "action_time": "2026-10-20T19:27:48.142Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "10",
+        "object_repr": "Workshop for DIY Enthusiasts",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 44,
+    "fields": {
+        "action_time": "2026-10-20T19:28:01.829Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "3",
+        "object_repr": "Do you want it?",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Full content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 45,
+    "fields": {
+        "action_time": "2026-10-20T19:46:55.570Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "10",
+        "object_repr": "Workshop for DIY Enthusiasts",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Short content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 46,
+    "fields": {
+        "action_time": "2026-10-20T19:51:30.801Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "8",
+        "object_repr": "New Oak Collection LaunchedI",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Short content\", \"Full content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 47,
+    "fields": {
+        "action_time": "2026-10-20T19:52:06.767Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "4",
+        "object_repr": "Factory Expansion Completed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Short content\", \"Full content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 48,
+    "fields": {
+        "action_time": "2026-10-20T19:52:46.465Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "10",
+        "object_repr": "Award for Sustainable Design",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Short content\", \"Full content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 49,
+    "fields": {
+        "action_time": "2026-10-20T19:53:09.800Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "6",
+        "object_repr": "Winter Sale Starts Today",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Short content\", \"Full content\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 50,
+    "fields": {
+        "action_time": "2026-10-20T19:55:05.868Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "4",
+        "object_repr": "Factory Expansion Completed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 51,
+    "fields": {
+        "action_time": "2026-10-20T19:56:03.687Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "10",
+        "object_repr": "Award for Sustainable Design",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 52,
+    "fields": {
+        "action_time": "2026-10-20T19:56:35.752Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "9",
+        "object_repr": "Free Delivery on Orders Over $500",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 53,
+    "fields": {
+        "action_time": "2026-10-20T19:57:21.409Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "3",
+        "object_repr": "Do you want it?",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 54,
+    "fields": {
+        "action_time": "2026-10-20T19:57:54.318Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "2",
+        "object_repr": "They are gonna dissapear!",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Full content\", \"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 55,
+    "fields": {
+        "action_time": "2026-10-20T19:58:23.626Z",
+        "user": 1,
+        "content_type": 13,
+        "object_id": "1",
+        "object_repr": "New design - Boompala!",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Full content\", \"Image\"]}}]"
+    }
+},
+{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -1134,7 +1524,24 @@
     "fields": {
         "name": "Employee",
         "permissions": [
+            84,
+            88,
+            28,
+            72,
+            33,
+            34,
+            35,
             36,
+            37,
+            38,
+            39,
+            40,
+            44,
+            64,
+            68,
+            45,
+            46,
+            47,
             48
         ]
     }
@@ -1144,7 +1551,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$1000000$kpT7xviV3GMoIoj742dV9j$20MtHjU/cFLA0UDhg540i8dfwSKPimj9ehsalxN0Opw=",
-        "last_login": "2026-09-13T15:07:12.878Z",
+        "last_login": "2026-10-20T19:26:08.888Z",
         "is_superuser": true,
         "username": "maria",
         "first_name": "",
@@ -1162,16 +1569,18 @@
     "pk": 9,
     "fields": {
         "password": "pbkdf2_sha256$1000000$jDoEymGXQKIuHYUdULBvcw$P4hsm8Q5QeH8aZ8PpIwpQbbsSs9BRyJYSd+lYezt9bI=",
-        "last_login": "2026-09-13T11:35:48.695Z",
+        "last_login": "2026-10-01T16:06:50.732Z",
         "is_superuser": false,
         "username": "emp",
         "first_name": "",
         "last_name": "",
         "email": "",
-        "is_staff": false,
+        "is_staff": true,
         "is_active": true,
-        "date_joined": "2026-06-06T22:14:42.561Z",
-        "groups": [],
+        "date_joined": "2026-06-06T22:14:42Z",
+        "groups": [
+            2
+        ],
         "user_permissions": []
     }
 },
@@ -1186,7 +1595,7 @@
         "first_name": "",
         "last_name": "",
         "email": "",
-        "is_staff": false,
+        "is_staff": true,
         "is_active": true,
         "date_joined": "2026-06-07T12:01:11Z",
         "groups": [
@@ -1200,7 +1609,7 @@
     "pk": 11,
     "fields": {
         "password": "pbkdf2_sha256$1000000$sDZ8v84CHWnMUUOpOdUEh8$i3/cgLYcU+wdq+Kz7tGnJZfSRWGGGFffAMP5fI79g0s=",
-        "last_login": "2026-09-13T11:39:08.745Z",
+        "last_login": "2026-10-19T20:52:48.989Z",
         "is_superuser": false,
         "username": "cool_girl",
         "first_name": "",
@@ -1753,10 +2162,34 @@
 },
 {
     "model": "sessions.session",
-    "pk": "kxjcnzpjnjt5q9ogg3zwvfstidfxm6fj",
+    "pk": "ctuh3nvivia5id0l6it4etjt8iwm8s2m",
     "fields": {
-        "session_data": ".eJxVjMsOwiAQRf-FtSEC5TEu3fsNZGAYqRqalHZl_HfbpAvd3nPOfYuI61Lj2sscRxIXocTpd0uYn6XtgB7Y7pPMU1vmMcldkQft8jZReV0P9--gYq9bzej5nFzhYD3BQEqZ5AflEmgNWnHRYAKE5Fh7yJYBiVBZs3VoQmbx-QLkdzgg:1x5lnU:B4zcq4MENIzjbTIg2C_Bw0VoRe4eTXCulvHrsxjEcoc",
-        "expire_date": "2026-09-27T15:07:12.879Z"
+        "session_data": ".eJxVjEEOwiAQRe_C2hAg0-nUpXvPQAYYpGogKe3KeHdt0oVu_3vvv5TnbS1-67L4OamzsladfsfA8SF1J-nO9dZ0bHVd5qB3RR-062tL8rwc7t9B4V6-NVlgK5BHMgYdT3niRJQhhciRUCBksCzI4lyKY7QwoAEk4SEHJKPeHxh0OJY:1x6Eb1:WgaXQP9CaA9ntOV3xGRaHjJ54yuPuWGqZNGDFeoo2Dc",
+        "expire_date": "2026-09-28T21:52:15.561Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "ep9et9k4pq8dxabv9wwi1ttpzn7m6ahp",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2hAg0-nUpXvPQAYYpGogKe3KeHdt0oVu_3vvv5TnbS1-67L4OamzsladfsfA8SF1J-nO9dZ0bHVd5qB3RR-062tL8rwc7t9B4V6-NVlgK5BHMgYdT3niRJQhhciRUCBksCzI4lyKY7QwoAEk4SEHJKPeHxh0OJY:1xCRRN:ZBxYwaUQYp3-jeYxGxHRD4LIIz5dYX6aIYavVY-qyU0",
+        "expire_date": "2026-10-16T00:47:57.108Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "fh5znjqlwtx49bgfuxaf8hlidnyfozd3",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSEC5TEu3fsNZGAYqRqalHZl_HfbpAvd3nPOfYuI61Lj2sscRxIXocTpd0uYn6XtgB7Y7pPMU1vmMcldkQft8jZReV0P9--gYq9bzej5nFzhYD3BQEqZ5AflEmgNWnHRYAKE5Fh7yJYBiVBZs3VoQmbx-QLkdzgg:1xJFTM:Ez8eSqYhfCQH-ZLa2B7kaB4k2Q6sMqoVX_3olEUWQdY",
+        "expire_date": "2026-11-03T19:26:08.889Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "h7u6bd4q358y0px2bsmsge00ezpm6ta5",
+    "fields": {
+        "session_data": ".eJxVjDkOwjAURO_iGlmWvMWU9JzB-v4LDqBYipMq4u4kUgpoppj3ZjaVYV1qXjvPeSR1VUldfrsC-OLpAPSE6dE0tmmZx6IPRZ-063sjft9O9--gQq_7GmAQb_dwxkNKjEwIsbCzIXKSEC078MFIHBybYAWLRPDiCQ1JQfX5AhPCOW4:1x7ASb:NsfMq78zKH0VxytpeXBlL4pLgpL7V1W1bZG8NhhNiPU",
+        "expire_date": "2026-10-01T11:39:25.445Z"
     }
 },
 {
@@ -2026,7 +2459,7 @@
         "title": "Bathroom Vanity",
         "design": 10,
         "price": "210.00",
-        "in_production": true,
+        "in_production": false,
         "image": "furniture/images/furn1.avif",
         "product_code": "ECO-009",
         "type": [
@@ -2041,7 +2474,7 @@
         "title": "Ergonomic Desk",
         "design": 9,
         "price": "350.00",
-        "in_production": true,
+        "in_production": false,
         "image": "furniture/images/furn1_gsyzVBQ.avif",
         "product_code": "ART -010",
         "type": [
@@ -2446,7 +2879,8 @@
         "furniture": 9,
         "quantity": 3,
         "order_date": "2026-01-01",
-        "delivery_date": "2026-04-01"
+        "delivery_date": "2026-04-01",
+        "status": "delivered"
     }
 },
 {
@@ -2457,7 +2891,8 @@
         "furniture": 5,
         "quantity": 2,
         "order_date": "2026-03-17",
-        "delivery_date": "2026-08-10"
+        "delivery_date": "2026-08-10",
+        "status": "delivered"
     }
 },
 {
@@ -2468,7 +2903,8 @@
         "furniture": 6,
         "quantity": 1,
         "order_date": "2024-09-02",
-        "delivery_date": "2024-12-02"
+        "delivery_date": "2024-12-02",
+        "status": "delivered"
     }
 },
 {
@@ -2479,7 +2915,8 @@
         "furniture": 7,
         "quantity": 3,
         "order_date": "2025-02-06",
-        "delivery_date": "2025-09-01"
+        "delivery_date": "2025-09-01",
+        "status": "delivered"
     }
 },
 {
@@ -2490,7 +2927,8 @@
         "furniture": 8,
         "quantity": 5,
         "order_date": "2024-01-31",
-        "delivery_date": "2024-07-04"
+        "delivery_date": "2024-07-04",
+        "status": "delivered"
     }
 },
 {
@@ -2501,7 +2939,8 @@
         "furniture": 9,
         "quantity": 2,
         "order_date": "2026-02-11",
-        "delivery_date": "2026-06-06"
+        "delivery_date": "2026-06-06",
+        "status": "delivered"
     }
 },
 {
@@ -2512,7 +2951,8 @@
         "furniture": 10,
         "quantity": 4,
         "order_date": "2025-03-10",
-        "delivery_date": "2025-07-14"
+        "delivery_date": "2025-07-14",
+        "status": "delivered"
     }
 },
 {
@@ -2523,7 +2963,8 @@
         "furniture": 1,
         "quantity": 6,
         "order_date": "2026-06-01",
-        "delivery_date": "2026-09-01"
+        "delivery_date": "2026-09-01",
+        "status": "delivered"
     }
 },
 {
@@ -2534,7 +2975,8 @@
         "furniture": 2,
         "quantity": 3,
         "order_date": "2026-06-03",
-        "delivery_date": "2026-09-03"
+        "delivery_date": "2026-09-03",
+        "status": "delivered"
     }
 },
 {
@@ -2545,7 +2987,8 @@
         "furniture": 3,
         "quantity": 7,
         "order_date": "2026-06-05",
-        "delivery_date": "2026-09-05"
+        "delivery_date": "2026-09-05",
+        "status": "delivered"
     }
 },
 {
@@ -2556,7 +2999,8 @@
         "furniture": 6,
         "quantity": 2,
         "order_date": "2026-06-07",
-        "delivery_date": "2026-10-19"
+        "delivery_date": "2026-10-19",
+        "status": "new"
     }
 },
 {
@@ -2567,7 +3011,56 @@
         "furniture": 3,
         "quantity": 1,
         "order_date": "2026-09-13",
-        "delivery_date": "2026-09-20"
+        "delivery_date": "2026-09-20",
+        "status": "delivered"
+    }
+},
+{
+    "model": "main.order",
+    "pk": 18,
+    "fields": {
+        "client": 1,
+        "furniture": 1,
+        "quantity": 4,
+        "order_date": "2026-10-01",
+        "delivery_date": "2028-02-03",
+        "status": "new"
+    }
+},
+{
+    "model": "main.order",
+    "pk": 19,
+    "fields": {
+        "client": 1,
+        "furniture": 9,
+        "quantity": 1,
+        "order_date": "2026-10-01",
+        "delivery_date": "2026-10-08",
+        "status": "new"
+    }
+},
+{
+    "model": "main.order",
+    "pk": 20,
+    "fields": {
+        "client": 1,
+        "furniture": 6,
+        "quantity": 2,
+        "order_date": "2026-10-01",
+        "delivery_date": "2026-10-08",
+        "status": "new"
+    }
+},
+{
+    "model": "main.order",
+    "pk": 21,
+    "fields": {
+        "client": 1,
+        "furniture": 3,
+        "quantity": 1,
+        "order_date": "2026-10-01",
+        "delivery_date": "2026-10-08",
+        "status": "new"
     }
 },
 {
@@ -2576,8 +3069,8 @@
     "fields": {
         "title": "New design - Boompala!",
         "short_content": "Boompala is last work of the most famous desingner in the world.",
-        "full_content": "Government try turn could culture. Particular here back.\n\nStore all clear street read ready. Push political campaign third.\n\nWeight father per check history report run detail. Usually big song west popular our child appear.",
-        "image": "news_images/news_image_1_vfvJ7h2.jpg",
+        "full_content": "Government try turn could culture. Particular here back.\r\n\r\nStore all clear street read ready. Push political campaign third.\r\n\r\nWeight father per check history report run detail. Usually big song west popular our child appear.",
+        "image": "news_images/warum-designermobel-mehr-sind-als-nur-mobel-qualitat-kunst-und-ethik-im-fok_7euvgQM.webp",
         "created_date": "2026-05-27"
     }
 },
@@ -2587,8 +3080,8 @@
     "fields": {
         "title": "They are gonna dissapear!",
         "short_content": "There are just several models of out favorite design!",
-        "full_content": "Him color politics very hear our. Measure surface perform particular father enter same reveal. Yourself likely check step.\n\nSkin beat source scientist cold training. Remain article wind entire. Large room wonder community.\n\nInstitution fall attack institution bag suddenly start. During health shoulder office consider fear.",
-        "image": "news_images/news_image_3_wcfENyV.jpg",
+        "full_content": "Him color politics very hear our. Measure surface perform particular father enter same reveal. Yourself likely check step.\r\n\r\nSkin beat source scientist cold training. Remain article wind entire. Large room wonder community.\r\n\r\nInstitution fall attack institution bag suddenly start. During health shoulder office consider fear.",
+        "image": "news_images/nbkj.jpeg",
         "created_date": "2026-05-27"
     }
 },
@@ -2598,8 +3091,8 @@
     "fields": {
         "title": "Do you want it?",
         "short_content": "We are thinking about recreating our past designs. Write us which favorite were for you!",
-        "full_content": "Prevent surface they rule some.\n\nThroughout painting a free just charge who. Customer wait nearly place. Whose today guess piece pay.\n\nReturn eight those wife hear size song her. Along wonder manage. Real might near involve.",
-        "image": "news_images/news_image_2_oY0Wfcx.jpg",
+        "full_content": "Prevent surface they rule some. Throughout painting a free just charge who. Customer wait nearly place. Whose today guess piece pay. Return eight those wife hear size song her. Along wonder manage. Real might near involve.",
+        "image": "news_images/Do_you_want_it.jpeg",
         "created_date": "2026-05-27"
     }
 },
@@ -2607,10 +3100,10 @@
     "model": "main.news",
     "pk": 4,
     "fields": {
-        "title": "New Collection: Scandinavian Comfort",
-        "short_content": "Discover our latest line of cozy sofas and armchairs inspired by Nordic design.",
-        "full_content": "Case animal doctor over campaign seven. Power conference artist true consider describe set.\n\nCan general commercial with owner. Way those school call possible surface.\n\nNot continue million view trial. Nearly report region determine create anything.",
-        "image": "news_images/news_image_1_f0X5bc2.jpg",
+        "title": "Factory Expansion Completed",
+        "short_content": "We have completed a major expansion of our production facility, adding 800 square meters and new CNC machinery to meet growing demand and shorten delivery times.",
+        "full_content": "After six months of construction, our factory expansion is now complete. The new 800-square-meter production hall houses state-of-the-art CNC machinery, automated cutting systems, and an expanded finishing area.\r\n\r\nThis investment doubles our production capacity and reduces average delivery times from four weeks to two. It also creates twelve new jobs in the local community, including positions for skilled carpenters and CNC operators.\r\n\r\nThe expansion was designed with sustainability in mind: energy-efficient LED lighting, improved dust extraction, and a new ventilation system that keeps the air clean and safe for our team.\r\n\r\nWe are grateful to our clients whose trust made this growth possible. The first orders from the new line will ship next week.",
+        "image": "news_images/Factory_Expansion_Completed.jpeg",
         "created_date": "2026-06-07"
     }
 },
@@ -2629,9 +3122,9 @@
     "model": "main.news",
     "pk": 6,
     "fields": {
-        "title": "Seasonal Sale Up to 30% off!",
-        "short_content": "Limited time offer on selected bedroom sets.",
-        "full_content": "Appear whole land fact game election happy can. Type relate remember grow.\n\nBudget give enough us sea ability. Forget him power tough board human science. Away like across matter include reach. Address girl million energy.\n\nWord section answer. Data experience interesting late film city culture face. Pick first government near human.",
+        "title": "Winter Sale Starts Today",
+        "short_content": "Our annual Winter Sale begins today, offering up to 30% off selected dining sets, bedroom furniture, and office chairs through the end of January.",
+        "full_content": "The most wonderful time of the year has arrived at Furniture Factory — our annual Winter Sale is now live.\r\n\r\nFrom today until January 31, selected dining sets, bedroom furniture, office chairs, and accessories are available with discounts of up to 30%. Highlights include:\r\n\r\n- Oak dining tables — 25% off\r\n- Nordic-style beds — 20% off\r\n- Ergonomic office chairs — 30% off\r\n- Modular shelving systems — 15% off\r\n\r\nAll discounted items come with our standard three-year warranty and free delivery within the city. The sale applies both in our showroom and in the online catalog.\r\n\r\nStock is limited, so we recommend visiting early. Our team is happy to help you find the perfect piece for your home.\r\n\r\nWarm wishes for the season from everyone at Furniture Factory.",
         "image": "news_images/news_image_2_ToAFIsu.jpg",
         "created_date": "2026-06-07"
     }
@@ -2642,7 +3135,7 @@
     "fields": {
         "title": "We've Moved to a Larger Showroom",
         "short_content": "Visit our new location at 456 Furniture Ave, Minsk.",
-        "full_content": "Return nor than lot. Section trip before charge home nature event.\n\nNotice office share word report would amount. Up five day throughout. Economy within total or.\n\nProcess class but could once great challenge how. Cold accept gun road. Exist look reduce mission matter development.",
+        "full_content": "Return nor than lot. Section trip before charge home nature event. Notice office share word report would amount. Up five day throughout. Economy within total or. Process class but could once great challenge how. Cold accept gun road. Exist look reduce mission matter development.",
         "image": "news_images/news_image_1_1r77AkB.jpg",
         "created_date": "2026-06-07"
     }
@@ -2651,9 +3144,9 @@
     "model": "main.news",
     "pk": 8,
     "fields": {
-        "title": "Interview with Our Head Designer",
-        "short_content": "Read about the creative process behind our bestsellers.",
-        "full_content": "Consider general expect course one recently. Family want help morning.\n\nSize pay before hundred happy finally value. Computer pull already on program ready political.\n\nReturn out both. Memory reality hot stuff require soon remember.",
+        "title": "New Oak Collection LaunchedI",
+        "short_content": "Our new Solid Oak Collection brings warmth and durability to every room, featuring hand-finished dining tables, chairs, and cabinets crafted from sustainably sourced timber.",
+        "full_content": "We are thrilled to announce the launch of our Solid Oak Collection, a carefully curated line of furniture that celebrates the natural beauty of sustainably sourced oak.\r\n\r\nEach piece is crafted in our workshop by experienced carpenters who understand the character of the wood. From the grain patterns to the final oil finish, every detail is considered. The collection includes dining tables, chairs, cabinets, and sideboards, all designed to age gracefully and become family heirlooms.\r\n\r\nThe oak we use is harvested from certified forests, ensuring that every piece contributes to responsible forest management. We finish each surface with natural oils that protect the wood while allowing it to breathe.\r\n\r\nThe Solid Oak Collection is available now in our showroom and online catalog. Visit us to experience the warmth and quality firsthand.",
         "image": "news_images/news_image_3_DYWkXkG.jpg",
         "created_date": "2026-06-07"
     }
@@ -2664,8 +3157,8 @@
     "fields": {
         "title": "Free Delivery on Orders Over $500",
         "short_content": "Enjoy free shipping within Minsk until the end of the month.",
-        "full_content": "City appear else wonder window. Continue least what give throughout military. Space its cup beautiful add foreign beautiful own.\n\nPicture field executive team enough. Raise writer bank follow partner foot southern.\n\nActually affect paper one peace past paper. Try eat provide improve with. Every difference alone central itself while.",
-        "image": "news_images/news_image_2_ntrVQWK.jpg",
+        "full_content": "City appear else wonder window. Continue least what give throughout military. Space its cup beautiful add foreign beautiful own. Picture field executive team enough. Raise writer bank follow partner foot southern. Actually affect paper one peace past paper. Try eat provide improve with. Every difference alone central itself while.",
+        "image": "news_images/Free_Delivery_on_Orders_Over_500.jpeg",
         "created_date": "2026-06-07"
     }
 },
@@ -2673,10 +3166,10 @@
     "model": "main.news",
     "pk": 10,
     "fields": {
-        "title": "Workshop for DIY Enthusiasts",
-        "short_content": "Learn how to restore old furniture. Register now!",
-        "full_content": "Personal woman popular. Part next draw four article federal energy.\r\n\r\nHappen table final age memory offer pretty name. Down artist seat run star provide.\r\n\r\nAfter receive my choose. Per certainly attack relate thing smile. Partner sister leg matter former minute large.",
-        "image": "news_images/news_image_1_nQaAcFS.jpg",
+        "title": "Award for Sustainable Design",
+        "short_content": "Furniture Factory received the Green Design Award at the International Furniture Fair for our zero-waste production system and use of recycled materials.",
+        "full_content": "We are proud to announce that Furniture Factory has been awarded the Green Design Award at this year's International Furniture Fair in Milan.\r\n\r\nThe jury recognized our commitment to sustainable production: 94% of our wood waste is now recycled into new components or converted into biomass fuel, and all our packaging is fully biodegradable. Our \"Second Life\" program also gives customers the option to return old furniture for refurbishment instead of disposal.\r\n\r\nThis award belongs to our entire team — designers, carpenters, and engineers — who worked hard over the past two years to rethink our production process from the ground up.\r\n\r\nWe will continue to invest in eco-friendly materials, reduce energy consumption, and explore new ways to make beautiful furniture without compromising the planet.",
+        "image": "news_images/eco-friendly-crystal-awards.png",
         "created_date": "2026-06-07"
     }
 },
@@ -3187,6 +3680,42 @@
         "name": "Pupsik",
         "logo": "partners/logos/pupsik.png",
         "website": "https://www.pinterest.com/babiesdotcom/"
+    }
+},
+{
+    "model": "main.partner",
+    "pk": 2,
+    "fields": {
+        "name": "Barbie",
+        "logo": "partners/logos/barbie_cOz4rTl.jpg",
+        "website": "https://www.warnerbros.com/movies/barbie"
+    }
+},
+{
+    "model": "main.partner",
+    "pk": 3,
+    "fields": {
+        "name": "Bratz",
+        "logo": "partners/logos/bratz_TkmqI8J.jpeg",
+        "website": "https://www.bratz.com/?srsltid=AU7gw4W0SvqglRFk_3u4JhDkX0H9bWDe3bIX6L-heVqwUuYksuVcxBea"
+    }
+},
+{
+    "model": "main.partner",
+    "pk": 4,
+    "fields": {
+        "name": "Monster High",
+        "logo": "partners/logos/monsterhigh_pT4yf1d.webp",
+        "website": "https://creations.mattel.com/pages/monster-high"
+    }
+},
+{
+    "model": "main.partner",
+    "pk": 5,
+    "fields": {
+        "name": "Winx",
+        "logo": "partners/logos/winx_euBcnxq.webp",
+        "website": "https://www.winxclub.com/"
     }
 },
 {
