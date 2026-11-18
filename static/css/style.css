@@ -2370,3 +2370,134 @@ button:disabled      {
 .admin-slider-controls button:hover {
     background-color: #05a88a;
 }
+
+/* ========================== ТЁМНАЯ ТЕМА (DARK MODE) ========================== */
+
+html[data-theme="dark"] body {
+    background-color: #121212;
+    background-image: none; /* Убираем светлый фоновый рисунок */
+    color: #e0e0e0;
+}
+
+/* Шапка и сайдбар */
+html[data-theme="dark"] header {
+    background-color: #1f1f1f;
+    border-bottom: 1px solid #333;
+}
+
+html[data-theme="dark"] .main-nav {
+    background-color: #252a34;
+}
+
+html[data-theme="dark"] .main-nav a,
+html[data-theme="dark"] aside a,
+html[data-theme="dark"] .nav-auth button {
+    background-color: #2d333b;
+    color: #64ffda;
+    border: 1px solid #444;
+}
+
+html[data-theme="dark"] .main-nav a:hover,
+html[data-theme="dark"] aside a:hover,
+html[data-theme="dark"] .nav-auth button:hover {
+    background-color: #373e47;
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .nav-user {
+    color: #80cbc4;
+}
+
+html[data-theme="dark"] aside {
+    background: linear-gradient(180deg, #1e242b 0%, #252525 100%);
+    border: 1px solid #333;
+}
+
+/* Основной блок контента и футер */
+html[data-theme="dark"] main {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #2c2c2c;
+}
+
+html[data-theme="dark"] footer {
+    background-color: #1a1a1a;
+    color: #9e9e9e;
+    border-top: 1px solid #333;
+}
+
+/* Заголовки и ссылки */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3 {
+    color: #64ffda;
+}
+
+html[data-theme="dark"] a:link {
+    color: #4db6ac;
+}
+
+html[data-theme="dark"] a:visited {
+    color: #b39ddb;
+}
+
+html[data-theme="dark"] a:hover {
+    color: #80cbc4;
+}
+
+/* Карточки, новости, FAQ, отзывы, промокоды, сотрудники */
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .catalog-section,
+html[data-theme="dark"] .catalog-card,
+html[data-theme="dark"] .news-card,
+html[data-theme="dark"] .news,
+html[data-theme="dark"] .faq-item,
+html[data-theme="dark"] .employee-card,
+html[data-theme="dark"] .vacancy-card,
+html[data-theme="dark"] .review-item,
+html[data-theme="dark"] .promo-card,
+html[data-theme="dark"] .timezone-info,
+html[data-theme="dark"] .admin-slider-controls,
+html[data-theme="dark"] #my-image-slider.custom-slider-container {
+    background-color: #252525 !important;
+    color: #e0e0e0 !important;
+    border-color: #383838 !important;
+}
+
+html[data-theme="dark"] .lead-text,
+html[data-theme="dark"] .news-article-lead,
+html[data-theme="dark"] .employee-duties,
+html[data-theme="dark"] .requisites,
+html[data-theme="dark"] .history-list li,
+html[data-theme="dark"] .values-list li,
+html[data-theme="dark"] .contacts-list li {
+    background-color: #2c3036;
+    color: #d0d7de;
+}
+
+/* Таблицы */
+html[data-theme="dark"] .furniture-table tbody tr:nth-child(odd) td,
+html[data-theme="dark"] table tbody tr:nth-child(odd) td {
+    background-color: #262b33;
+    color: #e0e0e0;
+}
+
+html[data-theme="dark"] .furniture-table tbody tr:nth-child(even) td,
+html[data-theme="dark"] table tbody tr:nth-child(even) td {
+    background-color: #2f353f;
+    color: #e0e0e0;
+}
+
+html[data-theme="dark"] th,
+html[data-theme="dark"] td {
+    border-color: #444;
+}
+
+/* Поля ввода */
+html[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+    background-color: #2d333b;
+    color: #ffffff;
+    border-color: #444c56;
+}

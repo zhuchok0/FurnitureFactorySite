@@ -15,6 +15,15 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    
+    <!-- Мгновенная установка темы до отрисовки страницы, чтобы не было белой вспышки -->
+    <script>
+        if (localStorage.getItem('site-theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
 </head>
 
 <body>
@@ -33,6 +42,9 @@
         <a href="{% url 'reviews_list' %}">Reviews</a>
 
         <div class="nav-auth">
+            <!-- Кнопка переключения темы -->
+            <button type="button" id="theme-toggle" class="theme-toggle-btn" title="Переключить тему">🌙 Тёмная</button>
+
             {% if user.is_authenticated %}
                 <span class="nav-user">{{ user.get_username }}</span>
                 <form action="{% url 'logout' %}" method="post">
@@ -92,5 +104,7 @@
             © 2010 Furniture Factory
         </p>
     </footer>
+
+    <script src="{% static 'js/theme.js' %}"></script>
 </body>
 </html>
