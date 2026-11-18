@@ -1,5 +1,6 @@
-{% extends "base_generic.html" %}
 
+{% extends "base_generic.html" %}
+{% load static %}
 {% block title %}Home - Statistics{% endblock %}
 
 {% block content %} 
@@ -30,6 +31,84 @@
 
         </div>
     </section>
+
+    <!-- ПАНЕЛЬ АДМИНИСТРАТОРА: Управление задержкой слайдера (доступно только админам) -->
+    {% if user.is_authenticated and user.is_superuser or user.is_staff %}
+    <div class="admin-slider-controls">
+        <label for="slider-delay-input"><strong>Панель администратора:</strong> Время показа слайда (сек): </label>
+        <input type="number" id="slider-delay-input" value="5" min="1" max="60">
+        <button id="apply-delay-btn">Применить</button>
+    </div>
+    {% endif %}
+
+    <!-- СЛАЙДЕР КАРТИНОК (по 2 в полный размер) -->
+    <figure id="my-image-slider" class="custom-slider-container">
+        <div class="slider-slide">
+            <a href="#trap" target="_blank" rel="noopener noreferrer">
+                <picture>
+                    <source media="(max-width: 60em)" srcset="/media/add/design4.webp 600w">
+                    <img src="/media/add/design2.jpeg" alt="Design 1">
+                </picture>
+            </a>
+            <figcaption>Первый проект: Современный дизайн интерьера</figcaption>
+        </div>
+
+        <div class="slider-slide">
+            <a href="#trap" target="_blank" rel="noopener noreferrer">
+                <picture>
+                    <source media="(max-width: 60em)" srcset="/media/add/design5.webp 600w">
+                    <img src="/media/add/design3.jpg" alt="Design 2">
+                </picture>
+            </a>
+            <figcaption>Второй проект: Элегантная деревянная мебель</figcaption>
+        </div>
+
+        <div class="slider-slide">
+            <a href="#trap" target="_blank" rel="noopener noreferrer">
+                <picture>
+                    <source media="(max-width: 60em)" srcset="/media/add/design6.jpg 600w">
+                    <img src="/media/add/design7.jpg" alt="Design 3">
+                </picture>
+            </a>
+            <figcaption>Третий проект: Эксклюзивные комоды и полки</figcaption>
+        </div>
+
+        <div class="slider-slide">
+            <a href="#trap" target="_blank" rel="noopener noreferrer">
+                <picture>
+                    <source media="(max-width: 60em)" srcset="/media/add/design1.jpg 600w">
+                    <img src="/media/add/design8.jpg" alt="Design 4">
+                </picture>
+            </a>
+            <figcaption>Четвертый проект: Модульные системы</figcaption>
+        </div>
+    </figure>
+
+    <!-- Подключение скрипта слайдера -->
+    <script src="{% static 'js/slider.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const mySlider = new ImageSlider('#my-image-slider', {
+            loop: true,
+            navs: true,
+            pags: true,
+            auto: true,
+            stopMouseHover: true,
+            delay: 5,
+            visibleItems: 1 // <--- Теперь показываем строго по 1 картинке
+        });
+
+        const applyBtn = document.getElementById('apply-delay-btn');
+        const delayInput = document.getElementById('slider-delay-input');
+
+        if (applyBtn && delayInput) {
+            applyBtn.addEventListener('click', () => {
+                mySlider.setDelay(delayInput.value);
+                alert(`Время показа слайда изменено на ${delayInput.value} сек.`);
+            });
+        }
+    });
+    </script>
 
     <h2>What people say about us</h2>
 
@@ -122,48 +201,6 @@
             </div>
         </div>
     </article>
-
-    <figure>
-        <a href="#trap" target="_blank" rel="noopener noreferrer">
-            <picture>
-                <source media="(max-width: 60em)"
-                        sizes="(max-width: 30em) 100vw, 30vw"
-                        srcset="/media/add/design2.jpeg 600w">
-                <source media="(max-width: 80em)"
-                        sizes="(max-width: 60em) 100vw, 50vw"
-                        srcset="/media/add/design1.jpg 1600w">
-                <img src="/media/add/design4.webp"
-                    alt="Love kitties!">
-            </picture>
-        </a>
-        <a href="#trap" target="_blank" rel="noopener noreferrer">
-            <picture>
-                <source media="(max-width: 60em)"
-                        sizes="(max-width: 30em) 100vw, 30vw"
-                        srcset="/media/add/design3.jpg 600w">
-                <source media="(max-width: 80em)"
-                        sizes="(max-width: 60em) 100vw, 50vw"
-                        srcset="/media/add/design9.jpg 1600w">
-                <img src="/media/add/design5.webp"
-                    alt="Love kitties!">
-            </picture>
-        </a>
-        <a href="#trap" target="_blank" rel="noopener noreferrer">
-            <picture>
-                <source media="(max-width: 60em)"
-                        sizes="(max-width: 30em) 100vw, 30vw"
-                        srcset="/media/add/design7.jpg 600w">
-                <source media="(max-width: 80em)"
-                        sizes="(max-width: 60em) 100vw, 50vw"
-                        srcset="/media/add/design8.jpg 1600w">
-                <img src="/media/add/design6.jpg"
-                    alt="Love kitties!">
-            </picture>
-        </a>
-        <figcaption>
-            To see our furniture tap on the pictures
-        </figcaption>
-    </figure>
 
     {% if latest_news %}
     <div class="news" 

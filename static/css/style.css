@@ -325,7 +325,7 @@ figure figcaption {
 
 .typography-demo h2,
 .typography-demo h3 {
-   font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
     color: #003322;
     margin-top: 25px;
     margin-bottom: 12px;
@@ -2214,4 +2214,159 @@ button:disabled      {
     .furn-loader__block {
         animation: none;
     }
+}
+
+/* ========================== СЛАЙДЕР (ПО 1 КАРТИНКЕ НА ВЕСЬ ЭКРАН) ========================== */
+
+#my-image-slider.custom-slider-container {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 25px auto !important;
+    overflow: hidden !important;
+    border: 1px solid #e5d9c9 !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    padding: 15px 50px !important; /* Отступы под стрелки */
+    box-sizing: border-box !important;
+    display: block !important;
+}
+
+#my-image-slider .slider-track {
+    display: flex !important;
+    transition: transform 0.4s ease-in-out !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+/* Каждый слайд занимает ровно 100% ширины контейнера */
+#my-image-slider .slider-slide-item {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    list-style: none !important;
+}
+
+/* Крупная, полноразмерная картинка */
+#my-image-slider .slider-slide-item a {
+    display: block !important;
+    width: 100% !important;
+    height: 480px !important; /* Высота слайдера (можете скорректировать под себя) */
+    overflow: hidden !important;
+    border-radius: 8px !important;
+    margin: 0 auto !important;
+}
+
+#my-image-slider .slider-slide-item picture,
+#my-image-slider .slider-slide-item img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+#my-image-slider .slider-slide-item figcaption {
+    font-size: 14px !important;
+    color: #555 !important;
+    margin-top: 10px !important;
+    text-align: center !important;
+    font-style: italic !important;
+}
+
+/* Стрелки навигации */
+#my-image-slider .slider-btn {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: rgba(6, 139, 115, 0.85) !important;
+    color: white !important;
+    border: none !important;
+    font-size: 20px !important;
+    padding: 10px 14px !important;
+    cursor: pointer !important;
+    border-radius: 50% !important;
+    z-index: 20 !important;
+}
+
+#my-image-slider .slider-btn-prev { left: 12px !important; }
+#my-image-slider .slider-btn-next { right: 12px !important; }
+
+#my-image-slider .slider-btn:hover {
+    background: #05a88a !important;
+}
+
+/* Счетчик (например, 1/3, 2/3, 3/3) */
+#my-image-slider .slider-counter {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    background: rgba(0, 0, 0, 0.65) !important;
+    color: white !important;
+    padding: 4px 10px !important;
+    font-size: 13px !important;
+    border-radius: 4px !important;
+    z-index: 20 !important;
+}
+
+/* Пагинация (точки) */
+#my-image-slider .slider-pagination {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-top: 15px !important;
+}
+
+#my-image-slider .slider-dot {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    border: 1px solid #068b73 !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+}
+
+#my-image-slider .slider-dot.active {
+    background: #068b73 !important;
+}
+
+/* ========================== ПАНЕЛЬ АДМИНИСТРАТОРА ========================== */
+
+.admin-slider-controls {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 12px 18px;
+    background: #f0f8ff;
+    border: 1px solid #99caf2;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.admin-slider-controls input[type="number"] {
+    width: 70px;
+    padding: 6px;
+    border: 1px solid #068b73;
+    border-radius: 6px;
+}
+
+.admin-slider-controls button {
+    padding: 6px 14px;
+    background-color: #068b73;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-slider-controls button:hover {
+    background-color: #05a88a;
 }
