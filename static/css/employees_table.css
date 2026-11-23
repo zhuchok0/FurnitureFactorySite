@@ -1,0 +1,253 @@
+
+/* -------------------------- EMPLOYEES TABLE PAGE -------------------------- */
+
+.employees-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #068b73;
+}
+
+.employees-page-header h1 {
+    margin: 0;
+    color: #003322;
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+.employees-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    background-color: #f0f8ff;
+    border: 1px solid #d0e7f5;
+    border-left: 4px solid #068b73;
+    border-radius: 10px;
+}
+
+.employees-controls input[type="text"] {
+    flex: 1 1 220px;
+    min-width: 180px;
+    padding: 8px 12px;
+    background-color: #ffffff;
+    border: 1px solid #99caf2;
+    border-radius: 6px;
+}
+
+.emp-btn {
+    padding: 8px 16px;
+    background-color: #068b73;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.15s;
+}
+
+.emp-btn:hover:not(:disabled) {
+    background-color: #05a88a;
+    transform: translateY(-1px);
+}
+
+.emp-btn--secondary {
+    background-color: #3987d7;
+}
+
+.emp-btn--secondary:hover:not(:disabled) {
+    background-color: #2d73ba;
+}
+
+/* Выпадающая форма добавления */
+.emp-form-container {
+    display: none;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #d0e7f5;
+    border-left: 4px solid #068b73;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(6, 139, 115, 0.08);
+}
+
+.emp-form-container.active {
+    display: block;
+}
+
+.emp-form-container h3 {
+    margin-top: 0;
+    color: #003322;
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+.emp-form-group {
+    margin-bottom: 12px;
+}
+
+.emp-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #003322;
+}
+
+.emp-form-group input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-error {
+    border: 1px solid #e05353 !important;
+    background-color: #ffe6e6 !important;
+}
+
+.error-message {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #c62828;
+}
+
+/* Таблица: белый фон по умолчанию, смена цвета при наведении на строку */
+.employees-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(6, 139, 115, 0.08);
+}
+
+.employees-data-table thead th {
+    background-color: #068b73;
+    color: #ffffff;
+    padding: 12px 10px;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #057560;
+}
+
+.employees-data-table thead th:first-child {
+    cursor: default;
+    text-align: center;
+    width: 44px;
+}
+
+.employees-data-table tbody td {
+    background-color: #ffffff;
+    color: #333333;
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    vertical-align: middle;
+    transition: background-color 0.18s ease;
+}
+
+.employees-data-table tbody td:first-child {
+    text-align: center;
+}
+
+.employees-data-table tbody tr {
+    cursor: pointer;
+}
+
+.employees-data-table tbody tr:hover td {
+    background-color: #e6f7f3;
+}
+
+.employees-data-table tbody tr td img {
+    display: block;
+    width: 54px;
+    height: 54px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #99caf2;
+}
+
+.sort-indicator {
+    margin-left: 6px;
+    font-size: 12px;
+}
+
+/* Пагинация */
+.emp-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.emp-pagination button {
+    padding: 6px 12px;
+    background-color: #ffffff;
+    color: #003322;
+    border: 1px solid #99caf2;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.emp-pagination button:hover {
+    background-color: #e6f3ff;
+}
+
+.emp-pagination button.active {
+    background-color: #068b73;
+    color: #ffffff;
+    border-color: #068b73;
+}
+
+/* Блоки деталей и премирования под таблицей */
+.emp-info-card {
+    margin-top: 22px;
+    padding: 18px 22px;
+    background-color: #ffffff;
+    border: 1px solid #d0e7f5;
+    border-left: 4px solid #068b73;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(6, 139, 115, 0.08);
+}
+
+.emp-info-card h3 {
+    margin-top: 0;
+    color: #003322;
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Тёмная тема для страницы сотрудников */
+html[data-theme="dark"] .employees-data-table,
+html[data-theme="dark"] .employees-data-table tbody td {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #3a3a3a;
+}
+
+html[data-theme="dark"] .employees-data-table tbody tr:hover td {
+    background-color: #273b37;
+}
+
+html[data-theme="dark"] .employees-controls,
+html[data-theme="dark"] .emp-form-container,
+html[data-theme="dark"] .emp-info-card {
+    background-color: #252525;
+    color: #e0e0e0;
+    border-color: #383838;
+}
+
+html[data-theme="dark"] .emp-pagination button {
+    background-color: #2d333b;
+    color: #e0e0e0;
+    border-color: #444c56;
+}
+
+html[data-theme="dark"] .emp-pagination button.active {
+    background-color: #068b73;
+    color: #ffffff;
+    border-color: #068b73;
+}

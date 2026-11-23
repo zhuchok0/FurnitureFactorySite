@@ -64,6 +64,7 @@
             <li><a href="{% url 'promocodes_list' %}">Promo Codes</a></li>
             <li><a href="{% url 'catalog' %}">Catalog</a></li>
             <li><a href="{%url 'form_demo' %}">Demo form</a></li>
+            <li><a href="{% url 'employees_page' %}">Employees Table</a></li>
                 
             {% if user.is_superuser or user.is_staff %}
                 <li><br></li>

@@ -1,0 +1,85 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block title %}Employees - Furniture Factory{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/employees_table.css' %}">
+
+    <div class="employees-page-header">
+        <h1>Employees Directory</h1>
+    </div>
+
+    <div class="employees-controls">
+        <button type="button" id="toggle-form-btn" class="emp-btn">Добавить</button>
+        <input type="text" id="search-input" placeholder="Введите текст для фильтрации...">
+        <button type="button" id="search-btn" class="emp-btn emp-btn--secondary">Найти</button>
+        <button type="button" id="premiate-btn" class="emp-btn">Премировать</button>
+    </div>
+
+    <div class="emp-form-container" id="form-container">
+        <h3>Добавление сотрудника</h3>
+        <form id="add-employee-form">
+            <div class="emp-form-group">
+                <label for="inp-fullname">ФИО:</label>
+                <input type="text" id="inp-fullname" required>
+            </div>
+            <div class="emp-form-group">
+                <label for="inp-url">URL описания работ (например, http://site.ru/index.php):</label>
+                <input type="text" id="inp-url" required>
+                <span class="error-message" id="err-url"></span>
+            </div>
+            <div class="emp-form-group">
+                <label for="inp-phone">Телефон:</label>
+                <input type="text" id="inp-phone" required placeholder="+375 (29) 111-22-33 или 80291112233">
+                <span class="error-message" id="err-phone"></span>
+            </div>
+            <div class="emp-form-group">
+                <label for="inp-email">Почта:</label>
+                <input type="email" id="inp-email" required>
+            </div>
+            <button type="submit" id="submit-btn" class="emp-btn" disabled>Добавить в таблицу</button>
+        </form>
+        <p id="validation-summary" style="margin-top: 10px; font-weight: 600;"></p>
+    </div>
+
+    <div id="loader" class="furn-loader" aria-label="Loading" role="status" style="display: none;">
+        <div class="furn-loader__blocks" aria-hidden="true">
+            <span class="furn-loader__block furn-loader__block--red"></span>
+            <span class="furn-loader__block furn-loader__block--yellow"></span>
+            <span class="furn-loader__block furn-loader__block--blue"></span>
+            <span class="furn-loader__block furn-loader__block--green"></span>
+        </div>
+        <p class="furn-loader__text">Загрузка данных...</p>
+    </div>
+
+    <div class="table-wrapper">
+        <table id="employees-table" class="employees-data-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all" aria-label="Выбрать всех"></th>
+                    <th data-sort="full_name">ФИО <span class="sort-indicator"></span></th>
+                    <th>Фото</th>
+                    <th data-sort="description">Описание выполняемых работ <span class="sort-indicator"></span></th>
+                    <th data-sort="phone">Телефон <span class="sort-indicator"></span></th>
+                    <th data-sort="email">Почта <span class="sort-indicator"></span></th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+    <div class="emp-pagination" id="pagination-container"></div>
+
+    <div class="emp-info-card" id="details-block" style="display: none;">
+        <h3>Детальная информация о сотруднике</h3>
+        <p id="details-content"></p>
+    </div>
+
+    <div class="emp-info-card" id="bonus-block" style="display: none;">
+        <h3>Премирование сотрудников</h3>
+        <p id="bonus-content"></p>
+    </div>
+
+    <script src="{% static 'js/employees.js' %}"></script>
+{% endblock %}

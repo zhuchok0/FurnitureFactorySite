@@ -950,3 +950,24 @@ def form_demo(request):
         'errors': errors,
         'submitted': request.method == 'POST' and not errors,
     })
+
+from django.http import JsonResponse
+
+def employees_api_view(request):
+    employees = Employee.objects.select_related('position').all()
+    data = []
+    for emp in employees:
+        data.append({
+            'id': emp.id,
+            'full_name': emp.full_name,
+            'first_name': emp.first_name,
+            'last_name': emp.last_name,
+            'photo': emp.photo.url if emp.photo else '',
+            'description': emp.position.name if emp.position else 'Сотрудник', # или описание из Position
+            'phone': emp.phone,
+            'email': emp.email,
+        })
+    return JsonResponse({'employees': data})
+
+def employees_page_view(request):
+    return render(request, 'employees_table.html')
