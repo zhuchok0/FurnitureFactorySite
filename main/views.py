@@ -599,33 +599,60 @@ def analytics_dashboard(request):
         
     return render(request, 'analytics_dashboard.html', context)
 
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
+PER_PAGE_OPTIONS = [3, 6, 9, 12]
+DEFAULT_PER_PAGE = 3
+
+
 def catalog(request):
     types = Type.objects.all().annotate(
         furniture_count=Count('furniture')
     ).order_by('name')
-    
+
     designs = Design.objects.all().annotate(
         furniture_count=Count('furniture')
     ).order_by('name')
-    
+
     sort_by = request.GET.get('sort', 'price_asc')
-    
-    if sort_by == 'price_asc':
-        furniture_list = Furniture.objects.all().order_by('price')
-    elif sort_by == 'price_desc':
-        furniture_list = Furniture.objects.all().order_by('-price')
+
+    if sort_by == 'price_desc':
+        furniture_qs = Furniture.objects.select_related('design').prefetch_related('type').order_by('-price', 'id')
     else:
-        furniture_list = Furniture.objects.all().order_by('price')
-    
-    for furniture in furniture_list:
+        sort_by = 'price_asc'
+        furniture_qs = Furniture.objects.select_related('design').prefetch_related('type').order_by('price', 'id')
+
+    per_page_raw = request.GET.get('per_page', str(DEFAULT_PER_PAGE))
+    try:
+        per_page = int(per_page_raw)
+    except (TypeError, ValueError):
+        per_page = DEFAULT_PER_PAGE
+
+    if per_page not in PER_PAGE_OPTIONS:
+        per_page = DEFAULT_PER_PAGE
+
+    paginator = Paginator(furniture_qs, per_page)
+    page_number = request.GET.get('page', 1)
+
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
+    for furniture in page_obj.object_list:
         furniture.type_names = ', '.join([t.name for t in furniture.type.all()])
         furniture.design_name = furniture.design.name if furniture.design else 'No design'
-    
+
     context = {
         'types': types,
         'designs': designs,
-        'furniture_list': furniture_list,
+        'page_obj': page_obj,
+        'furniture_list': page_obj.object_list,
         'sort_by': sort_by,
+        'per_page': per_page,
+        'per_page_options': PER_PAGE_OPTIONS,
     }
     return render(request, 'catalog.html', context)
 

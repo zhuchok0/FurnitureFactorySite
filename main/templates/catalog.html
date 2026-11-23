@@ -29,37 +29,163 @@
         </ul>
     </section>
 
-    <section class="catalog-section catalog-items-section">
+    <section class="catalog-section catalog-items-section" id="furniture-items-section">
         <h2>🪑 Furniture Items</h2>
 
-        <div class="catalog-sort">
-            <strong>Sort by price:</strong>
-            <a href="?sort=price_asc">↓ Low to High</a> |
-            <a href="?sort=price_desc">↑ High to Low</a>
-        </div>
+        <div id="catalog-items-dynamic">
+            <div class="catalog-toolbar">
+                <div class="catalog-sort">
+                    <strong>Sort by price:</strong>
+                    <a href="?sort=price_asc&per_page={{ per_page }}"
+                       class="{% if sort_by == 'price_asc' %}active-sort{% endif %}">↓ Low to High</a> |
+                    <a href="?sort=price_desc&per_page={{ per_page }}"
+                       class="{% if sort_by == 'price_desc' %}active-sort{% endif %}">↑ High to Low</a>
+                </div>
 
-        <div class="catalog-items-grid">
-            {% for item in furniture_list %}
-            <article class="catalog-card">
-                <h3>
-                    <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
-                </h3>
-                <p><strong>Type:</strong> {{ item.type_names|default:"No type" }}</p>
-                <p><strong>Design:</strong> {{ item.design_name }}</p>
-                <p class="catalog-card-price">${{ item.price|floatformat:2 }}</p>
-                <p>
-                    {% if item.in_production %}
-                    <span class="status-yes">✓ In production</span>
-                    {% else %}
-                    <span class="status-no">✗ Not in production</span>
-                    {% endif %}
-                </p>
-            </article>
-            {% empty %}
-            <p>No furniture available</p>
-            {% endfor %}
+                <form method="get" class="catalog-per-page-form">
+                    <input type="hidden" name="sort" value="{{ sort_by }}">
+                    <label for="per-page-select"><strong>Items per page:</strong></label>
+                    <select id="per-page-select" name="per_page">
+                        {% for option in per_page_options %}
+                        <option value="{{ option }}" {% if per_page == option %}selected{% endif %}>
+                            {{ option }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+
+            <div class="catalog-items-grid">
+                {% for item in furniture_list %}
+                <article class="catalog-card">
+                    <h3>
+                        <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+                    </h3>
+                    <p><strong>Type:</strong> {{ item.type_names|default:"No type" }}</p>
+                    <p><strong>Design:</strong> {{ item.design_name }}</p>
+                    <p class="catalog-card-price">${{ item.price|floatformat:2 }}</p>
+                    <p>
+                        {% if item.in_production %}
+                        <span class="status-yes">✓ In production</span>
+                        {% else %}
+                        <span class="status-no">✗ Not in production</span>
+                        {% endif %}
+                    </p>
+                </article>
+                {% empty %}
+                <p>No furniture available</p>
+                {% endfor %}
+            </div>
+
+            {% if page_obj and page_obj.paginator.num_pages > 1 %}
+            <nav class="catalog-pagination" aria-label="Catalog pagination">
+                {% if page_obj.has_previous %}
+                <a class="page-link"
+                   href="?page={{ page_obj.previous_page_number }}&per_page={{ per_page }}&sort={{ sort_by }}">
+                    ← Prev
+                </a>
+                {% else %}
+                <span class="page-link disabled">← Prev</span>
+                {% endif %}
+
+                <div class="page-numbers">
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if num == page_obj.number %}
+                        <span class="page-link active">{{ num }}</span>
+                        {% else %}
+                        <a class="page-link"
+                           href="?page={{ num }}&per_page={{ per_page }}&sort={{ sort_by }}">
+                            {{ num }}
+                        </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                {% if page_obj.has_next %}
+                <a class="page-link"
+                   href="?page={{ page_obj.next_page_number }}&per_page={{ per_page }}&sort={{ sort_by }}">
+                    Next →
+                </a>
+                {% else %}
+                <span class="page-link disabled">Next →</span>
+                {% endif %}
+            </nav>
+            {% endif %}
         </div>
     </section>
 
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const sectionEl = document.getElementById('furniture-items-section');
+    const dynamicEl = document.getElementById('catalog-items-dynamic');
+    if (!sectionEl || !dynamicEl) return;
+
+    function scrollToCatalogSection() {
+        const top = sectionEl.getBoundingClientRect().top + window.scrollY - 16;
+        window.scrollTo({
+            top: Math.max(0, top),
+            behavior: 'smooth'
+        });
+    }
+
+    async function loadCatalogFragment(url, pushHistory = true) {
+        dynamicEl.style.opacity = '0.5';
+        try {
+            const response = await fetch(url, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const nextDynamic = doc.getElementById('catalog-items-dynamic');
+
+            if (nextDynamic) {
+                dynamicEl.innerHTML = nextDynamic.innerHTML;
+                if (pushHistory) {
+                    window.history.pushState({}, '', url);
+                }
+                scrollToCatalogSection();
+            } else {
+                window.location.href = url;
+            }
+        } catch (err) {
+            console.error('Ошибка обновления списка мебели:', err);
+            window.location.href = url;
+        } finally {
+            dynamicEl.style.opacity = '1';
+        }
+    }
+
+    // Перехватываем клики по ссылкам пагинации и сортировки внутри секции мебели
+    sectionEl.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || !href.startsWith('?')) return;
+
+        e.preventDefault();
+        loadCatalogFragment(href, true);
+    });
+
+    // Перехватываем смену количества элементов на странице
+    sectionEl.addEventListener('change', (e) => {
+        if (e.target && e.target.id === 'per-page-select') {
+            const form = e.target.closest('form');
+            if (!form) return;
+            const params = new URLSearchParams(new FormData(form));
+            params.delete('page'); // при смене per_page возвращаемся на 1-ю страницу
+            loadCatalogFragment('?' + params.toString(), true);
+        }
+    });
+
+    // Поддержка кнопок «Назад / Вперёд» в браузере
+    window.addEventListener('popstate', () => {
+        loadCatalogFragment(window.location.search || '?', false);
+    });
+});
+</script>
 {% endblock %}
