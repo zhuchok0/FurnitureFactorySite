@@ -1,4 +1,314 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Генератор элементов формы (<input type="checkbox">) ---
+    const STORAGE_KEY = 'customCheckboxElements_v1';
+    const OPEN_STATE_KEY = 'customCheckboxSectionOpen_v1';
+
+    const generateTrigger = document.getElementById('generate-checkbox-trigger');
+    const generatedWorkspace = document.getElementById('generated-workspace');
+    const addGeneratedBtn = document.getElementById('add-generated-checkbox-btn');
+    const generatedList = document.getElementById('generated-checkboxes-list');
+    const deleteSelectedBtn = document.getElementById('delete-selected-generated-btn');
+
+    let generatedItems = [];
+    let selectedGeneratedIds = new Set();
+
+    function loadGeneratedItems() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            const parsed = raw ? JSON.parse(raw) : [];
+            generatedItems = Array.isArray(parsed) ? parsed : [];
+        } catch (err) {
+            console.error('Ошибка чтения сгенерированных элементов из localStorage:', err);
+            generatedItems = [];
+        }
+    }
+
+    function saveGeneratedItems() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(generatedItems));
+        } catch (err) {
+            console.error('Ошибка сохранения сгенерированных элементов в localStorage:', err);
+        }
+    }
+
+    function saveWorkspaceVisibility(isOpen) {
+        try {
+            localStorage.setItem(OPEN_STATE_KEY, isOpen ? '1' : '0');
+        } catch (err) {
+            console.error('Ошибка сохранения состояния переключателя:', err);
+        }
+    }
+
+    function applyWorkspaceVisibility(isOpen) {
+        if (generateTrigger) {
+            generateTrigger.checked = Boolean(isOpen);
+        }
+        if (generatedWorkspace) {
+            generatedWorkspace.style.display = isOpen ? 'block' : 'none';
+        }
+    }
+
+    function updateDeleteSelectedButton() {
+        if (!deleteSelectedBtn) return;
+        deleteSelectedBtn.disabled = selectedGeneratedIds.size === 0;
+    }
+
+    function applyCheckboxAttributes(inputEl, item) {
+        if (item.name) {
+            inputEl.setAttribute('name', item.name);
+            inputEl.name = item.name;
+        } else {
+            inputEl.removeAttribute('name');
+            inputEl.name = '';
+        }
+
+        inputEl.setAttribute('value', item.value);
+        inputEl.value = item.value;
+
+        inputEl.defaultChecked = Boolean(item.checked);
+        inputEl.checked = Boolean(item.checked);
+        if (item.checked) {
+            inputEl.setAttribute('checked', 'checked');
+        } else {
+            inputEl.removeAttribute('checked');
+        }
+
+        inputEl.required = Boolean(item.required);
+        if (item.required) {
+            inputEl.setAttribute('required', 'required');
+        } else {
+            inputEl.removeAttribute('required');
+        }
+
+        inputEl.disabled = Boolean(item.disabled);
+        if (item.disabled) {
+            inputEl.setAttribute('disabled', 'disabled');
+        } else {
+            inputEl.removeAttribute('disabled');
+        }
+    }
+
+    function createGeneratedItem() {
+        const index = generatedItems.length + 1;
+        const newItem = {
+            id: `cb_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+            name: `checkbox_${index}`,
+            value: `value_${index}`,
+            checked: false,
+            required: false,
+            disabled: false
+        };
+        generatedItems.push(newItem);
+        saveGeneratedItems();
+        renderGeneratedItems();
+    }
+
+    function deleteGeneratedItem(id) {
+        generatedItems = generatedItems.filter(item => item.id !== id);
+        selectedGeneratedIds.delete(id);
+        saveGeneratedItems();
+        renderGeneratedItems();
+    }
+
+    function renderGeneratedItems() {
+        if (!generatedList) return;
+        generatedList.innerHTML = '';
+
+        const existingIds = new Set(generatedItems.map(item => item.id));
+        selectedGeneratedIds = new Set(
+            Array.from(selectedGeneratedIds).filter(id => existingIds.has(id))
+        );
+
+        if (generatedItems.length === 0) {
+            generatedList.innerHTML = '<p>Сгенерированных флажков пока нет. Нажмите «+ Добавить элемент», чтобы создать первый.</p>';
+            updateDeleteSelectedButton();
+            return;
+        }
+
+        generatedItems.forEach((item, idx) => {
+            const card = document.createElement('div');
+            card.className = 'generated-item-card';
+            card.dataset.id = item.id;
+
+            const header = document.createElement('div');
+            header.className = 'generated-item-header';
+
+            const selectLabel = document.createElement('label');
+            selectLabel.className = 'generated-item-select';
+
+            const selectCheckbox = document.createElement('input');
+            selectCheckbox.type = 'checkbox';
+            selectCheckbox.checked = selectedGeneratedIds.has(item.id);
+            selectCheckbox.addEventListener('change', () => {
+                if (selectCheckbox.checked) {
+                    selectedGeneratedIds.add(item.id);
+                } else {
+                    selectedGeneratedIds.delete(item.id);
+                }
+                updateDeleteSelectedButton();
+            });
+
+            const titleSpan = document.createElement('span');
+            titleSpan.textContent = `Элемент #${idx + 1}`;
+
+            selectLabel.appendChild(selectCheckbox);
+            selectLabel.appendChild(titleSpan);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.type = 'button';
+            deleteBtn.className = 'btn-delete-item';
+            deleteBtn.textContent = 'Удалить';
+            deleteBtn.addEventListener('click', () => deleteGeneratedItem(item.id));
+
+            header.appendChild(selectLabel);
+            header.appendChild(deleteBtn);
+
+            const preview = document.createElement('div');
+            preview.className = 'generated-item-preview';
+
+            const generatedCheckbox = document.createElement('input');
+            generatedCheckbox.type = 'checkbox';
+            applyCheckboxAttributes(generatedCheckbox, item);
+
+            const previewMeta = document.createElement('span');
+            const updatePreviewMeta = () => {
+                previewMeta.textContent =
+                    `name="${item.name}" | value="${item.value}" | ` +
+                    `checked=${item.checked} | required=${item.required} | disabled=${item.disabled}`;
+            };
+
+            generatedCheckbox.addEventListener('change', () => {
+                item.checked = generatedCheckbox.checked;
+                checkedInput.checked = item.checked;
+                if (item.checked) {
+                    generatedCheckbox.setAttribute('checked', 'checked');
+                } else {
+                    generatedCheckbox.removeAttribute('checked');
+                }
+                updatePreviewMeta();
+                saveGeneratedItems();
+            });
+
+            updatePreviewMeta();
+            preview.appendChild(generatedCheckbox);
+            preview.appendChild(previewMeta);
+
+            const attrsGrid = document.createElement('div');
+            attrsGrid.className = 'generated-item-attrs';
+
+            const nameLabel = document.createElement('label');
+            nameLabel.textContent = 'Атрибут name:';
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.value = item.name;
+            nameInput.addEventListener('input', () => {
+                item.name = nameInput.value;
+                applyCheckboxAttributes(generatedCheckbox, item);
+                updatePreviewMeta();
+                saveGeneratedItems();
+            });
+            nameLabel.appendChild(nameInput);
+
+            const valueLabel = document.createElement('label');
+            valueLabel.textContent = 'Атрибут value:';
+            const valueInput = document.createElement('input');
+            valueInput.type = 'text';
+            valueInput.value = item.value;
+            valueInput.addEventListener('input', () => {
+                item.value = valueInput.value;
+                applyCheckboxAttributes(generatedCheckbox, item);
+                updatePreviewMeta();
+                saveGeneratedItems();
+            });
+            valueLabel.appendChild(valueInput);
+
+            const checkedLabel = document.createElement('label');
+            checkedLabel.className = 'attr-bool-label';
+            const checkedInput = document.createElement('input');
+            checkedInput.type = 'checkbox';
+            checkedInput.checked = Boolean(item.checked);
+            checkedInput.addEventListener('change', () => {
+                item.checked = checkedInput.checked;
+                applyCheckboxAttributes(generatedCheckbox, item);
+                updatePreviewMeta();
+                saveGeneratedItems();
+            });
+            checkedLabel.appendChild(checkedInput);
+            checkedLabel.appendChild(document.createTextNode('checked'));
+
+            const requiredLabel = document.createElement('label');
+            requiredLabel.className = 'attr-bool-label';
+            const requiredInput = document.createElement('input');
+            requiredInput.type = 'checkbox';
+            requiredInput.checked = Boolean(item.required);
+            requiredInput.addEventListener('change', () => {
+                item.required = requiredInput.checked;
+                applyCheckboxAttributes(generatedCheckbox, item);
+                updatePreviewMeta();
+                saveGeneratedItems();
+            });
+            requiredLabel.appendChild(requiredInput);
+            requiredLabel.appendChild(document.createTextNode('required'));
+
+            const disabledLabel = document.createElement('label');
+            disabledLabel.className = 'attr-bool-label';
+            const disabledInput = document.createElement('input');
+            disabledInput.type = 'checkbox';
+            disabledInput.checked = Boolean(item.disabled);
+            disabledInput.addEventListener('change', () => {
+                item.disabled = disabledInput.checked;
+                applyCheckboxAttributes(generatedCheckbox, item);
+                updatePreviewMeta();
+                saveGeneratedItems();
+            });
+            disabledLabel.appendChild(disabledInput);
+            disabledLabel.appendChild(document.createTextNode('disabled'));
+
+            attrsGrid.appendChild(nameLabel);
+            attrsGrid.appendChild(valueLabel);
+            attrsGrid.appendChild(checkedLabel);
+            attrsGrid.appendChild(requiredLabel);
+            attrsGrid.appendChild(disabledLabel);
+
+            card.appendChild(header);
+            card.appendChild(preview);
+            card.appendChild(attrsGrid);
+            generatedList.appendChild(card);
+        });
+
+        updateDeleteSelectedButton();
+    }
+
+    if (generateTrigger) {
+        generateTrigger.addEventListener('change', () => {
+            const isOpen = generateTrigger.checked;
+            applyWorkspaceVisibility(isOpen);
+            saveWorkspaceVisibility(isOpen);
+        });
+    }
+
+    if (addGeneratedBtn) {
+        addGeneratedBtn.addEventListener('click', createGeneratedItem);
+    }
+
+    if (deleteSelectedBtn) {
+        deleteSelectedBtn.addEventListener('click', () => {
+            if (selectedGeneratedIds.size === 0) return;
+            generatedItems = generatedItems.filter(item => !selectedGeneratedIds.has(item.id));
+            selectedGeneratedIds.clear();
+            saveGeneratedItems();
+            renderGeneratedItems();
+        });
+    }
+
+    loadGeneratedItems();
+    renderGeneratedItems();
+    const savedOpenState = localStorage.getItem(OPEN_STATE_KEY) === '1';
+    applyWorkspaceVisibility(savedOpenState);
+
+    // --- Таблица сотрудников ---
+
     let employeesData = [];
     let filteredData = [];
     let selectedEmployeeIds = new Set();

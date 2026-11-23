@@ -6,6 +6,29 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/employees_table.css' %}">
 
+    <section class="checkbox-generator-section" id="checkbox-generator-section">
+        <div class="generator-controls">
+            <label class="generator-trigger-label">
+                <input type="checkbox" id="generate-checkbox-trigger">
+                <span>Генератор элементов формы</span>
+            </label>
+        </div>
+
+        <div id="generated-workspace" class="generated-workspace" style="display: none;">
+            <div class="generated-actions-bar">
+                <button type="button" id="add-generated-checkbox-btn" class="btn-add-item">
+                    + Добавить элемент
+                </button>
+
+                <button type="button" id="delete-selected-generated-btn" class="btn-danger-outline" disabled>
+                    Удалить выбранные
+                </button>
+            </div>
+
+            <div id="generated-checkboxes-list" class="generated-checkboxes-list"></div>
+        </div>
+    </section>
+
     <div class="employees-page-header">
         <h1>Employees Directory</h1>
     </div>
