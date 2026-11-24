@@ -104,7 +104,7 @@ class ImageSlider {
         const totalPages = this.getTotalPages();
 
         // Смещение трека в процентах для показа нужной группы картинок
-        const offset = -(this.currentIndex * (100 / this.options.visibleItems));
+        const offset = -(this.currentIndex * 100);
         this.track.style.transform = `translateX(${offset}%)`;
 
         // Обновление счетчика (например, текущая группа / всего групп)
