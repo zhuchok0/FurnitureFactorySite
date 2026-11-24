@@ -86,29 +86,6 @@
 
     <!-- Подключение скрипта слайдера -->
     <script src="{% static 'js/slider.js' %}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-        const mySlider = new ImageSlider('#my-image-slider', {
-            loop: true,
-            navs: true,
-            pags: true,
-            auto: true,
-            stopMouseHover: true,
-            delay: 5,
-            visibleItems: 1 // <--- Теперь показываем строго по 1 картинке
-        });
-
-        const applyBtn = document.getElementById('apply-delay-btn');
-        const delayInput = document.getElementById('slider-delay-input');
-
-        if (applyBtn && delayInput) {
-            applyBtn.addEventListener('click', () => {
-                mySlider.setDelay(delayInput.value);
-                alert(`Время показа слайда изменено на ${delayInput.value} сек.`);
-            });
-        }
-    });
-    </script>
 
     <h2>What people say about us</h2>
 

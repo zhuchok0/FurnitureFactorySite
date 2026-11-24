@@ -10,7 +10,7 @@ class ImageSlider {
             auto: true,
             stopMouseHover: true,
             delay: 5,
-            visibleItems: 3 // Количество одновременно видимых картинок
+            visibleItems: 1
         }, options);
 
         this.slides = Array.from(this.container.querySelectorAll('.slider-slide'));
@@ -22,7 +22,7 @@ class ImageSlider {
         this.initDOM();
         this.initEvents();
         this.updateSlider();
-        
+
         if (this.options.auto) {
             this.startAutoplay();
         }
@@ -32,7 +32,7 @@ class ImageSlider {
         // Создаем обертку-трек для картинок
         this.track = document.createElement('div');
         this.track.className = 'slider-track';
-        
+
         this.slides.forEach(slide => {
             this.track.appendChild(slide);
             slide.classList.add('slider-slide-item');
@@ -49,7 +49,7 @@ class ImageSlider {
             this.prevBtn = document.createElement('button');
             this.prevBtn.className = 'slider-btn slider-btn-prev';
             this.prevBtn.innerHTML = '&#10094;';
-            
+
             this.nextBtn = document.createElement('button');
             this.nextBtn.className = 'slider-btn slider-btn-next';
             this.nextBtn.innerHTML = '&#10095;';
@@ -62,7 +62,7 @@ class ImageSlider {
         if (this.options.pags) {
             this.pagsContainer = document.createElement('div');
             this.pagsContainer.className = 'slider-pagination';
-            
+
             const totalPages = this.getTotalPages();
             for (let i = 0; i < totalPages; i++) {
                 const dot = document.createElement('button');
@@ -76,7 +76,7 @@ class ImageSlider {
 
     getTotalPages() {
         // Максимальное количество страниц для сдвига
-        return Math.max(1, this.slides.length - this.options.visibleItems + 1);
+        return Math.max(1, this.slides.length);
     }
 
     initEvents() {
@@ -102,7 +102,7 @@ class ImageSlider {
 
     updateSlider() {
         const totalPages = this.getTotalPages();
-        
+
         // Смещение трека в процентах для показа нужной группы картинок
         const offset = -(this.currentIndex * (100 / this.options.visibleItems));
         this.track.style.transform = `translateX(${offset}%)`;
@@ -175,3 +175,28 @@ class ImageSlider {
         }
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sliderEl = document.getElementById('my-image-slider');
+    if (!sliderEl) return;
+
+    const mySlider = new ImageSlider('#my-image-slider', {
+        loop: true,
+        navs: true,
+        pags: true,
+        auto: true,
+        stopMouseHover: true,
+        delay: 5,
+        visibleItems: 1
+    });
+
+    const applyBtn = document.getElementById('apply-delay-btn');
+    const delayInput = document.getElementById('slider-delay-input');
+
+    if (applyBtn && delayInput) {
+        applyBtn.addEventListener('click', () => {
+            mySlider.setDelay(delayInput.value);
+            alert(`Время показа слайда изменено на ${delayInput.value} сек.`);
+        });
+    }
+});
