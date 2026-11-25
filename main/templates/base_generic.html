@@ -65,6 +65,8 @@
             <li><a href="{% url 'catalog' %}">Catalog</a></li>
             <li><a href="{%url 'form_demo' %}">Demo form</a></li>
             <li><a href="{% url 'employees_page' %}">Employees Table</a></li>
+            <li><a href="{% url 'series_chart' %}">Series chart</a></li>
+            <li><a href="{% url 'passengers' %}">Passengers</a></li>
                 
             {% if user.is_superuser or user.is_staff %}
                 <li><br></li>

@@ -1,0 +1,40 @@
+<section class="pax" data-variant="{{ key }}">
+    <h2>{{ title }}</h2>
+
+    <form class="pax-form">
+        <label>Фамилия <input name="lastName" type="text" required></label>
+        <label>Имя <input name="firstName" type="text" required></label>
+        <label>Отчество <input name="patronymic" type="text"></label>
+        <label>Номер рейса <input name="flight" type="text" required placeholder="SU101"></label>
+
+        <label>Тип пассажира
+            <select name="kind">
+                <option value="base">Passenger (базовый класс)</option>
+                <option value="ext">TicketedPassenger (наследник)</option>
+            </select>
+        </label>
+        <label class="pax-ext">Место <input name="seat" type="text" placeholder="12A"></label>
+        <label class="pax-ext">Класс
+            <select name="ticketClass">
+                <option value="economy">Эконом</option>
+                <option value="business">Бизнес</option>
+            </select>
+        </label>
+
+        <div class="pax-buttons">
+            <button type="submit">Добавить пассажира</button>
+            <button type="button" class="pax-sample">Заполнить примером</button>
+        </div>
+    </form>
+    <p class="pax-msg" role="status"></p>
+
+    <h3>Все пассажиры</h3>
+    <div class="pax-list table-wrapper"></div>
+
+    <h3>Однофамильцы на рейсе</h3>
+    <form class="pax-search">
+        <label>Номер рейса <input name="searchFlight" type="text" required placeholder="SU101"></label>
+        <button type="submit">Найти однофамильцев</button>
+    </form>
+    <div class="pax-result"></div>
+</section>

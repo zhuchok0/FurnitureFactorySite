@@ -998,3 +998,9 @@ def employees_api_view(request):
 
 def employees_page_view(request):
     return render(request, 'employees_table.html')
+
+def series_chart(request):
+    return render(request, 'series_chart.html')
+
+def passengers(request):
+    return render(request, 'passengers.html')

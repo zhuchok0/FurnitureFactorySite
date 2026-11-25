@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block title %}Passengers{% endblock %}
+
+{% block content %}
+    <h1>Пассажиры авиакомпании: однофамильцы на рейсе</h1>
+    <p>
+        Массив объектов хранит фамилию, имя, отчество и номер рейса. Базовый класс —
+        <code>Passenger</code>, наследник <code>TicketedPassenger</code> добавляет место и класс обслуживания.
+        Один и тот же алгоритм реализован двумя способами.
+    </p>
+
+    {% include "passengers_section.html" with key="proto" title="1) Функциональный стиль: прототипное наследование" %}
+    {% include "passengers_section.html" with key="class" title="2) Конструкция class / extends" %}
+
+    <script src="{% static 'js/passengers-common.js' %}"></script>
+    <script src="{% static 'js/passengers-proto.js' %}"></script>
+    <script src="{% static 'js/passengers-class.js' %}"></script>
+    <script src="{% static 'js/passengers-page.js' %}"></script>
+{% endblock %}

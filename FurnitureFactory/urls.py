@@ -55,6 +55,8 @@ urlpatterns = [
     path('form/', views.form_demo, name='form_demo'),
     path('api/employees/', views.employees_api_view, name='employees_api'),
     path('employees/', views.employees_page_view, name='employees_page'),
+    path('series/', views.series_chart, name='series_chart'),\
+    path('passengers/', views.passengers, name='passengers'),
 ]
 
 

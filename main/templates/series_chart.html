@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block title %}Series chart{% endblock %}
+
+{% block content %}
+    <h1>Разложение ln(1+x) в ряд</h1>
+    <p>
+        F(x) = Σ (−1)<sup>k−1</sup> · x<sup>k</sup> / k, |x| &lt; 1 — сравнение с <code>Math.log(1 + x)</code>.
+    </p>
+
+    <div class="series-controls">
+        <label for="seriesN">Количество членов ряда n:
+            <input type="range" id="seriesN" min="1" max="50" value="5">
+            <strong id="seriesNValue">5</strong>
+        </label>
+        <button type="button" id="seriesDraw">Построить</button>
+        <button type="button" id="seriesSave">Сохранить в PNG</button>
+    </div>
+
+    <div class="series-chart-wrap">
+        <canvas id="seriesChart"></canvas>
+    </div>
+
+    <div class="table-wrapper">
+        <table id="seriesTable" class="series-table">
+            <thead>
+                <tr><th>x</th><th>n</th><th>F(x)</th><th>Math F(x)</th><th>eps</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="{% static 'js/chart.umd.min.js' %}"></script>
+    <script src="{% static 'js/series-chart.js' %}"></script>
+{% endblock %}

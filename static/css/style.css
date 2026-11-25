@@ -2673,3 +2673,81 @@ html[data-theme="dark"] textarea {
 .chairs-scene__chair--lg { width: 150px; margin: -75px 0 0 -75px; }
 .chairs-scene__chair--sm { width: 80px;  margin: -40px 0 0 -40px; }
 @media (max-width: 600px) { .chairs-scene { height: 380px; } }
+
+/* --------- GRAPHICS ----------- */
+
+.series-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    margin: 16px 0;
+}
+.series-controls button {
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #068b73;
+    color: #fff;
+    cursor: pointer;
+}
+.series-controls button:hover { background: #057a65; }
+.series-chart-wrap {
+    position: relative;
+    height: 480px;
+    margin-bottom: 20px;
+}
+.series-table { border-collapse: collapse; width: 100%; }
+.series-table th, .series-table td {
+    border: 1px solid #99caf2;
+    padding: 6px 10px;
+    text-align: center;
+}
+.series-table th { background: #e8f3fc; }
+
+/* ---------- PASSENGERS ----------- */
+
+.pax {
+    margin: 24px 0 40px;
+    padding: 16px;
+    border: 1px solid #99caf2;
+    border-radius: 12px;
+}
+.pax-form, .pax-search {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    align-items: flex-end;
+    margin-bottom: 12px;
+}
+.pax-form label, .pax-search label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+}
+.pax-form input, .pax-form select, .pax-search input {
+    padding: 6px 8px;
+    border: 1px solid #99caf2;
+    border-radius: 6px;
+}
+.pax-buttons { display: flex; gap: 8px; }
+.pax button {
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #068b73;
+    color: #fff;
+    cursor: pointer;
+}
+.pax button:hover { background: #057a65; }
+.pax .pax-sample { background: #8a98a8; }
+.pax-msg { color: #d9534f; min-height: 1.2em; }
+.pax-table { border-collapse: collapse; width: 100%; }
+.pax-table th, .pax-table td {
+    border: 1px solid #99caf2;
+    padding: 6px 10px;
+    text-align: left;
+}
+.pax-table th { background: #e8f3fc; }
+.pax-result { margin-top: 8px; }
