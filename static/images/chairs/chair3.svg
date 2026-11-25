@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 150" width="124" height="150" role="img" aria-label="Chair">
+  <g stroke-linecap="round">
+    <line x1="30" y1="96" x2="22" y2="140" stroke="#444444" stroke-width="6"/>
+    <line x1="94" y1="96" x2="102" y2="140" stroke="#444444" stroke-width="6"/>
+    <line x1="44" y1="96" x2="42" y2="134" stroke="#444444" stroke-width="5" opacity=".75"/>
+    <line x1="80" y1="96" x2="82" y2="134" stroke="#444444" stroke-width="5" opacity=".75"/>
+  </g>
+  <ellipse cx="62" cy="86" rx="40" ry="11" fill="#e3b43c"/><ellipse cx="62" cy="91" rx="40" ry="9" fill="#b8892a"/>
+  <rect x="24" y="32" width="76" height="42" rx="10" fill="#e3b43c"/>
+  <rect x="24" y="32" width="76" height="8" rx="4" fill="#b8892a"/>
+  <line x1="34" y1="48" x2="34" y2="72" stroke="#b8892a" stroke-width="2" opacity=".5"/>
+  <line x1="62" y1="48" x2="62" y2="72" stroke="#b8892a" stroke-width="2" opacity=".5"/>
+  <line x1="90" y1="48" x2="90" y2="72" stroke="#b8892a" stroke-width="2" opacity=".5"/>
+</svg>

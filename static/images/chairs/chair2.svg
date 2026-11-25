@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 150" width="124" height="150" role="img" aria-label="Chair">
+  <g stroke-linecap="round">
+    <line x1="30" y1="96" x2="22" y2="140" stroke="#6b4423" stroke-width="6"/>
+    <line x1="94" y1="96" x2="102" y2="140" stroke="#6b4423" stroke-width="6"/>
+    <line x1="44" y1="96" x2="42" y2="134" stroke="#6b4423" stroke-width="5" opacity=".75"/>
+    <line x1="80" y1="96" x2="82" y2="134" stroke="#6b4423" stroke-width="5" opacity=".75"/>
+  </g>
+  <rect x="20" y="78" width="84" height="16" rx="6" fill="#c98f5a"/><rect x="20" y="90" width="84" height="6" rx="3" fill="#8d5a2f"/>
+  <rect x="24" y="32" width="76" height="42" rx="10" fill="#c98f5a"/>
+  <rect x="24" y="32" width="76" height="8" rx="4" fill="#8d5a2f"/>
+  <line x1="34" y1="48" x2="34" y2="72" stroke="#8d5a2f" stroke-width="2" opacity=".5"/>
+  <line x1="62" y1="48" x2="62" y2="72" stroke="#8d5a2f" stroke-width="2" opacity=".5"/>
+  <line x1="90" y1="48" x2="90" y2="72" stroke="#8d5a2f" stroke-width="2" opacity=".5"/>
+</svg>

@@ -32,6 +32,26 @@
         </div>
     </section>
 
+    <section class="chairs-scene" data-chairs-scene aria-label="Animated chairs">
+        <h2 class="chairs-scene__title">Every chair finds its turn</h2>
+
+        <div class="chairs-scene__chair chairs-scene__chair--lg" data-chair data-x="12" data-y="25" data-spin="1.5" data-start="20" data-speed="0.6" data-sway="20" data-phase="0">
+            <img src="{% static 'images/chairs/chair1.svg' %}" alt="" aria-hidden="true">
+        </div>
+        <div class="chairs-scene__chair" data-chair data-x="32" data-y="70" data-spin="-1" data-start="-30" data-speed="-0.5" data-sway="30" data-phase="1">
+            <img src="{% static 'images/chairs/chair2.svg' %}" alt="" aria-hidden="true">
+        </div>
+        <div class="chairs-scene__chair chairs-scene__chair--sm" data-chair data-x="50" data-y="30" data-spin="2" data-start="60" data-speed="0.4" data-sway="15" data-phase="2">
+            <img src="{% static 'images/chairs/chair3.svg' %}" alt="" aria-hidden="true">
+        </div>
+        <div class="chairs-scene__chair chairs-scene__chair--lg" data-chair data-x="68" data-y="72" data-spin="-1.5" data-start="10" data-speed="0.7" data-sway="25" data-phase="3">
+            <img src="{% static 'images/chairs/chair4.svg' %}" alt="" aria-hidden="true">
+        </div>
+        <div class="chairs-scene__chair" data-chair data-x="88" data-y="28" data-spin="1" data-start="140" data-speed="-0.6" data-sway="20" data-phase="4">
+            <img src="{% static 'images/chairs/chair5.svg' %}" alt="" aria-hidden="true">
+        </div>
+    </section>
+
     <!-- ПАНЕЛЬ АДМИНИСТРАТОРА: Управление задержкой слайдера (доступно только админам) -->
     {% if user.is_authenticated and user.is_superuser or user.is_staff %}
     <div class="admin-slider-controls">
@@ -87,7 +107,7 @@
     <!-- Подключение скрипта слайдера -->
     <script src="{% static 'js/slider.js' %}"></script>
 
-    <h2>What people say about us</h2>
+    <h2 data-reveal="left">What people say about us</h2>
 
     <p lang="en">
         As the saying goes, <q>Quality is not an act, it is a habit.</q>
@@ -121,7 +141,8 @@
         Professional designers and local craftsmen turn selected timber into elegant home furniture. Seamless combination of modern machinery and traditional carpentry delivers lasting comfort for every living space.
     </p>
 
-    <article class="typography-demo">
+    
+    <article class="typography-demo" data-reveal="zoom" data-reveal-stagger>
         <h2 class="text-uppercase">The Art of Furniture</h2>
 
         <p class="lead-text">
@@ -399,5 +420,8 @@
         </div>
         <p class="furn-loader__text">Building something beautiful...</p>
     </div>
+
+    <script src="{% static 'js/chairs-scroll.js' %}"></script>
+    <script src="{% static 'js/reveal.js' %}"></script>
 
 {% endblock %}

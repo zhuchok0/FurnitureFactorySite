@@ -2638,3 +2638,38 @@ html[data-theme="dark"] textarea {
     color: #ffffff;
     border-color: #444c56;
 }
+
+ /* --------- CHAIR ANIMATION ------------ */
+
+.chairs-scene {
+    position: relative;
+    height: 520px;
+    margin: 2rem 0;
+    overflow: hidden;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #6cc4b8 0%, #8fd6cb 100%);
+}
+.chairs-scene__title {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.6rem);
+    color: rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+}
+.chairs-scene__chair {
+    position: absolute;
+    width: 110px;
+    margin: -55px 0 0 -55px;
+    will-change: transform;
+    filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.18));
+}
+.chairs-scene__chair img { display: block; width: 100%; height: auto; }
+.chairs-scene__chair--lg { width: 150px; margin: -75px 0 0 -75px; }
+.chairs-scene__chair--sm { width: 80px;  margin: -40px 0 0 -40px; }
+@media (max-width: 600px) { .chairs-scene { height: 380px; } }
