@@ -1,0 +1,67 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block title %}Web APIs{% endblock %}
+
+{% block content %}
+
+    <!-- ===== Geolocation ===== -->
+    <section class="api-card" id="geoCard">
+        <h2>Геолокация <span class="api-badge" id="geoSupport"></span></h2>
+        <div class="api-buttons">
+            <button type="button" id="geoOnce">Определить местоположение</button>
+            <button type="button" id="geoWatch">Следить за перемещением</button>
+            <button type="button" id="geoSpeak" disabled>Озвучить</button>
+        </div>
+        <p class="api-msg" id="geoMsg" role="status"></p>
+        <dl class="api-data">
+            <dt>Широта</dt><dd id="geoLat">—</dd>
+            <dt>Долгота</dt><dd id="geoLon">—</dd>
+            <dt>Точность</dt><dd id="geoAcc">—</dd>
+            <dt>Высота</dt><dd id="geoAlt">—</dd>
+            <dt>Скорость</dt><dd id="geoSpeed">—</dd>
+            <dt>Время замера</dt><dd id="geoTime">—</dd>
+        </dl>
+        <p><a id="geoMap" href="#" target="_blank" rel="noopener" hidden>Показать на карте OpenStreetMap</a></p>
+    </section>
+
+    <!-- ===== Speech synthesis ===== -->
+    <section class="api-card" id="ttsCard">
+        <h2>Синтез речи <span class="api-badge" id="ttsSupport"></span></h2>
+        <label class="api-field">Текст
+            <textarea id="ttsText" rows="3">Добро пожаловать на сайт мебельной фабрики! Мы создаём мебель для вашего дома.</textarea>
+        </label>
+        <div class="api-row">
+            <label class="api-field">Голос <select id="ttsVoice"></select></label>
+            <label class="api-field">Скорость: <strong id="ttsRateVal">1</strong>
+                <input type="range" id="ttsRate" min="0.5" max="2" step="0.1" value="1">
+            </label>
+            <label class="api-field">Тон: <strong id="ttsPitchVal">1</strong>
+                <input type="range" id="ttsPitch" min="0" max="2" step="0.1" value="1">
+            </label>
+        </div>
+        <div class="api-buttons">
+            <button type="button" id="ttsSpeak">Произнести</button>
+            <button type="button" id="ttsPause">Пауза</button>
+            <button type="button" id="ttsResume">Продолжить</button>
+            <button type="button" id="ttsStop">Стоп</button>
+        </div>
+        <p class="api-msg" id="ttsStatus" role="status"></p>
+    </section>
+
+    <!-- ===== Battery ===== -->
+    <section class="api-card" id="batCard">
+        <h2>Состояние батареи <span class="api-badge" id="batSupport"></span></h2>
+        <p class="api-msg" id="batMsg" role="status"></p>
+        <div id="batInfo" hidden>
+            <meter id="batMeter" min="0" max="100" low="20" high="60" optimum="100" value="0"></meter>
+            <dl class="api-data">
+                <dt>Заряд</dt><dd id="batLevel">—</dd>
+                <dt>Питание</dt><dd id="batCharging">—</dd>
+            </dl>
+            <button type="button" id="batSpeak">Озвучить</button>
+        </div>
+    </section>
+
+    <script src="{% static 'js/web-apis.js' %}"></script>
+{% endblock %}

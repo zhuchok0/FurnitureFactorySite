@@ -57,6 +57,7 @@ urlpatterns = [
     path('employees/', views.employees_page_view, name='employees_page'),
     path('series/', views.series_chart, name='series_chart'),\
     path('passengers/', views.passengers, name='passengers'),
+    path('web-apis/', views.web_apis, name='web_apis'),
 ]
 
 

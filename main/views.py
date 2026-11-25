@@ -1004,3 +1004,6 @@ def series_chart(request):
 
 def passengers(request):
     return render(request, 'passengers.html')
+
+def web_apis(request):
+    return render(request, 'web_apis.html')

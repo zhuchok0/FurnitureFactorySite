@@ -2751,3 +2751,56 @@ html[data-theme="dark"] textarea {
 }
 .pax-table th { background: #e8f3fc; }
 .pax-result { margin-top: 8px; }
+
+/* ------------------ WEB API ------------------ */
+.api-card {
+    margin: 20px 0;
+    padding: 16px;
+    border: 1px solid #99caf2;
+    border-radius: 12px;
+}
+.api-card h2 { margin-top: 0; }
+.api-badge {
+    margin-left: 8px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 400;
+    vertical-align: middle;
+}
+.api-badge--ok { background: #d6f0e0; color: #1d7a45; }
+.api-badge--no { background: #f8d7da; color: #a12a34; }
+.api-buttons, .api-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    align-items: flex-end;
+    margin: 12px 0;
+}
+.api-card button {
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #068b73;
+    color: #fff;
+    cursor: pointer;
+}
+.api-card button:hover:not(:disabled) { background: #057a65; }
+.api-card button:disabled { background: #b9c4c9; cursor: not-allowed; }
+.api-field { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.api-field textarea, .api-field select {
+    padding: 6px 8px;
+    border: 1px solid #99caf2;
+    border-radius: 6px;
+    font: inherit;
+}
+.api-msg { min-height: 1.2em; color: #555; }
+.api-data {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 16px;
+    margin: 12px 0;
+}
+.api-data dt { font-weight: 700; }
+.api-data dd { margin: 0; }
+#batMeter { width: 100%; max-width: 360px; height: 24px; }
