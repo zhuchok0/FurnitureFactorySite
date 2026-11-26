@@ -46,12 +46,10 @@
             }));
     };
 
-    // ???
     Passenger.prototype.renderResult = function (list, flight, container) {
         U.renderResult(container, flight, U.findNamesakes(list, flight), U.fullName);
     };
 
-    // ----- Наследник -----
     function TicketedPassenger(lastName, firstName, patronymic, flight, seat, ticketClass) {
         Passenger.call(this, lastName, firstName, patronymic, flight);
         this.seat = seat || '';
@@ -96,6 +94,5 @@
         });
     };
 
-    // ???
     window.PaxProto = { Passenger: Passenger, TicketedPassenger: TicketedPassenger };
 })();

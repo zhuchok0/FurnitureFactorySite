@@ -70,7 +70,6 @@
         container.appendChild(ul);
     }
 
-    // ???
     window.PaxUtil = {
         val, fullName, findNamesakes, renderTable, renderResult,
         classLabel: (c) => CLASS_LABELS[c] || '—'
