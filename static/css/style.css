@@ -835,9 +835,9 @@ input[type="radio"]:checked {
     grid-auto-flow: row;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 15px;
-    perspective: 900px;
 }
 
+/* Карточка: эффект объёма при наведении (JS: static/js/catalog.js) */
 .catalog-card {
     --rotateX: 0deg;
     --rotateY: 0deg;
@@ -851,10 +851,16 @@ input[type="radio"]:checked {
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    transform-style: preserve-3d;
-    transform: rotateX(var(--rotateY)) rotateY(var(--rotateX)) translateZ(0);
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    transform: perspective(900px) rotateX(var(--rotateX)) rotateY(var(--rotateY));
+    transition: transform 0.5s ease, box-shadow 0.3s ease, border-color 0.2s ease; /* плавный возврат */
     will-change: transform;
+}
+
+/* При наведении: быстрое следование за курсором, усиленная тень */
+.catalog-card:hover {
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.2s ease;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+    border-color: #068b73;
 }
 
 /* Мягкий световой блик, двигающийся за курсором */
@@ -874,22 +880,8 @@ input[type="radio"]:checked {
     transition: opacity 0.25s ease;
 }
 
-.catalog-card:hover {
-    border-color: #068b73;
-    box-shadow: 0 12px 24px rgba(0, 51, 34, 0.14);
-}
-
 .catalog-card:hover::before {
     opacity: 1;
-}
-
-@keyframes reset-card {
-    from {
-        transform: rotateX(var(--rotateY)) rotateY(var(--rotateX));
-    }
-    to {
-        transform: rotateX(0deg) rotateY(0deg);
-    }
 }
 
 .catalog-card h3 {

@@ -37,13 +37,13 @@
             <div class="catalog-toolbar">
                 <div class="catalog-sort">
                     <strong>Sort by price:</strong>
-                    <a href="?sort=price_asc&per_page={{ per_page }}"
-                       class="{% if sort_by == 'price_asc' %}active-sort{% endif %}">↓ Low to High</a> |
-                    <a href="?sort=price_desc&per_page={{ per_page }}"
-                       class="{% if sort_by == 'price_desc' %}active-sort{% endif %}">↑ High to Low</a>
+                    <a href="?sort=price_asc&per_page={{ per_page }}#furniture-items-section"
+                    class="{% if sort_by == 'price_asc' %}active-sort{% endif %}">↓ Low to High</a> |
+                    <a href="?sort=price_desc&per_page={{ per_page }}#furniture-items-section"
+                    class="{% if sort_by == 'price_desc' %}active-sort{% endif %}">↑ High to Low</a>
                 </div>
 
-                <form method="get" class="catalog-per-page-form">
+                <form method="get" action="#furniture-items-section" class="catalog-per-page-form">
                     <input type="hidden" name="sort" value="{{ sort_by }}">
                     <label for="per-page-select"><strong>Items per page:</strong></label>
                     <select id="per-page-select" name="per_page">
@@ -82,7 +82,7 @@
             <nav class="catalog-pagination" aria-label="Catalog pagination">
                 {% if page_obj.has_previous %}
                 <a class="page-link"
-                   href="?page={{ page_obj.previous_page_number }}&per_page={{ per_page }}&sort={{ sort_by }}">
+                   href="?page={{ page_obj.previous_page_number }}&per_page={{ per_page }}&sort={{ sort_by }}#furniture-items-section">
                     ← Prev
                 </a>
                 {% else %}
@@ -95,7 +95,7 @@
                         <span class="page-link active">{{ num }}</span>
                         {% else %}
                         <a class="page-link"
-                           href="?page={{ num }}&per_page={{ per_page }}&sort={{ sort_by }}">
+                           href="?page={{ num }}&per_page={{ per_page }}&sort={{ sort_by }}#furniture-items-section">
                             {{ num }}
                         </a>
                         {% endif %}
@@ -104,7 +104,7 @@
 
                 {% if page_obj.has_next %}
                 <a class="page-link"
-                   href="?page={{ page_obj.next_page_number }}&per_page={{ per_page }}&sort={{ sort_by }}">
+                   href="?page={{ page_obj.next_page_number }}&per_page={{ per_page }}&sort={{ sort_by }}#furniture-items-section">
                     Next →
                 </a>
                 {% else %}
@@ -117,5 +117,5 @@
 
 </div>
 
-<script src="{% static 'JS/catalog.js' %}"></script>
+<script src="{% static 'js/catalog.js' %}"></script>
 {% endblock %}

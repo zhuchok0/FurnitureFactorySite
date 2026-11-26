@@ -29,7 +29,6 @@ class ImageSlider {
     }
 
     initDOM() {
-        // Создаем обертку-трек для картинок
         this.track = document.createElement('div');
         this.track.className = 'slider-track';
 
@@ -39,12 +38,10 @@ class ImageSlider {
         });
         this.container.appendChild(this.track);
 
-        // Индикатор номера (например, 1/3)
         this.counter = document.createElement('div');
         this.counter.className = 'slider-counter';
         this.container.appendChild(this.counter);
 
-        // Навигация (стрелочки)
         if (this.options.navs) {
             this.prevBtn = document.createElement('button');
             this.prevBtn.className = 'slider-btn slider-btn-prev';
@@ -58,7 +55,6 @@ class ImageSlider {
             this.container.appendChild(this.nextBtn);
         }
 
-        // Пагинация (точки по количеству возможных страниц сдвига)
         if (this.options.pags) {
             this.pagsContainer = document.createElement('div');
             this.pagsContainer.className = 'slider-pagination';
@@ -75,7 +71,6 @@ class ImageSlider {
     }
 
     getTotalPages() {
-        // Максимальное количество страниц для сдвига
         return Math.max(1, this.slides.length);
     }
 
@@ -103,16 +98,13 @@ class ImageSlider {
     updateSlider() {
         const totalPages = this.getTotalPages();
 
-        // Смещение трека в процентах для показа нужной группы картинок
         const offset = -(this.currentIndex * 100);
         this.track.style.transform = `translateX(${offset}%)`;
 
-        // Обновление счетчика (например, текущая группа / всего групп)
         if (this.counter) {
             this.counter.textContent = `${this.currentIndex + 1} / ${totalPages}`;
         }
 
-        // Обновление пагинации
         if (this.options.pags) {
             const dots = this.pagsContainer.querySelectorAll('.slider-dot');
             dots.forEach((dot, index) => {

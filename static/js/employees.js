@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Генератор элементов формы (<input type="checkbox">) ---
+    // --- Генератор элементов формы ---
     const STORAGE_KEY = 'customCheckboxElements_v1';
     const OPEN_STATE_KEY = 'customCheckboxSectionOpen_v1';
 
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveGeneratedItems();
         renderGeneratedItems();
     }
-
+  
     function deleteGeneratedItem(id) {
         generatedItems = generatedItems.filter(item => item.id !== id);
         selectedGeneratedIds.delete(id);
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedOpenState = localStorage.getItem(OPEN_STATE_KEY) === '1';
     applyWorkspaceVisibility(savedOpenState);
 
-    // --- Таблица сотрудников ---
+    // ---------- Таблица сотрудников ------------------
 
     let employeesData = [];
     let filteredData = [];
@@ -315,14 +315,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
     const itemsPerPage = 3;
     let currentSortColumn = null;
-    let sortDirection = 'asc'; // 'asc' или 'desc'
+    let sortDirection = 'asc';
 
     const tableBody = document.getElementById('table-body');
     const selectAllCheckbox = document.getElementById('select-all');
     const loader = document.getElementById('loader');
+    
     const searchInput = document.getElementById('search-input');
     const searchBtn = document.getElementById('search-btn');
+    const premiateBtn = document.getElementById('premiate-btn');
     const toggleFormBtn = document.getElementById('toggle-form-btn');
+
     const formContainer = document.getElementById('form-container');
     const paginationContainer = document.getElementById('pagination-container');
     const detailsBlock = document.getElementById('details-block');
@@ -330,7 +333,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const bonusBlock = document.getElementById('bonus-block');
     const bonusContent = document.getElementById('bonus-content');
 
-    // Элементы формы
     const fullNameInput = document.getElementById('inp-fullname');
     const inpUrl = document.getElementById('inp-url');
     const inpPhone = document.getElementById('inp-phone');
@@ -339,6 +341,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const errUrl = document.getElementById('err-url');
     const errPhone = document.getElementById('err-phone');
     const addForm = document.getElementById('add-employee-form');
+
+    const inpPhoto = document.getElementById('inp-photo');
+    const errPhoto = document.getElementById('err-photo');
+    const EMP_STORAGE_KEY = 'customEmployees_v1';
+    const MAX_PHOTO_SIZE = 5 * 1024 * 1024; 
+    const PHOTO_MAX_SIDE = 300;
 
     const loaderText = loader ? loader.querySelector('.furn-loader__text') : null;
 
@@ -361,8 +369,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Небольшая задержка нужна, чтобы браузер успел отрисовать прелоадер
-        // даже при быстрой клиентской обработке массива
         if (delayMs > 0) {
             setTimeout(finish, delayMs);
         } else {
@@ -383,7 +389,59 @@ document.addEventListener('DOMContentLoaded', () => {
         selectAllCheckbox.indeterminate = checkedCount > 0 && checkedCount < pageCheckboxes.length;
     }
 
-    // 1. Загрузка данных с сервера с прелоадером
+    function loadCustomEmployees() {
+        try {
+            const raw = localStorage.getItem(EMP_STORAGE_KEY);
+            const parsed = raw ? JSON.parse(raw) : [];
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (err) {
+            console.error('Ошибка чтения сотрудников из localStorage:', err);
+            return [];
+        }
+    }
+
+    function saveCustomEmployees(list) {
+        try {
+            localStorage.setItem(EMP_STORAGE_KEY, JSON.stringify(list));
+            return true;
+        } catch (err) {
+            console.error('Ошибка сохранения сотрудников в localStorage:', err);
+            return false;
+        }
+    }
+
+    function getPhotoFile() {
+        return inpPhoto && inpPhoto.files ? inpPhoto.files[0] : null;
+    }
+
+    function isPhotoValid(file) {
+        return !!file && file.type.startsWith('image/') && file.size <= MAX_PHOTO_SIZE;
+    }
+
+    function resizePhoto(file) {
+        return new Promise((resolve, reject) => {
+            const url = URL.createObjectURL(file);
+            const img = new Image();
+            img.onload = () => {
+                const scale = Math.min(1, PHOTO_MAX_SIDE / Math.max(img.width, img.height));
+                const canvas = document.createElement('canvas');
+                canvas.width = Math.round(img.width * scale);
+                canvas.height = Math.round(img.height * scale);
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                URL.revokeObjectURL(url);
+                resolve(canvas.toDataURL('image/jpeg', 0.8));
+            };
+            img.onerror = () => {
+                URL.revokeObjectURL(url);
+                reject(new Error('Не удалось прочитать изображение.'));
+            };
+            img.src = url;
+        });
+    }
+
     function fetchEmployees() {
         setLoading(true, 'Загрузка данных...');
         fetch('/api/employees/')
@@ -392,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(data => {
-                employeesData = data.employees || [];
+                employeesData = [...loadCustomEmployees(), ...(data.employees || [])];
                 filteredData = [...employeesData];
                 renderTable();
             })
@@ -406,7 +464,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchEmployees();
 
-    // 2. Отображение таблицы и пагинация
     function renderTable() {
         if (!tableBody) return;
         tableBody.innerHTML = '';
@@ -460,6 +517,18 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPagination();
     }
 
+    function showDetails(emp) {
+        if (!detailsBlock || !detailsContent) return;
+        detailsBlock.style.display = 'block';
+        detailsContent.innerHTML = `
+            <strong>ФИО:</strong> ${emp.full_name}<br>
+            <strong>Должность / Работы:</strong> ${emp.description}<br>
+            <strong>Телефон:</strong> ${emp.phone}<br>
+            <strong>Email:</strong> ${emp.email}<br>
+            ${emp.photo ? `<img src="${emp.photo}" width="100" style="margin-top:10px; border-radius:4px;">` : ''}
+        `;
+    }
+
     if (selectAllCheckbox) {
         selectAllCheckbox.addEventListener('change', () => {
             if (!tableBody) return;
@@ -495,7 +564,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. Фильтрация
     if (searchBtn && searchInput) {
         searchBtn.addEventListener('click', () => {
             const query = searchInput.value.toLowerCase().trim();
@@ -516,7 +584,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Сортировка по столбцам
     document.querySelectorAll('th[data-sort]').forEach(th => {
         th.addEventListener('click', () => {
             const column = th.dataset.sort;
@@ -543,27 +610,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Показ деталей строки под таблицей
-    function showDetails(emp) {
-        if (!detailsBlock || !detailsContent) return;
-        detailsBlock.style.display = 'block';
-        detailsContent.innerHTML = `
-            <strong>ФИО:</strong> ${emp.full_name}<br>
-            <strong>Должность / Работы:</strong> ${emp.description}<br>
-            <strong>Телефон:</strong> ${emp.phone}<br>
-            <strong>Email:</strong> ${emp.email}<br>
-            ${emp.photo ? `<img src="${emp.photo}" width="100" style="margin-top:10px; border-radius:4px;">` : ''}
-        `;
-    }
-
-    // 6. Валидация URL и Телефона
     function validateUrl(url) {
         const regex = /^https?:\/\/.+\.(php|html)$/i;
         return regex.test(url);
     }
 
     function validatePhone(phone) {
-        const regex = /^(\+375|8)\s*\(?\d{2}\)?\s*\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+        const regex = /^(?:\+375\s*\(?\d{2}\)?|8\s*\(?0\d{2}\)?)\s*\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
         return regex.test(phone);
     }
 
@@ -574,7 +627,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (inpUrl.value && !isUrlValid) {
             inpUrl.classList.add('input-error');
-            if (errUrl) errUrl.textContent = 'Неверный формат URL. Пример: http://site.ru/index.php';
         } else {
             inpUrl.classList.remove('input-error');
             if (errUrl) errUrl.textContent = '';
@@ -588,10 +640,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (errPhone) errPhone.textContent = '';
         }
 
+        const photoFile = getPhotoFile();
+        const isPhotoOk = isPhotoValid(photoFile);
+        if (photoFile && !isPhotoOk) {
+            if (inpPhoto) inpPhoto.classList.add('input-error');
+            if (errPhoto) errPhoto.textContent = 'Выберите изображение размером до 5 МБ';
+        } else {
+            if (inpPhoto) inpPhoto.classList.remove('input-error');
+            if (errPhoto) errPhoto.textContent = '';
+        }
+
         const hasName = fullNameInput && fullNameInput.value.trim().length > 0;
         const hasEmail = emailInput && emailInput.value.trim().length > 0;
 
-        if (isUrlValid && isPhoneValid && hasName && hasEmail) {
+        if (isUrlValid && isPhoneValid && hasName && hasEmail && isPhotoOk) {
             submitBtn.removeAttribute('disabled');
         } else {
             submitBtn.setAttribute('disabled', 'true');
@@ -602,6 +664,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (inpPhone) inpPhone.addEventListener('input', checkFormValidity);
     if (fullNameInput) fullNameInput.addEventListener('input', checkFormValidity);
     if (emailInput) emailInput.addEventListener('input', checkFormValidity);
+    if (inpPhoto) inpPhoto.addEventListener('change', checkFormValidity);
 
     if (toggleFormBtn && formContainer) {
         toggleFormBtn.addEventListener('click', () => {
@@ -612,29 +675,48 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addForm) {
         addForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const newEmp = {
-                id: Date.now(),
-                full_name: fullNameInput ? fullNameInput.value.trim() : '',
-                photo: '',
-                description: 'Новый сотрудник (' + inpUrl.value.trim() + ')',
-                phone: inpPhone.value.trim(),
-                email: emailInput ? emailInput.value.trim() : ''
-            };
+            const photoFile = getPhotoFile();
+            if (!isPhotoValid(photoFile)) return;
 
-            runWithLoader(() => {
-                employeesData.unshift(newEmp);
-                filteredData = [...employeesData];
-                currentPage = 1;
-                renderTable();
-                addForm.reset();
-                submitBtn.setAttribute('disabled', 'true');
-                if (formContainer) formContainer.classList.remove('active');
-            }, 'Добавление сотрудника...', 200);
+            if (errPhoto) errPhoto.textContent = '';
+            submitBtn.setAttribute('disabled', 'true');
+
+            resizePhoto(photoFile)
+                .then((photoData) => {
+                    const newEmp = {
+                        id: 'local_' + Date.now(),
+                        full_name: fullNameInput ? fullNameInput.value.trim() : '',
+                        photo: photoData,
+                        description: 'Новый сотрудник (' + inpUrl.value.trim() + ')',
+                        phone: inpPhone.value.trim(),
+                        email: emailInput ? emailInput.value.trim() : ''
+                    };
+
+                    const custom = loadCustomEmployees();
+                    custom.unshift(newEmp);
+                    if (!saveCustomEmployees(custom)) {
+                        if (errPhoto) errPhoto.textContent = 'Не удалось сохранить: хранилище браузера переполнено или недоступно.';
+                        checkFormValidity();
+                        return;
+                    }
+
+                    runWithLoader(() => {
+                        employeesData.unshift(newEmp);
+                        filteredData = [...employeesData];
+                        currentPage = 1;
+                        renderTable();
+                        addForm.reset();
+                        submitBtn.setAttribute('disabled', 'true');
+                        if (formContainer) formContainer.classList.remove('active');
+                    }, 'Добавление сотрудника...', 200);
+                })
+                .catch((err) => {
+                    if (errPhoto) errPhoto.textContent = err.message;
+                    checkFormValidity();
+                });
         });
     }
 
-    // 7. Кнопка премирования выбранных чекбоксами (по всем страницам)
-    const premiateBtn = document.getElementById('premiate-btn');
     if (premiateBtn) {
         premiateBtn.addEventListener('click', () => {
             const selectedEmployees = employeesData.filter(emp =>
@@ -650,7 +732,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const names = selectedEmployees.map(emp => emp.full_name);
                 if (bonusBlock && bonusContent) {
                     bonusBlock.style.display = 'block';
-                    bonusContent.innerHTML = `Приказываю выдать премию следующим сотрудникам: <strong>${names.join(', ')}</strong> за успешное выполнение текущих задач и высокий профессионализм.`;
+                    bonusContent.innerHTML = `Премия будет выдана следующим сотрудникам: <strong>${names.join(', ')}</strong> за успешное выполнение текущих задач и высокий профессионализм.`;
                 }
             }, 'Формирование приказа о премировании...', 200);
         });

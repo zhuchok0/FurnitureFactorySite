@@ -2,14 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
 
-    // 1. Проверяем сохранённую тему при загрузке
     const savedTheme = localStorage.getItem('site-theme');
     if (savedTheme === 'dark') {
         htmlElement.setAttribute('data-theme', 'dark');
         if (themeToggleBtn) themeToggleBtn.textContent = '☀️ Светлая';
     }
 
-    // 2. Обработка переключения темы
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
             const isDark = htmlElement.getAttribute('data-theme') === 'dark';

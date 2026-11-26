@@ -10,7 +10,6 @@
             this.flight = flight;
         }
 
-        // 1) геттер
         getData() {
             return {
                 lastName: this.lastName,
@@ -20,14 +19,12 @@
             };
         }
 
-        // 2) сеттер
         setData(d) {
             ['lastName', 'firstName', 'patronymic', 'flight'].forEach((k) => {
                 if (d[k] !== undefined) this[k] = String(d[k]).trim();
             });
         }
 
-        // 3) добавление объекта из компонентов формы
         addFromForm(form, list) {
             const d = {
                 lastName: U.val(form, 'lastName'),
@@ -41,7 +38,6 @@
             return true;
         }
 
-        // 4) вывод всех объектов массива
         renderAll(list, container) {
             U.renderTable(container, ['№', 'Фамилия', 'Имя', 'Отчество', 'Рейс'],
                 list.map((p, i) => {
@@ -50,7 +46,6 @@
                 }));
         }
 
-        // 5) вывод результата (однофамильцы на рейсе)
         renderResult(list, flight, container) {
             U.renderResult(container, flight, U.findNamesakes(list, flight), U.fullName);
         }

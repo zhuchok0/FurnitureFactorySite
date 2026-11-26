@@ -2,7 +2,6 @@
     'use strict';
     const U = window.PaxUtil;
 
-    // ----- Базовый конструктор -----
     function Passenger(lastName, firstName, patronymic, flight) {
         this.lastName = lastName || '';
         this.firstName = firstName || '';
@@ -10,7 +9,6 @@
         this.flight = flight || '';
     }
 
-    // 1) геттер
     Passenger.prototype.getData = function () {
         return {
             lastName: this.lastName,
@@ -20,7 +18,6 @@
         };
     };
 
-    // 2) сеттер
     Passenger.prototype.setData = function (d) {
         const self = this;
         ['lastName', 'firstName', 'patronymic', 'flight'].forEach(function (k) {
@@ -28,7 +25,6 @@
         });
     };
 
-    // 3) добавление объекта из компонентов формы
     Passenger.prototype.addFromForm = function (form, list) {
         const d = {
             lastName: U.val(form, 'lastName'),
@@ -42,7 +38,6 @@
         return true;
     };
 
-    // 4) вывод всех объектов массива
     Passenger.prototype.renderAll = function (list, container) {
         U.renderTable(container, ['№', 'Фамилия', 'Имя', 'Отчество', 'Рейс'],
             list.map(function (p, i) {
@@ -51,7 +46,7 @@
             }));
     };
 
-    // 5) вывод результата (однофамильцы на рейсе)
+    // ???
     Passenger.prototype.renderResult = function (list, flight, container) {
         U.renderResult(container, flight, U.findNamesakes(list, flight), U.fullName);
     };
@@ -101,5 +96,6 @@
         });
     };
 
+    // ???
     window.PaxProto = { Passenger: Passenger, TicketedPassenger: TicketedPassenger };
 })();

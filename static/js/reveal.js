@@ -4,7 +4,6 @@
     const items = document.querySelectorAll('[data-reveal]');
     if (!items.length || !('IntersectionObserver' in window) || !items[0].animate) return;
 
-    // Варианты: data-reveal="up" (по умолчанию), "left", "right", "zoom"
     const variants = {
         up:    { from: 'translateY(90px) rotate(-3deg) scale(0.9)' },
         left:  { from: 'translateX(-120px) rotate(-6deg) scale(0.9)' },
@@ -43,7 +42,6 @@
             const base = parseInt(el.dataset.revealDelay || '0', 10);
             play(el, base);
 
-            // Дочерние элементы блока появляются по очереди (если задан data-reveal-stagger)
             if (el.hasAttribute('data-reveal-stagger')) {
                 Array.from(el.children).forEach((child, i) => {
                     child.style.opacity = '0';

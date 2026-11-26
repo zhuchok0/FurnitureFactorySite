@@ -61,6 +61,11 @@
                 <label for="inp-email">Почта:</label>
                 <input type="email" id="inp-email" required>
             </div>
+            <div class="emp-form-group">
+                <label for="inp-photo">Фото:</label>
+                <input type="file" id="inp-photo" accept="image/*" required>
+                <span class="error-message" id="err-photo"></span>
+            </div>
             <button type="submit" id="submit-btn" class="emp-btn" disabled>Добавить в таблицу</button>
         </form>
         <p id="validation-summary" style="margin-top: 10px; font-weight: 600;"></p>

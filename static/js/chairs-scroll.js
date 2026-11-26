@@ -60,7 +60,6 @@
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
     current = target = readProgress();
     render(current);
 })();

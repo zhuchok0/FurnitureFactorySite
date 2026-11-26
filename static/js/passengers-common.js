@@ -10,7 +10,6 @@
         return f ? String(f.value).trim() : '';
     }
 
-    // Алгоритм: однофамильцы на рейсе -> массив групп (в группе >= 2 пассажиров)
     function findNamesakes(list, flight) {
         const groups = new Map();
         list.forEach((p) => {
@@ -71,6 +70,7 @@
         container.appendChild(ul);
     }
 
+    // ???
     window.PaxUtil = {
         val, fullName, findNamesakes, renderTable, renderResult,
         classLabel: (c) => CLASS_LABELS[c] || '—'

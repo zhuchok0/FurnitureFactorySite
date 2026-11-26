@@ -13,6 +13,7 @@
         ['Смирнов', 'Павел', 'Андреевич', 'SU303', '9A', 'economy']
     ];
 
+    // ???
     document.querySelectorAll('.pax').forEach((section) => {
         const V = variants[section.dataset.variant];
         if (!V) return;
